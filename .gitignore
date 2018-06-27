@@ -1,0 +1,31 @@
+# OSX
+.DS_Store
+
+# Xcode
+ios/
+!ios/*/*.plist
+!ios/*/Contents/Resources/*
+
+# Android/IntelliJ
+android/
+!android/*/AndroidManifest.xml
+!android/*/gradle.properties
+!android/*/build.gradle
+!android/*/res/*
+
+# npm
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# BUCK
+buck-out/
+\.buckd/
+*.keystore
+
+# VSCode
+.vscode/
+
+# expo
+.expo/packager-info.json
