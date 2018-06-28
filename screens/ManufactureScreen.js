@@ -9,11 +9,12 @@ import {
   View,
 } from 'react-native'
 
+import Header from '../components/Header'
 import FontIcon from '../components/FontIcon'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    header: <Header title="Manufacture" />,
   }
 
   render() {
