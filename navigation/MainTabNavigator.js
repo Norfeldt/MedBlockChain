@@ -6,12 +6,13 @@ import {
 } from 'react-navigation'
 
 import TabBarIcon from '../components/TabBarIcon'
-import HomeScreen from '../screens/HomeScreen'
-import LinksScreen from '../screens/LinksScreen'
-import SettingsScreen from '../screens/SettingsScreen'
+import DiagnosticScreen from '../screens/DiagnosticScreen'
+import ManufactureScreen from '../screens/ManufactureScreen'
+import PatientScreen from '../screens/PatientScreen'
+import SerializationScreen from '../screens/SerializationScreen'
 
 const DiagnosticStack = createStackNavigator({
-  diagnostic: HomeScreen,
+  diagnostic: DiagnosticScreen,
 })
 
 DiagnosticStack.navigationOptions = {
@@ -22,7 +23,7 @@ DiagnosticStack.navigationOptions = {
 }
 
 const ManufactureStack = createStackNavigator({
-  manufacture: LinksScreen,
+  manufacture: ManufactureScreen,
 })
 
 ManufactureStack.navigationOptions = {
@@ -33,7 +34,7 @@ ManufactureStack.navigationOptions = {
 }
 
 const PatientStack = createStackNavigator({
-  Patient: SettingsScreen,
+  Patient: PatientScreen,
 })
 
 PatientStack.navigationOptions = {
@@ -42,7 +43,7 @@ PatientStack.navigationOptions = {
 }
 
 const SerializationStack = createStackNavigator({
-  Serialization: HomeScreen,
+  Serialization: SerializationScreen,
 })
 
 SerializationStack.navigationOptions = {
