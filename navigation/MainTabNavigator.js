@@ -54,8 +54,8 @@ SerializationStack.navigationOptions = {
 }
 
 export default createBottomTabNavigator({
-  DiagnosticStack,
   ManufactureStack,
   PatientStack,
   SerializationStack,
+  DiagnosticStack,
 })

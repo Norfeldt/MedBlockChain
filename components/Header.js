@@ -16,7 +16,7 @@ const Header = ({ title }) => {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    height: 70,
+    height: 55,
     justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: Colors.headerColor,
