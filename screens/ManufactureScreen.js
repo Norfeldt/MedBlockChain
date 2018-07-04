@@ -13,6 +13,14 @@ export default class HomeScreen extends React.Component {
     header: <Header title="Manufacture" />,
   }
 
+  state = {
+    Manufacture: 'Jukka Labs',
+    'Production Date': '24 June 2018',
+    'Substance A Dose [mg]': 4.25,
+    'Substance B Dose [mg]': 80,
+    'Hash Salt': 'HAWQ',
+  }
+
   render() {
     return (
       <ScrollView
@@ -22,25 +30,41 @@ export default class HomeScreen extends React.Component {
           alignItems: 'center',
         }}
       >
-        <InfoRow setting="Manufacture" value="Jukka Labs" />
+        <InfoRow setting="Manufacture" value={this.state['Manufacture']} />
+
         <InfoRow setting="Production Date" value="24 June 2018" />
-        <InfoRow setting="Substance A Dose" value="4 mg" />
+
+        <InfoRow
+          setting="Substance A Dose"
+          value={`${this.state['Substance A Dose [mg]'].toFixed(2)} mg`}
+        />
         <Slider
           style={styles.slider}
           maximumValue={20}
-          value={4}
-          onValueChange={value => this.setState({ value })}
+          value={this.state['Substance A Dose [mg]']}
+          step={0.25}
+          onValueChange={value =>
+            this.setState({ 'Substance A Dose [mg]': value })
+          }
         />
-        <InfoRow setting="Substance B Dose" value="80 mg" />
+
+        <InfoRow
+          setting="Substance B Dose"
+          value={`${this.state['Substance B Dose [mg]']} mg`}
+        />
         <Slider
           style={styles.slider}
           maximumValue={200}
-          value={80}
-          onValueChange={value => this.setState({ value })}
+          value={this.state['Substance B Dose [mg]']}
+          step={10}
+          onValueChange={value =>
+            this.setState({ 'Substance B Dose [mg]': value })
+          }
         />
-        <InfoRow setting="Hash Salt" value="HAWQ" />
+        <InfoRow setting="Hash Salt" value={this.state['Hash Salt']} />
+
         <QRCode
-          value={'Hello World'}
+          value={JSON.stringify({ ...this.state })}
           size={150}
           bgColor={Colors.tintColor}
           fgColor="white"
@@ -56,7 +80,6 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     backgroundColor: '#fff',
     paddingHorizontal: 10,
   },
