@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, ScrollView, Slider } from 'react-native'
 import QRCode from 'react-native-qrcode'
+import { SHA256 } from 'crypto-js'
 
 import Header from '../components/Header'
 import InfoRow from '../components/InfoRow'
@@ -72,7 +73,12 @@ export default class HomeScreen extends React.Component {
           fgColor="white"
         />
 
-        <InfoRow setting="Serialize ID" value="#?" />
+        <InfoRow
+          setting="Serialize ID (SHA256)"
+          value={`${SHA256(JSON.stringify({ ...this.state }))
+            .toString()
+            .slice(0, 10)}...`}
+        />
         <Button title="CHECK IN" iconName="check_in" />
       </ScrollView>
     )
