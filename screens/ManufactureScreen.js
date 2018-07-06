@@ -72,6 +72,7 @@ export default class HomeScreen extends React.Component {
           step={10}
           onValueChange={DRUG_B_VALUE => this.setState({ DRUG_B_VALUE })}
         />
+
         <InfoRow setting="Hash Salt" value={HASH_SALT} />
 
         <QRCode
