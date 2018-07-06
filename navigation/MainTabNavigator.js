@@ -13,20 +13,6 @@ import SerializationScreen from '../screens/SerializationScreen'
 
 import Colors from '../constants/Colors'
 
-const DiagnosticStack = createStackNavigator({
-  diagnostic: DiagnosticScreen,
-})
-
-DiagnosticStack.navigationOptions = {
-  tabBarLabel: 'Diagnostic',
-  tabBarOptions: {
-    activeTintColor: Colors.tintColor,
-  },
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name="diagnostic" />
-  ),
-}
-
 const ManufactureStack = createStackNavigator({
   manufacture: ManufactureScreen,
 })
@@ -64,6 +50,20 @@ SerializationStack.navigationOptions = {
   },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name="block_chain" />
+  ),
+}
+
+const DiagnosticStack = createStackNavigator({
+  diagnostic: DiagnosticScreen,
+})
+
+DiagnosticStack.navigationOptions = {
+  tabBarLabel: 'Diagnostic',
+  tabBarOptions: {
+    activeTintColor: Colors.tintColor,
+  },
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name="diagnostic" />
   ),
 }
 
