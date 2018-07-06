@@ -15,14 +15,26 @@ export default class HomeScreen extends React.Component {
   }
 
   state = {
-    Manufacture: 'Jukka Labs',
-    'Production Date': '24 June 2018',
-    'Substance A Dose [mg]': 4.25,
-    'Substance B Dose [mg]': 80,
-    'Hash Salt': 'HAWQ',
+    MANUFACTURE_NAME: 'Jukka Labs',
+    PRODUCTION_DATE: '24 June 2018',
+    DRUG_A_VALUE: 4.25,
+    DRUG_A_UNITS: 'mg',
+    DRUG_B_VALUE: 80,
+    DRUG_B_UNITS: 'mg',
+    HASH_SALT: 'HAWQ',
   }
 
   render() {
+    const {
+      MANUFACTURE_NAME,
+      PRODUCTION_DATE,
+      DRUG_A_VALUE,
+      DRUG_A_UNITS,
+      DRUG_B_VALUE,
+      DRUG_B_UNITS,
+      HASH_SALT,
+    } = this.state
+
     return (
       <ScrollView
         style={styles.container}
@@ -31,40 +43,36 @@ export default class HomeScreen extends React.Component {
           alignItems: 'center',
         }}
       >
-        <InfoRow setting="Manufacture" value={this.state['Manufacture']} />
+        <InfoRow setting="Manufacture" value={MANUFACTURE_NAME} />
 
-        <InfoRow setting="Production Date" value="24 June 2018" />
+        <InfoRow setting="Production Date" value={PRODUCTION_DATE} />
 
         <InfoRow
           setting="Substance A Dose"
-          value={`${this.state['Substance A Dose [mg]'].toFixed(2)} mg`}
+          value={`${DRUG_A_VALUE.toFixed(2)} ${DRUG_A_UNITS}`}
         />
         <Slider
           style={styles.slider}
           minimumTrackTintColor={Colors.tintColor}
           maximumValue={20}
-          value={this.state['Substance A Dose [mg]']}
+          value={DRUG_A_VALUE}
           step={0.25}
-          onValueChange={value =>
-            this.setState({ 'Substance A Dose [mg]': value })
-          }
+          onValueChange={DRUG_A_VALUE => this.setState({ DRUG_A_VALUE })}
         />
 
         <InfoRow
           setting="Substance B Dose"
-          value={`${this.state['Substance B Dose [mg]']} mg`}
+          value={`${DRUG_B_VALUE.toFixed(2)} ${DRUG_B_UNITS}`}
         />
         <Slider
           style={styles.slider}
           minimumTrackTintColor={Colors.tintColor}
           maximumValue={200}
-          value={this.state['Substance B Dose [mg]']}
+          value={DRUG_B_VALUE}
           step={10}
-          onValueChange={value =>
-            this.setState({ 'Substance B Dose [mg]': value })
-          }
+          onValueChange={DRUG_B_VALUE => this.setState({ DRUG_B_VALUE })}
         />
-        <InfoRow setting="Hash Salt" value={this.state['Hash Salt']} />
+        <InfoRow setting="Hash Salt" value={HASH_SALT} />
 
         <QRCode
           value={JSON.stringify({ ...this.state })}
