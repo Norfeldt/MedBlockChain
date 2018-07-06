@@ -40,6 +40,7 @@ export default class HomeScreen extends React.Component {
         />
         <Slider
           style={styles.slider}
+          minimumTrackTintColor={Colors.tintColor}
           maximumValue={20}
           value={this.state['Substance A Dose [mg]']}
           step={0.25}
@@ -54,6 +55,7 @@ export default class HomeScreen extends React.Component {
         />
         <Slider
           style={styles.slider}
+          minimumTrackTintColor={Colors.tintColor}
           maximumValue={200}
           value={this.state['Substance B Dose [mg]']}
           step={10}
