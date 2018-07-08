@@ -11,16 +11,7 @@ import ManufactureScreen from '../screens/ManufactureScreen'
 import PatientScreen from '../screens/PatientScreen'
 import SerializationScreen from '../screens/SerializationScreen'
 
-const DiagnosticStack = createStackNavigator({
-  diagnostic: DiagnosticScreen,
-})
-
-DiagnosticStack.navigationOptions = {
-  tabBarLabel: 'Diagnostic',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name="diagnostic" />
-  ),
-}
+import Colors from '../constants/Colors'
 
 const ManufactureStack = createStackNavigator({
   manufacture: ManufactureScreen,
@@ -28,6 +19,9 @@ const ManufactureStack = createStackNavigator({
 
 ManufactureStack.navigationOptions = {
   tabBarLabel: 'Manufacture',
+  tabBarOptions: {
+    activeTintColor: Colors.tintColor,
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name="manufacture" />
   ),
@@ -39,6 +33,9 @@ const PatientStack = createStackNavigator({
 
 PatientStack.navigationOptions = {
   tabBarLabel: 'Patient',
+  tabBarOptions: {
+    activeTintColor: Colors.tintColor,
+  },
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="patient" />,
 }
 
@@ -48,14 +45,31 @@ const SerializationStack = createStackNavigator({
 
 SerializationStack.navigationOptions = {
   tabBarLabel: 'Serialization',
+  tabBarOptions: {
+    activeTintColor: Colors.tintColor,
+  },
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name="block_chain" />
   ),
 }
 
+const DiagnosticStack = createStackNavigator({
+  diagnostic: DiagnosticScreen,
+})
+
+DiagnosticStack.navigationOptions = {
+  tabBarLabel: 'Diagnostic',
+  tabBarOptions: {
+    activeTintColor: Colors.tintColor,
+  },
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name="diagnostic" />
+  ),
+}
+
 export default createBottomTabNavigator({
-  DiagnosticStack,
   ManufactureStack,
   PatientStack,
   SerializationStack,
+  DiagnosticStack,
 })
