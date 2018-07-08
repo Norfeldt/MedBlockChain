@@ -28,6 +28,7 @@ export default class HomeScreen extends React.Component {
       HASH_SALT: 'HAWQ',
       QR: 'loading',
       hash: 'loading',
+      updating: true,
     }
 
     this.debounceDose = debounce(this.updateDose, 25)
@@ -35,16 +36,17 @@ export default class HomeScreen extends React.Component {
   }
 
   updateDose(DRUG_X_VALUE) {
-    this.setState({ ...DRUG_X_VALUE })
+    this.setState({ ...DRUG_X_VALUE, updating: true })
     this.debounceUpdate()
   }
 
   updateQRAndHash() {
-    const { QR, hash, ...cleanedState } = this.state // getting state without QR and hash key
+    const { QR, hash, updating, ...cleanedState } = this.state // getting state without QR and hash key
     const stateStr = JSON.stringify(cleanedState)
     this.setState({
       QR: stateStr,
       hash: SHA256(stateStr).toString(),
+      updating: false,
     })
   }
 
@@ -63,6 +65,7 @@ export default class HomeScreen extends React.Component {
       HASH_SALT,
       QR,
       hash,
+      updating,
     } = this.state
 
     return (
@@ -108,7 +111,7 @@ export default class HomeScreen extends React.Component {
         <QRCode
           value={QR}
           size={150}
-          bgColor={Colors.tintColor}
+          bgColor={updating ? Colors.idleColor : Colors.tintColor}
           fgColor="white"
         />
 
