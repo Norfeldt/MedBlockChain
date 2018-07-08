@@ -9,6 +9,7 @@ import InfoRow from '../components/InfoRow'
 import Button from '../components/Button'
 
 import Colors from '../constants/Colors'
+import Layout from '../constants/Layout'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -45,7 +46,9 @@ export default class HomeScreen extends React.Component {
     const stateStr = JSON.stringify(cleanedState)
     this.setState({
       QR: stateStr,
-      hash: SHA256(stateStr).toString(),
+      hash: SHA256(stateStr)
+        .toString()
+        .toUpperCase(),
       updating: false,
     })
   }
@@ -67,6 +70,11 @@ export default class HomeScreen extends React.Component {
       hash,
       updating,
     } = this.state
+
+    const {
+      window: { width },
+      isSmallDevice,
+    } = Layout
 
     return (
       <ScrollView
@@ -110,7 +118,7 @@ export default class HomeScreen extends React.Component {
 
         <QRCode
           value={QR}
-          size={150}
+          size={isSmallDevice ? width * 0.9 : width * 0.5}
           bgColor={updating ? Colors.idleColor : Colors.tintColor}
           fgColor="white"
         />

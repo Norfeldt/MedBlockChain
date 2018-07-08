@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   },
   rightText: {
     flex: 1,
+    fontFamily: 'Aldrich-Regular',
     textAlign: 'right',
     color: Colors.passiveText,
   },
