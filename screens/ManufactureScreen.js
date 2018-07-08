@@ -30,23 +30,17 @@ export default class HomeScreen extends React.Component {
       hash: 'loading',
     }
 
-    this.debounceDoseA = debounce(this.updateDoseA, 25)
-    this.debounceDoseB = debounce(this.updateDoseB, 25)
+    this.debounceDose = debounce(this.updateDose, 25)
     this.debounceUpdate = debounce(this.updateQRAndHash, 500)
   }
 
-  updateDoseA(DRUG_A_VALUE) {
-    this.setState({ DRUG_A_VALUE })
-    this.debounceUpdate()
-  }
-
-  updateDoseB(DRUG_B_VALUE) {
-    this.setState({ DRUG_B_VALUE })
+  updateDose(DRUG_X_VALUE) {
+    this.setState({ ...DRUG_X_VALUE })
     this.debounceUpdate()
   }
 
   updateQRAndHash() {
-    const { QR, hash, ...cleanedState } = this.state
+    const { QR, hash, ...cleanedState } = this.state // getting state without QR and hash key
     const stateStr = JSON.stringify(cleanedState)
     this.setState({
       QR: stateStr,
@@ -93,7 +87,7 @@ export default class HomeScreen extends React.Component {
           maximumValue={20}
           value={DRUG_A_VALUE}
           step={0.25}
-          onValueChange={value => this.debounceDoseA(value)}
+          onValueChange={DRUG_A_VALUE => this.debounceDose({ DRUG_A_VALUE })}
         />
 
         <InfoRow
@@ -106,7 +100,7 @@ export default class HomeScreen extends React.Component {
           maximumValue={200}
           value={DRUG_B_VALUE}
           step={10}
-          onValueChange={value => this.debounceDoseB(value)}
+          onValueChange={DRUG_B_VALUE => this.debounceDose({ DRUG_B_VALUE })}
         />
 
         <InfoRow setting="Hash Salt" value={HASH_SALT} />
