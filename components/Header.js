@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'Aldrich-Regular',
     fontSize: 24,
-    color: Colors.headerText,
+    color: Colors.headerTextColor,
     marginBottom: 5,
   },
 })

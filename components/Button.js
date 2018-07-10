@@ -5,9 +5,9 @@ import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
 import Colors from '../constants/Colors'
 import FontIcon from './FontIcon'
 
-export default (Button = ({ title, iconName }) => {
+export default (Button = ({ title, iconName, onPress }) => {
   return (
-    <TouchableOpacity style={styles.btnClickContain}>
+    <TouchableOpacity style={styles.btnClickContain} onPress={onPress}>
       <View style={styles.btnContainer}>
         <Text style={styles.btnText}>{title}</Text>
         <FontIcon

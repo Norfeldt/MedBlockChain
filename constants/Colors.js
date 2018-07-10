@@ -9,7 +9,7 @@ export default {
   tabBar: '#fefefe',
   headerColor: 'rgb(240, 240, 240)',
   headerLine: '#999999',
-  headerText: '#333333',
+  headerTextColor: '#333333',
   errorBackground: 'red',
   errorText: '#fff',
   warningBackground: '#EAEB5E',
