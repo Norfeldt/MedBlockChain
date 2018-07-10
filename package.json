@@ -10,10 +10,12 @@
   "dependencies": {
     "@expo/samples": "2.1.1",
     "crypto-js": "^3.1.9-1",
+    "date-fns": "^1.29.0",
     "expo": "^28.0.0",
     "lodash": "^4.17.10",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-28.0.0.tar.gz",
+    "react-native-dialog": "^5.1.0",
     "react-native-qrcode": "^0.2.6",
     "react-navigation": "2.3.1"
   },
