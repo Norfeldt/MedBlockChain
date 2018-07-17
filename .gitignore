@@ -29,3 +29,6 @@ buck-out/
 
 # expo
 .expo/packager-info.json
+
+# Purchased icons
+assets/icons/
