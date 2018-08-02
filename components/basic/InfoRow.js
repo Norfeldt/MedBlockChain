@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-import Colors from '../constants/Colors'
+import Colors from '../../constants/Colors'
 
 // create a component
 const InfoRow = ({ setting, value }) => {

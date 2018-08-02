@@ -11,7 +11,7 @@ import {
 import dateFomatter from 'date-fns/format'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
-import InfoRow from './InfoRow'
+import InfoRow from './basic/InfoRow'
 import Button from './Button'
 
 import Colors from '../constants/Colors'
@@ -58,7 +58,7 @@ const Card = ({
           {`${distanceInWordsToNow(dateTaken)} ago`}
         </Text>
       )}
-      <InfoRow setting={manufacture} value="Jukka Labs" />
+      <InfoRow setting="Manufacture" value={manufacture} />
       <InfoRow
         setting="Production Date"
         value={`${dateFomatter(productionDate, 'YYYY-MM-DD')}`}

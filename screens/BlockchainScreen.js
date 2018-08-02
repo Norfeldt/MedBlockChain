@@ -11,7 +11,7 @@ import {
 
 import FontIcon from '../components/FontIcon'
 
-export default class HomeScreen extends React.Component {
+export default class BlockchainScreen extends React.Component {
   static navigationOptions = {
     header: null,
   }

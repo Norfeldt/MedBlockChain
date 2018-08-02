@@ -5,7 +5,7 @@ import { SHA256 } from 'crypto-js'
 import { debounce } from 'lodash'
 
 import Header from '../components/Header'
-import InfoRow from '../components/InfoRow'
+import InfoRow from '../components/basic/InfoRow'
 import Button from '../components/Button'
 
 import Colors from '../constants/Colors'

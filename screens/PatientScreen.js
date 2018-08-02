@@ -7,8 +7,8 @@ import dateFomatter from 'date-fns/format'
 import subDays from 'date-fns/sub_days'
 
 import Header from '../components/Header'
-import InfoRow from '../components/InfoRow'
-import Card from '../components/Card'
+import InfoRow from '../components/basic/InfoRow'
+import DrugTakeCard from '../components/DrugTakeCard'
 import Button from '../components/Button'
 import MedicationHistory from '../components/MedicationHistory'
 
@@ -72,7 +72,7 @@ export default class HomeScreen extends React.Component {
             )}
 
             {barCodeData != barCodeDataTemp && (
-              <Card
+              <DrugTakeCard
                 dateTaken={null}
                 manufacture={barCodeData.MANUFACTURE_NAME}
                 productionDate={barCodeData.PRODUCTION_DATE}
