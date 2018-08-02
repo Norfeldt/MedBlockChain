@@ -5,7 +5,7 @@ import {
   createBottomTabNavigator,
 } from 'react-navigation'
 
-import TabBarIcon from '../components/TabBarIcon'
+import TabBarIcon from '../components/basic/TabBarIcon'
 import DiagnosticScreen from '../screens/DiagnosticScreen'
 import ManufactureScreen from '../screens/ManufactureScreen'
 import PatientScreen from '../screens/PatientScreen'

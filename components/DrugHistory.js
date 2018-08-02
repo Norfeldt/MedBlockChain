@@ -3,13 +3,13 @@ import React from 'react'
 import { ScrollView, StyleSheet } from 'react-native'
 import subDays from 'date-fns/sub_days'
 
-import DrugTakeCard from './DrugTakeCard'
+import DrugCard from './DrugCard'
 
 // create a component
-const MedicationHistory = () => {
+const DrugHistory = () => {
   return (
     <ScrollView style={{ flex: 1 }}>
-      <DrugTakeCard
+      <DrugCard
         dateTaken={subDays(new Date(), 1)}
         manufacture={'Jukka Labs'}
         productionDate={subDays(new Date(), 15)}
@@ -21,7 +21,7 @@ const MedicationHistory = () => {
         checked_out={true}
       />
 
-      <DrugTakeCard
+      <DrugCard
         dateTaken={subDays(new Date(), 4)}
         manufacture={'Jukka Labs'}
         productionDate={subDays(new Date(), 20)}
@@ -33,7 +33,7 @@ const MedicationHistory = () => {
         checked_out={true}
       />
 
-      <DrugTakeCard
+      <DrugCard
         dateTaken={subDays(new Date(), 7)}
         manufacture={'Jukka Labs'}
         productionDate={subDays(new Date(), 25)}
@@ -45,7 +45,7 @@ const MedicationHistory = () => {
         checked_out={true}
       />
 
-      <DrugTakeCard
+      <DrugCard
         dateTaken={subDays(new Date(), 9)}
         manufacture={'Jukka Labs'}
         productionDate={subDays(new Date(), 26)}
@@ -61,4 +61,4 @@ const MedicationHistory = () => {
 }
 
 //make this component available to the app
-export default MedicationHistory
+export default DrugHistory

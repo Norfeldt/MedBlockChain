@@ -4,13 +4,12 @@ import { BarCodeScanner, Permissions } from 'expo'
 import Dialog from 'react-native-dialog'
 
 import dateFomatter from 'date-fns/format'
-import subDays from 'date-fns/sub_days'
 
-import Header from '../components/Header'
+import Header from '../components/basic/Header'
 import InfoRow from '../components/basic/InfoRow'
-import DrugTakeCard from '../components/DrugTakeCard'
-import Button from '../components/Button'
-import MedicationHistory from '../components/MedicationHistory'
+import DrugCard from '../components/DrugCard'
+import Button from '../components/basic/Button'
+import DrugHistory from '../components/DrugHistory'
 
 const barCodeDataTemp = {
   MANUFACTURE_NAME: null,
@@ -72,7 +71,7 @@ export default class HomeScreen extends React.Component {
             )}
 
             {barCodeData != barCodeDataTemp && (
-              <DrugTakeCard
+              <DrugCard
                 dateTaken={null}
                 manufacture={barCodeData.MANUFACTURE_NAME}
                 productionDate={barCodeData.PRODUCTION_DATE}
@@ -91,7 +90,7 @@ export default class HomeScreen extends React.Component {
               />
             )}
 
-            <MedicationHistory />
+            <DrugHistory />
           </View>
         )
       }

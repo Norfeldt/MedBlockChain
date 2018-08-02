@@ -4,9 +4,9 @@ import QRCode from 'react-native-qrcode'
 import { SHA256 } from 'crypto-js'
 import { debounce } from 'lodash'
 
-import Header from '../components/Header'
+import Header from '../components/basic/Header'
 import InfoRow from '../components/basic/InfoRow'
-import Button from '../components/Button'
+import Button from '../components/basic/Button'
 
 import Colors from '../constants/Colors'
 import Layout from '../constants/Layout'
