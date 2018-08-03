@@ -10,9 +10,19 @@ const Icon = createIconSetFromFontello(fontelloConfig, 'q180624')
 
 export default class Button extends PureComponent {
   render() {
-    const { title, onPress, buttonColor, iconName, iconColor } = this.props
+    const {
+      style,
+      title,
+      onPress,
+      buttonColor,
+      iconName,
+      iconColor,
+    } = this.props
     return (
-      <TouchableOpacity style={styles.btnClickContain} onPress={onPress}>
+      <TouchableOpacity
+        style={[styles.btnClickContain, style]}
+        onPress={onPress}
+      >
         <View
           style={[
             styles.btnContainer,

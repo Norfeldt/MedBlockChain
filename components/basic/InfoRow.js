@@ -5,9 +5,9 @@ import { View, Text, StyleSheet } from 'react-native'
 import Colors from '../../constants/Colors'
 
 // create a component
-const InfoRow = ({ setting, value }) => {
+const InfoRow = ({ style, setting, value }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Text style={styles.leftText}>{setting}</Text>
 
       <Text style={styles.rightText}>{value}</Text>

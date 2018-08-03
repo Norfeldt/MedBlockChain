@@ -8,9 +8,10 @@ const Icon = createIconSetFromFontello(fontelloConfig, 'q180624')
 
 export default class TabBarIcon extends React.Component {
   render() {
+    const { style } = this.props
     return (
       <Icon
-        style={{ marginBottom: -3 }}
+        style={[{ marginBottom: -3 }, style]}
         name={this.props.name}
         size={26}
         color={

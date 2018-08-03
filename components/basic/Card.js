@@ -3,17 +3,20 @@ import React, { PureComponent } from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
 
 import Colors from '../../constants/Colors'
+import Layout from '../../constants/Layout'
 
 // create a component
 export default class Card extends PureComponent {
   render() {
-    return <View style={styles.card}>{this.props.children}</View>
+    const { style } = this.props
+    return <View style={[styles.card, style]}>{this.props.children}</View>
   }
 }
 
 // define your styles
 const styles = StyleSheet.create({
   card: {
+    width: Layout.window.width - 20,
     paddingHorizontal: 5,
     marginBottom: 10,
     backgroundColor: '#fff',
