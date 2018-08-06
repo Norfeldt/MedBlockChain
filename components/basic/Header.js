@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   text: {
-    fontFamily: 'Aldrich-Regular',
+    fontFamily: 'Aldrich',
     fontSize: 24,
     color: Colors.headerTextColor,
     marginBottom: 5,

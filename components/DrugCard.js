@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   textHeader: {
     color: Colors.headerTextColor,
     textAlign: 'center',
-    fontFamily: 'Aldrich-Regular',
+    fontFamily: 'Aldrich',
     fontSize: 20,
     paddingTop: 7,
   },
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color: Colors.idleColor,
     textAlign: 'center',
-    fontFamily: 'Aldrich-Regular',
+    fontFamily: 'Aldrich',
     paddingVertical: 20,
   },
 })

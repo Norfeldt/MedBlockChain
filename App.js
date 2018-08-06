@@ -34,7 +34,8 @@ export default class App extends React.Component {
         require('./assets/images/robot-prod.png'),
       ]),
       Font.loadAsync({
-        'Aldrich-Regular': require('./assets/fonts/Aldrich-Regular.ttf'),
+        Aldrich: require('./assets/fonts/Aldrich-Regular.ttf'),
+        VT323: require('./assets/fonts/VT323-Regular.ttf'),
         q180624: require('./assets/fonts/q180624.ttf'),
       }),
     ])

@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
   },
   leftText: {
     flex: 1,
-    fontFamily: 'Aldrich-Regular',
+    fontFamily: 'Aldrich',
     color: Colors.tintColor,
     fontWeight: 'bold',
   },
   rightText: {
     flex: 1,
-    fontFamily: 'Aldrich-Regular',
+    fontFamily: 'Aldrich',
     textAlign: 'right',
     color: Colors.passiveText,
   },

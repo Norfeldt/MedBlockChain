@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     flex: 1,
-    fontFamily: 'Aldrich-Regular',
+    fontFamily: 'Aldrich',
     fontSize: 24,
     color: '#fff',
     paddingTop: 5,
