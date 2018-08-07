@@ -10,6 +10,7 @@ import {
 
 import invert from 'invert-color'
 import { reduce, trim, lowerCase, capitalize } from 'lodash'
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
 import Card from './basic/Card'
 import FontIcon from './basic/FontIcon'
@@ -37,25 +38,29 @@ export default class BlockCard extends PureComponent {
 
     BlockButton = ({ style, title, hash }) => (
       <TouchableOpacity
-        style={[hashBlockContainer(hash), style]}
+        style={[hashBlockContainer(hash), blockStyle.shadow, style]}
         onPress={() => {
           this.setState({
             showBlockInfo: this.state.showBlockInfo == title ? null : title,
           })
         }}
       >
-        <Text style={hashBlockText(hash)}>{title}</Text>
-        <Text style={[hashBlockText(hash), textStyle.hash]}>{`${hash.slice(
-          0,
-          10
-        )}...`}</Text>
+        <Text
+          style={[
+            textStyle.subheader,
+            { color: invert(`#${hash.slice(0, 6)}`, true) },
+          ]}
+        >
+          {title}
+        </Text>
+        <Text style={hashBlockText(hash)}>{`${hash.slice(0, 10)}...`}</Text>
       </TouchableOpacity>
     )
 
     BlockHash = ({ hash = '00ff00', style }) => (
       <View
         style={[
-          { borderRadius: 10, backgroundColor: `#${hash.slice(0, 6)}` },
+          { borderRadius: 7, backgroundColor: `#${hash.slice(0, 6)}` },
           style,
         ]}
       >
@@ -71,8 +76,21 @@ export default class BlockCard extends PureComponent {
       </View>
     )
 
-    ChainingInfo = ({ previousHash, blockKeyHash, hash }) => (
+    ChainingInfo = ({ timestamp, previousHash, blockKeyHash, hash }) => (
       <View style={blockStyle.blockInfo}>
+        <Text style={textStyle.subheader}>TIMESTAMP</Text>
+
+        <View style={hashBlockContainer(Colors.headerLine.slice(1, 7))}>
+          <Text
+            style={[
+              hashBlockText('ffffff'),
+              { backgroundColor: 'transparent' },
+            ]}
+          >
+            {timestamp}
+          </Text>
+        </View>
+
         <Text style={textStyle.subheader}>PREVIOUS HASH</Text>
         <BlockHash hash={previousHash} />
 
@@ -88,33 +106,26 @@ export default class BlockCard extends PureComponent {
             paddingBottom: 5,
           }}
         >
-          <Text style={{ fontFamily: 'Aldrich', fontSize: 14 }}>SHA256(</Text>
+          <Text style={textStyle.subheader}>SHA256(</Text>
 
-          <Text
-            style={{
-              fontFamily: 'VT323',
-              fontSize: 19,
-              color: invert(`#${previousHash.slice(0, 6)}`, true),
-              backgroundColor: `#${previousHash.slice(0, 6)}`,
-            }}
-          >{`${previousHash.slice(0, 3)}...${previousHash.slice(
-            64 - 3,
-            64
-          )}`}</Text>
+          <Text style={hashBlockText(Colors.headerLine.slice(1, 7))}>
+            {`${timestamp.slice(0, 3)}...${timestamp.slice(
+              timestamp.length - 3,
+              timestamp.length
+            )}`}
+          </Text>
 
-          <Text
-            style={{
-              fontFamily: 'VT323',
-              fontSize: 19,
-              color: invert(`#${blockKeyHash.slice(0, 6)}`, true),
-              backgroundColor: `#${blockKeyHash.slice(0, 6)}`,
-            }}
-          >{`${blockKeyHash.slice(0, 3)}...${blockKeyHash.slice(
-            64 - 3,
-            64
-          )}`}</Text>
+          <Text style={hashBlockText(previousHash)}>{`${previousHash.slice(
+            0,
+            3
+          )}...${previousHash.slice(64 - 3, 64)}`}</Text>
 
-          <Text style={{ fontFamily: 'Aldrich', fontSize: 14 }}>)</Text>
+          <Text style={hashBlockText(blockKeyHash)}>{`${blockKeyHash.slice(
+            0,
+            3
+          )}...${blockKeyHash.slice(64 - 3, 64)}`}</Text>
+
+          <Text style={textStyle.subheader}>)</Text>
         </View>
         <BlockHash hash={hash} />
       </View>
@@ -131,6 +142,7 @@ export default class BlockCard extends PureComponent {
         case 'PREVIOUS HASH':
           return (
             <ChainingInfo
+              timestamp={this.props.previousHashInfo.timestamp}
               previousHash={this.props.previousHashInfo.previousHash}
               blockKeyHash={this.props.previousHashInfo.blockKeyHash}
               hash={this.props.previousHash}
@@ -163,6 +175,16 @@ export default class BlockCard extends PureComponent {
 
                 <View
                   style={{
+                    backgroundColor: Colors.headerLine,
+                    borderRadius: 7,
+                    padding: 10,
+                  }}
+                >
+                  <Text style={textStyle.hash}>{key}</Text>
+                </View>
+
+                <View
+                  style={{
                     flexDirection: 'row',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -170,22 +192,19 @@ export default class BlockCard extends PureComponent {
                     paddingBottom: 5,
                   }}
                 >
-                  <Text style={{ fontFamily: 'Aldrich', fontSize: 14 }}>
-                    SHA256(
-                  </Text>
+                  <Text style={textStyle.subheader}>SHA256(</Text>
 
                   <Text
-                    style={{
-                      fontFamily: 'VT323',
-                      fontSize: 19,
-                      backgroundColor: Colors.headerColor,
-                    }}
+                    style={[
+                      textStyle.hash,
+                      { backgroundColor: Colors.headerLine },
+                    ]}
                   >{`${key.slice(0, 10)}...${key.slice(
                     key.length - 10,
                     key.length
                   )}`}</Text>
 
-                  <Text style={{ fontFamily: 'Aldrich', fontSize: 14 }}>)</Text>
+                  <Text style={textStyle.subheader}>)</Text>
                 </View>
 
                 <BlockHash hash={blockKeyHash} />
@@ -209,6 +228,7 @@ export default class BlockCard extends PureComponent {
         case 'BLOCK HASH':
           return (
             <ChainingInfo
+              timestamp={this.props.timestamp}
               previousHash={this.props.previousHash}
               blockKeyHash={this.props.blockKeyHash}
               hash={this.props.blockHash}
@@ -222,6 +242,9 @@ export default class BlockCard extends PureComponent {
 
     return (
       <Card>
+        <Text style={textStyle.header}>{`${distanceInWordsToNow(
+          this.props.timestamp
+        )} ago`}</Text>
         <View style={blockStyle.column}>
           <View
             style={{ flex: 4, justifyContent: 'space-between', padding: 5 }}
@@ -280,32 +303,18 @@ export default class BlockCard extends PureComponent {
 
 hashBlockContainer = hash => ({
   backgroundColor: `#${hash.slice(0, 6)}`,
+  borderColor: Colors.headerLine,
   borderRadius: 7,
   padding: 5,
-  borderColor: Colors.headerLine,
-  ...Platform.select({
-    ios: {
-      shadowColor: '#000000',
-      shadowOpacity: 0.3,
-      shadowRadius: 1,
-      shadowOffset: {
-        height: 1,
-        width: 0.3,
-      },
-    },
-    android: {
-      elevation: 1,
-      position: 'relative',
-    },
-  }),
 })
 
-hashBlockText = hash => ({
-  textAlign: 'center',
-  fontFamily: 'Aldrich',
-  fontSize: 12,
-  color: invert(`#${hash.slice(0, 6)}`, true),
-})
+hashBlockText = hash => [
+  textStyle.hash,
+  {
+    color: invert(`#${hash.slice(0, 6)}`, true),
+    backgroundColor: `#${hash.slice(0, 6)}`,
+  },
+]
 
 const blockStyle = StyleSheet.create({
   column: {
@@ -325,6 +334,23 @@ const blockStyle = StyleSheet.create({
     borderTopColor: Colors.headerLine,
     borderTopWidth: 1,
   },
+  shadow: {
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000000',
+        shadowOpacity: 0.3,
+        shadowRadius: 1,
+        shadowOffset: {
+          height: 1,
+          width: 0.3,
+        },
+      },
+      android: {
+        elevation: 1,
+        position: 'relative',
+      },
+    }),
+  },
 })
 
 const defaultText = {
@@ -335,10 +361,15 @@ const defaultText = {
 
 const textStyle = StyleSheet.create({
   defaultText,
+  header: {
+    ...defaultText,
+    fontSize: 18,
+    marginVertical: 10,
+  },
   subheader: {
     ...defaultText,
-    paddingTop: 15,
-    paddingBottom: 5,
+    paddingTop: 5,
+    paddingBottom: 2,
     fontSize: 14,
   },
   right: {

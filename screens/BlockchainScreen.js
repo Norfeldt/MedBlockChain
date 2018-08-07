@@ -13,6 +13,7 @@ export default class BlockchainScreen extends React.Component {
     return (
       <View style={styles.container}>
         <BlockCard
+          timestamp={new Date('2018-06-27T12:00:00Z').toISOString()}
           previousHash={
             'F1A2583273AE26E28D8E509FEEBF2BBBF9A6D0C1D0B589B10FDA251D2E619CDA'
           }
@@ -23,12 +24,17 @@ export default class BlockchainScreen extends React.Component {
             '6EBF41D311EE3BCA9D80EE05853530B0AC5FB323A75208769364A262DC9CB7E1'
           }
           previousHashInfo={{
+            timestamp: new Date('2018-06-24T12:00:00Z').toISOString(),
             previousHash:
               'C2A1F6F411BABD19896A7EF944B3A9FC05D66E15C9122F26167450510FF38062',
             blockKeyHash:
               'BC7A03D7D1C603E9ADB05F89ECFCC58439399EFD87186C2A2C334A1CAD7D1F6C',
           }}
-          blockKey={null}
+          blockKey={{
+            manufacturer: 'Jukka Labs',
+            drugADose: 100,
+            drugAUnits: 'mg',
+          }}
           blockKeyInfo={{
             Manufacture: 'Jukka Labs',
           }}
