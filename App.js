@@ -35,7 +35,7 @@ export default class App extends React.Component {
       ]),
       Font.loadAsync({
         Aldrich: require('./assets/fonts/Aldrich-Regular.ttf'),
-        VT323: require('./assets/fonts/VT323-Regular.ttf'),
+        NovaMono: require('./assets/fonts/NovaMono.ttf'),
         q180624: require('./assets/fonts/q180624.ttf'),
       }),
     ])

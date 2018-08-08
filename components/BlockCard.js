@@ -383,7 +383,7 @@ const textStyle = StyleSheet.create({
     textAlign: 'center',
   },
   hash: {
-    fontFamily: 'VT323',
+    fontFamily: 'NovaMono',
     fontSize: 16,
     textAlign: 'center',
   },
