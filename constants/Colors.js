@@ -7,7 +7,7 @@ export default {
   tabIconDefault: idleColor,
   tabIconSelected: tintColor,
   tabBar: '#fefefe',
-  headerColor: 'rgb(240, 240, 240)',
+  headerColor: '#fefefe',
   headerLine: '#999999',
   headerTextColor: '#333333',
   errorBackground: 'red',
