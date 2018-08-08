@@ -28,12 +28,12 @@ export default class BlockCard extends PureComponent {
 
   render() {
     const {
-      previousHash,
-      blockKeyHash,
       blockHash,
+      timestamp,
+      blockKeyHash,
+      previousHash,
       blockKey,
       blockKeyInfo,
-      previousHashInfo,
     } = this.props
 
     BlockButton = ({ style, title, hash }) => (
@@ -142,9 +142,9 @@ export default class BlockCard extends PureComponent {
         case 'PREVIOUS HASH':
           return (
             <ChainingInfo
-              timestamp={this.props.previousHashInfo.timestamp}
-              previousHash={this.props.previousHashInfo.previousHash}
-              blockKeyHash={this.props.previousHashInfo.blockKeyHash}
+              timestamp={this.props.previousBlockInfo.timestamp}
+              previousHash={this.props.previousBlockInfo.previousHash}
+              blockKeyHash={this.props.previousBlockInfo.blockKeyHash}
               hash={this.props.previousHash}
             />
           )
