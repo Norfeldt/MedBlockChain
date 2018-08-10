@@ -1,18 +1,22 @@
 //import liraries
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 import Colors from '../../constants/Colors'
 
 // create a component
-const InfoRow = ({ style, setting, value }) => {
-  return (
-    <View style={[styles.container, style]}>
-      <Text style={styles.leftText}>{setting}</Text>
+class InfoRow extends PureComponent {
+  render() {
+    const { style, setting, value } = this.props
 
-      <Text style={styles.rightText}>{value}</Text>
-    </View>
-  )
+    return (
+      <View style={[styles.container, style]}>
+        <Text style={styles.leftText}>{setting}</Text>
+
+        <Text style={styles.rightText}>{value}</Text>
+      </View>
+    )
+  }
 }
 
 // define your styles
@@ -32,7 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontFamily: 'Aldrich',
     textAlign: 'right',
-    color: Colors.passiveText,
+    color: Colors.dark,
   },
 })
 
