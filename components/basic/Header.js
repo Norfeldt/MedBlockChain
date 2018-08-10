@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Platform } from 'react-native'
 
 import Colors from '../../constants/Colors'
 
@@ -22,6 +22,21 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.headerColor,
     borderColor: Colors.headerLine,
     borderBottomWidth: StyleSheet.hairlineWidth,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000000',
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
+        shadowOffset: {
+          height: 1,
+          width: 0.3,
+        },
+      },
+      android: {
+        elevation: 1,
+        position: 'relative',
+      },
+    }),
   },
   text: {
     fontFamily: 'Aldrich',
