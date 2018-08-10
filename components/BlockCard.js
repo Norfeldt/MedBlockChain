@@ -9,15 +9,12 @@ import {
 } from 'react-native'
 
 import invert from 'invert-color'
-import reduce from 'lodash/reduce'
 import trim from 'lodash/trim'
-import lowerCase from 'lodash/lowerCase'
-import capitalize from 'lodash/capitalize'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
 import Card from './basic/Card'
 import FontIcon from './basic/FontIcon'
-import InfoRow from './basic/InfoRow'
+import ListData from './ListData'
 
 import Colors from '../constants/Colors'
 
@@ -78,26 +75,6 @@ export default class BlockCard extends PureComponent {
         >{`${trim(hash.replace(/(.{32})/g, '$1\n'))}`}</Text>
       </View>
     )
-
-    ListData = data =>
-      reduce(
-        data,
-        (acc, value, key) => {
-          acc = [
-            ...acc,
-            <InfoRow
-              key={key}
-              setting={lowerCase(key)
-                .split(' ')
-                .map(word => capitalize(word))
-                .join(' ')}
-              value={String(value)}
-            />,
-          ]
-          return acc
-        },
-        []
-      )
 
     ChainingInfo = ({ timestamp, previousBlockHash, drugDataHash, hash }) => (
       <View style={blockStyle.blockInfo}>
@@ -176,7 +153,7 @@ export default class BlockCard extends PureComponent {
             const key = JSON.stringify(drugData)
             return (
               <View style={blockStyle.blockInfo}>
-                {ListData(drugData)}
+                <ListData data={drugData} />
                 <View
                   style={{
                     backgroundColor: Colors.headerLine,
@@ -217,7 +194,7 @@ export default class BlockCard extends PureComponent {
           } else {
             return (
               <View style={blockStyle.blockInfo}>
-                {ListData(drugMetaData)}
+                <ListData data={drugMetaData} />
                 <Text style={textStyle.subheader}>CHECKED IN</Text>
                 <BlockHash hash={this.props.drugDataHash} />
               </View>

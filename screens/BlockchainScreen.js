@@ -8,6 +8,8 @@ import BlockCard from '../components/BlockCard'
 
 import Blockchain from '../cloudComputing/Blockchain'
 
+import Colors from '../constants/Colors'
+
 export default class BlockchainScreen extends PureComponent {
   static navigationOptions = {
     header: <Header title="Blockchain" />,
@@ -17,7 +19,9 @@ export default class BlockchainScreen extends PureComponent {
     const BC = new Blockchain() // FIXME: pass by prop or use Context API
 
     return (
-      <ScrollView style={{ flex: 1, marginTop: 10 }}>
+      <ScrollView
+        style={{ flex: 1, paddingTop: 10, backgroundColor: Colors.scrollBG }}
+      >
         {map(BC.chain, block => (
           <View
             style={{ flexDirection: 'row', justifyContent: 'center' }}

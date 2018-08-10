@@ -1,34 +1,37 @@
-import React from 'react'
-import { StyleSheet, ScrollView, Slider } from 'react-native'
-import QRCode from 'react-native-qrcode'
+import React, { Component } from 'react'
+import { ScrollView, View, Slider, StyleSheet } from 'react-native'
+
 const SHA256 = require('crypto-js/sha256')
 import debounce from 'lodash/debounce'
 
 import Header from '../components/basic/Header'
-import InfoRow from '../components/basic/InfoRow'
+import SectionTitle from '../components/basic/SectionTitle'
 import Button from '../components/basic/Button'
+import ListData from '../components/ListData'
+import DrugQR from '../components/DrugQR'
 
 import Colors from '../constants/Colors'
-import Layout from '../constants/Layout'
 
-export default class HomeScreen extends React.Component {
+export default class HomeScreen extends Component {
   static navigationOptions = {
     header: <Header title="Manufacture" />,
   }
 
   constructor(props) {
     super(props)
-
+    const manufacture = 'Jukka Labs'
     this.state = {
-      MANUFACTURE_NAME: 'Jukka Labs',
-      PRODUCTION_DATE: '24 June 2018',
-      DRUG_A_VALUE: 4.25,
-      DRUG_A_UNITS: 'mg',
-      DRUG_B_VALUE: 80,
-      DRUG_B_UNITS: 'mg',
-      HASH_SALT: 'HAWQ',
+      drugData: {
+        manufacture,
+        productionDate: new Date().toISOString(),
+        ActivePharmIngredient: '4.25 mg',
+        hashSalt: this.makeHashSalt(),
+      },
+      drugDataHash: 'loading',
+      drugMetaData: {
+        manufacture,
+      },
       QR: 'loading',
-      hash: 'loading',
       updating: true,
     }
 
@@ -36,17 +39,39 @@ export default class HomeScreen extends React.Component {
     this.debounceUpdate = debounce(this.updateQRAndHash, 500)
   }
 
-  updateDose(DRUG_X_VALUE) {
-    this.setState({ ...DRUG_X_VALUE, updating: true })
+  makeHashSalt = () => {
+    return (
+      SHA256(Math.random().toString())
+        .toString()
+        .slice(0, 5)
+        .toUpperCase() +
+      ' ' +
+      SHA256(Math.random().toString())
+        .toString()
+        .slice(0, 5)
+        .toUpperCase()
+    )
+  }
+
+  updateDose(value) {
+    const { drugData } = { ...this.state }
+    drugData.ActivePharmIngredient =
+      value.toFixed(2) + drugData.ActivePharmIngredient.replace(/[\d\.]*/g, '')
+    drugData.productionDate = new Date().toISOString()
+
+    // TODO: Make the hash salt update random!
+    drugData.hashSalt = this.makeHashSalt()
+
+    this.setState({ drugData, updating: true })
     this.debounceUpdate()
   }
 
   updateQRAndHash() {
-    const { QR, hash, updating, ...cleanedState } = this.state // getting state without QR and hash key
-    const stateStr = JSON.stringify(cleanedState)
+    const { drugMetaData, QR, hash, updating, ...drugData } = this.state // getting state without QR and hash key
+    const drugDataSTRING = JSON.stringify(drugData)
     this.setState({
-      QR: stateStr,
-      hash: SHA256(stateStr)
+      QR: drugDataSTRING,
+      hash: SHA256(drugDataSTRING)
         .toString()
         .toUpperCase(),
       updating: false,
@@ -58,87 +83,30 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-    const {
-      MANUFACTURE_NAME,
-      PRODUCTION_DATE,
-      DRUG_A_VALUE,
-      DRUG_A_UNITS,
-      DRUG_B_VALUE,
-      DRUG_B_UNITS,
-      HASH_SALT,
-      QR,
-      hash,
-      updating,
-    } = this.state
-
-    const {
-      window: { width },
-      isSmallDevice,
-    } = Layout
+    const { drugData } = this.state
 
     return (
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={{
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-        }}
-      >
-        <InfoRow setting="Manufacture" value={MANUFACTURE_NAME} />
-
-        <InfoRow setting="Production Date" value={PRODUCTION_DATE} />
-
-        <InfoRow
-          setting="Substance A Dose"
-          value={`${DRUG_A_VALUE.toFixed(2)} ${DRUG_A_UNITS}`}
-        />
-        <Slider
-          style={styles.slider}
-          minimumTrackTintColor={Colors.tintColor}
-          maximumValue={20}
-          value={DRUG_A_VALUE}
-          step={0.25}
-          onValueChange={DRUG_A_VALUE => this.debounceDose({ DRUG_A_VALUE })}
-        />
-
-        <InfoRow
-          setting="Substance B Dose"
-          value={`${DRUG_B_VALUE.toFixed(2)} ${DRUG_B_UNITS}`}
-        />
-        <Slider
-          style={styles.slider}
-          minimumTrackTintColor={Colors.tintColor}
-          maximumValue={200}
-          value={DRUG_B_VALUE}
-          step={10}
-          onValueChange={DRUG_B_VALUE => this.debounceDose({ DRUG_B_VALUE })}
-        />
-
-        <InfoRow setting="Hash Salt" value={HASH_SALT} />
-
-        <QRCode
-          value={QR}
-          size={isSmallDevice ? width * 0.9 : width * 0.5}
-          bgColor={updating ? Colors.idleColor : Colors.tintColor}
-          fgColor="white"
-        />
-
-        <InfoRow
-          setting="Drug Data Hash (SHA256)"
-          value={`${hash.slice(0, 10)}...`}
-        />
-
-        <Button title="CHECK IN" iconName="check_in" />
+      <ScrollView style={{ flex: 1, backgroundColor: Colors.scrollBG }}>
+        <View style={{ alignContent: 'center', paddingHorizontal: 10 }}>
+          <SectionTitle name="DRUG DATA" />
+          <ListData data={drugData} />
+          <Slider
+            style={{ height: 60, alignSelf: 'stretch' }}
+            minimumTrackTintColor={Colors.tintColor}
+            maximumValue={20}
+            value={parseFloat(
+              drugData.ActivePharmIngredient.replace(/[^\d\.]*/g, '')
+            )}
+            step={0.25}
+            onValueChange={value => this.debounceDose(value)}
+          />
+          <SectionTitle name="REGISTER" />
+          <Button title="CHECK IN" iconName="check_in" />
+          // FIXME: List Previous checked IN drugs
+          <SectionTitle name="CHECKED IN" />
+          <DrugQR value={this.state.QR} />
+        </View>
       </ScrollView>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingHorizontal: 10,
-  },
-  slider: { height: 60, alignSelf: 'stretch' },
-})
