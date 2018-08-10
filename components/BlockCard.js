@@ -9,7 +9,10 @@ import {
 } from 'react-native'
 
 import invert from 'invert-color'
-import { reduce, trim, lowerCase, capitalize } from 'lodash'
+import reduce from 'lodash/reduce'
+import trim from 'lodash/trim'
+import lowerCase from 'lodash/lowerCase'
+import capitalize from 'lodash/capitalize'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
 import Card from './basic/Card'
@@ -30,10 +33,10 @@ export default class BlockCard extends PureComponent {
     const {
       blockHash,
       timestamp,
-      blockKeyHash,
-      previousHash,
-      blockKey,
-      blockKeyInfo,
+      drugDataHash,
+      previousBlockHash,
+      drugData,
+      drugMetaData,
     } = this.props
 
     BlockButton = ({ style, title, hash }) => (
@@ -76,7 +79,27 @@ export default class BlockCard extends PureComponent {
       </View>
     )
 
-    ChainingInfo = ({ timestamp, previousHash, blockKeyHash, hash }) => (
+    ListData = data =>
+      reduce(
+        data,
+        (acc, value, key) => {
+          acc = [
+            ...acc,
+            <InfoRow
+              key={key}
+              setting={lowerCase(key)
+                .split(' ')
+                .map(word => capitalize(word))
+                .join(' ')}
+              value={String(value)}
+            />,
+          ]
+          return acc
+        },
+        []
+      )
+
+    ChainingInfo = ({ timestamp, previousBlockHash, drugDataHash, hash }) => (
       <View style={blockStyle.blockInfo}>
         <Text style={textStyle.subheader}>TIMESTAMP</Text>
 
@@ -91,11 +114,11 @@ export default class BlockCard extends PureComponent {
           </Text>
         </View>
 
-        <Text style={textStyle.subheader}>PREVIOUS HASH</Text>
-        <BlockHash hash={previousHash} />
+        <Text style={textStyle.subheader}>DRUG DATA HASH</Text>
+        <BlockHash hash={drugDataHash} />
 
-        <Text style={textStyle.subheader}>BLOCK KEY HASH</Text>
-        <BlockHash hash={blockKeyHash} />
+        <Text style={textStyle.subheader}>PREVIOUS HASH</Text>
+        <BlockHash hash={previousBlockHash} />
 
         <View
           style={{
@@ -115,15 +138,17 @@ export default class BlockCard extends PureComponent {
             )}`}
           </Text>
 
-          <Text style={hashBlockText(previousHash)}>{`${previousHash.slice(
-            0,
-            3
-          )}...${previousHash.slice(64 - 3, 64)}`}</Text>
+          <Text
+            style={hashBlockText(previousBlockHash)}
+          >{`${previousBlockHash.slice(0, 3)}...${previousBlockHash.slice(
+            64 - 3,
+            64
+          )}`}</Text>
 
-          <Text style={hashBlockText(blockKeyHash)}>{`${blockKeyHash.slice(
+          <Text style={hashBlockText(drugDataHash)}>{`${drugDataHash.slice(
             0,
             3
-          )}...${blockKeyHash.slice(64 - 3, 64)}`}</Text>
+          )}...${drugDataHash.slice(64 - 3, 64)}`}</Text>
 
           <Text style={textStyle.subheader}>)</Text>
         </View>
@@ -132,47 +157,26 @@ export default class BlockCard extends PureComponent {
     )
 
     BlockInfo = () => {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+
       const { showBlockInfo } = this.state
-
-      if (showBlockInfo !== null) {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
-      }
-
       switch (showBlockInfo) {
         case 'PREVIOUS HASH':
           return (
             <ChainingInfo
               timestamp={this.props.previousBlockInfo.timestamp}
-              previousHash={this.props.previousBlockInfo.previousHash}
-              blockKeyHash={this.props.previousBlockInfo.blockKeyHash}
-              hash={this.props.previousHash}
+              previousBlockHash={this.props.previousBlockInfo.previousBlockHash}
+              drugDataHash={this.props.previousBlockInfo.drugDataHash}
+              hash={this.props.previousBlockHash}
             />
           )
 
-        case 'BLOCK KEY HASH':
-          if (blockKey) {
-            const key = JSON.stringify(blockKey)
+        case 'DRUG DATA':
+          if (drugData) {
+            const key = JSON.stringify(drugData)
             return (
               <View style={blockStyle.blockInfo}>
-                {reduce(
-                  blockKey,
-                  (acc, value, key) => {
-                    acc = [
-                      ...acc,
-                      <InfoRow
-                        key={key}
-                        setting={lowerCase(key)
-                          .split(' ')
-                          .map(word => capitalize(word))
-                          .join(' ')}
-                        value={value}
-                      />,
-                    ]
-                    return acc
-                  },
-                  []
-                )}
-
+                {ListData(drugData)}
                 <View
                   style={{
                     backgroundColor: Colors.headerLine,
@@ -207,20 +211,15 @@ export default class BlockCard extends PureComponent {
                   <Text style={textStyle.subheader}>)</Text>
                 </View>
 
-                <BlockHash hash={blockKeyHash} />
+                <BlockHash hash={drugDataHash} />
               </View>
             )
           } else {
             return (
               <View style={blockStyle.blockInfo}>
-                <InfoRow
-                  setting="Manufacture"
-                  value={blockKeyInfo['Manufacture']}
-                />
-
+                {ListData(drugMetaData)}
                 <Text style={textStyle.subheader}>CHECKED IN</Text>
-
-                <BlockHash hash={this.props.blockKeyHash} />
+                <BlockHash hash={this.props.drugDataHash} />
               </View>
             )
           }
@@ -229,8 +228,8 @@ export default class BlockCard extends PureComponent {
           return (
             <ChainingInfo
               timestamp={this.props.timestamp}
-              previousHash={this.props.previousHash}
-              blockKeyHash={this.props.blockKeyHash}
+              previousBlockHash={this.props.previousBlockHash}
+              drugDataHash={this.props.drugDataHash}
               hash={this.props.blockHash}
             />
           )
@@ -251,11 +250,11 @@ export default class BlockCard extends PureComponent {
           >
             <BlockButton
               style={{ marginBottom: 5 }}
-              title="PREVIOUS HASH"
-              hash={previousHash}
+              title="DRUG DATA"
+              hash={drugDataHash}
             />
 
-            <BlockButton title="BLOCK KEY HASH" hash={blockKeyHash} />
+            <BlockButton title="PREVIOUS HASH" hash={previousBlockHash} />
           </View>
 
           <View
@@ -286,8 +285,8 @@ export default class BlockCard extends PureComponent {
             }}
           >
             <FontIcon
-              name={blockKey ? 'check_out' : 'check_in'}
-              size={30}
+              name={drugData ? 'check_out' : 'check_in'}
+              size={45}
               color={Colors.headerLine}
               style={{ textAlign: 'center', marginVertical: 5 }}
             />
@@ -322,7 +321,7 @@ const blockStyle = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 5,
   },
-  blockKey: {
+  drugData: {
     backgroundColor: Colors.headerLine,
     borderColor: Colors.tintColor,
     borderWidth: StyleSheet.hairlineWidth,

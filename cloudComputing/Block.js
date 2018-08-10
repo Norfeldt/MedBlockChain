@@ -1,19 +1,31 @@
 const SHA256 = require('crypto-js/sha256')
 
 class Block {
-  constructor(blockKey, blockKeyInfo, previousHash, previousBlockInfo) {
-    this.timestamp = new Date().toISOString()
-    this.blockKey = blockKey
-    this.blockKeyInfo = blockKeyInfo
-    this.previousHash = previousHash
+  constructor({
+    drugData,
+    drugDataHash,
+    drugMetaData,
+    previousBlockHash,
+    previousBlockInfo,
+    timestamp,
+  }) {
+    this.timestamp = timestamp
+      ? timestamp.toISOString()
+      : new Date().toISOString()
+    this.drugData = drugData
+    this.drugMetaData = drugMetaData
+    this.previousBlockHash = previousBlockHash
     this.previousBlockInfo = previousBlockInfo
 
     this.hashFunctionName = 'SHA256'
-    this.blockKeyHash = SHA256(JSON.stringify(blockKey))
-      .toString()
-      .toUpperCase()
+    // FIXME: allow to CHECK IN and not just check out
+    this.drugDataHash = drugDataHash
+      ? drugDataHash
+      : SHA256(JSON.stringify(drugData))
+          .toString()
+          .toUpperCase()
     this.blockHash = SHA256(
-      this.timestamp + this.blockKeyHash + this.previousHash
+      this.timestamp + this.drugDataHash + this.previousBlockHash
     )
       .toString()
       .toUpperCase()

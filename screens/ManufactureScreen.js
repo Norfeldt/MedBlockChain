@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet, ScrollView, Slider } from 'react-native'
 import QRCode from 'react-native-qrcode'
-import { SHA256 } from 'crypto-js'
-import { debounce } from 'lodash'
+const SHA256 = require('crypto-js/sha256')
+import debounce from 'lodash/debounce'
 
 import Header from '../components/basic/Header'
 import InfoRow from '../components/basic/InfoRow'
@@ -124,7 +124,7 @@ export default class HomeScreen extends React.Component {
         />
 
         <InfoRow
-          setting="Serialize ID (SHA256)"
+          setting="Drug Data Hash (SHA256)"
           value={`${hash.slice(0, 10)}...`}
         />
 

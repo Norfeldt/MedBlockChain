@@ -4,114 +4,122 @@ const SHA256 = require('crypto-js/sha256')
 
 class Blockchain {
   constructor() {
-    // Block( blockKey, blockKeyInfo, previousHash, previousHashInfo)
-    const genesisBlock = new Block(
-      { initialBlockInBlockChain: true },
-      { manufacturer: 'Authorized Unit' },
-      SHA256('N/A' + SHA256('N/A').toString() + SHA256('N/A').toString())
-        .toString()
-        .toUpperCase(),
-      {
-        timestamp: 'N/A',
-        previousHash: SHA256('N/A')
-          .toString()
-          .toUpperCase(),
-        blockKeyHash: SHA256('N/A')
-          .toString()
-          .toUpperCase(),
-      }
-    )
-    this.chain = [genesisBlock]
+    this.chain = [this.createGensisBlock()]
 
+    // TODO: make a lookup table and consider how it can be added to the blockchain as well
     // https://stackoverflow.com/questions/48817283/searching-for-an-item-in-a-blockchain
-    this.lookupTable = {}
+
+    // DEMO CHAIN - Adding some demonstration blocks to the chain
+    // Will be using addBlock() instead of checkIN() or checkOUT() because timestamp is needed
+
+    //// Manufacturer CHECK IN 1st produced drug
+    // FIXME: use/get data matching Manufacture screen produced
+    this.addBlock({
+      drugData: null,
+      drugDataHash: this.getHashOf({ DrugADose: 100 }),
+      drugMetaData: { Manufacture: 'Jukka Labs' },
+      timestamp: new Date(2018, 6 - 1, 30),
+    })
+
+    //// Patient CHECK OUT 1st produced drug
+    this.addBlock({
+      drugData: { Manufacture: 'Jukka Labs', DrugADose: 100 },
+      drugDataHash: null,
+      drugMetaData: {
+        PatintID:
+          '1CA71187ECCBCE79E1F0272B74DCD1538335E4679A37D0ACF4A4C59D13461D54',
+      },
+      timestamp: new Date(2018, 7 - 1, 3),
+    })
+
+    //// Manufacturer CHECK IN 2nd produced drug
+    this.addBlock({
+      drugData: null,
+      drugDataHash: this.getHashOf({ DrugADose: 80 }),
+      drugMetaData: { Manufacture: 'Jukka Labs' },
+      timestamp: new Date(2018, 7 - 1, 4),
+    })
+  }
+
+  createGensisBlock() {
+    const hashNA = this.getHashOf('N/A')
+    // Block( drugData, drugMetaData, previousBlockHash, previousBlockInfo, timestamp)
+    return new Block({
+      drugData: null,
+      drugDataHash: null,
+      drugMetaData: { BlockCreator: 'Authorized Unit' },
+      previousBlockHash: this.getHashOf('N/A' + hashNA + hashNA),
+      previousBlockInfo: {
+        timestamp: new Date(2018, 6 - 1, 24).toISOString(),
+        previousBlockHash: hashNA,
+        drugDataHash: hashNA,
+      },
+      timestamp: new Date(2018, 6 - 1, 24),
+    })
+  }
+
+  getHashOf(key) {
+    return SHA256(key)
+      .toString()
+      .toUpperCase()
   }
 
   getLatestBlock() {
-    return this.chain[this.chain.length - 1]
+    return this.chain[0]
   }
 
   // Only authorized unit can call this method
-  addBlock(blockKey, blockKeyInfo) {
-    const {
-      blockHash: previousHash,
-      timestamp,
-      blockKeyHash,
-      previousHash: ppHash,
-    } = this.getLatestBlock()
-
+  addBlock({ drugData, drugDataHash, drugMetaData, timestamp }) {
+    // Build block info for the latest block
     const previousBlockInfo = {
-      timestamp,
-      blockKeyHash,
-      previousHash: ppHash,
+      timestamp: this.getLatestBlock().timestamp,
+      drugDataHash: this.getLatestBlock().drugDataHash,
+      previousBlockHash: this.getLatestBlock().previousBlockHash,
     }
-    const blockToChain = new Block(
-      blockKey,
-      blockKeyInfo,
-      previousHash,
-      previousBlockInfo
-    )
-    this.chain.push(blockToChain)
+
+    // Build the block to chain
+    // Block( drugData, drugMetaData, previousBlockHash, previousBlockInfo [, timestamp])
+    const blockToChain = new Block({
+      drugData,
+      drugDataHash,
+      drugMetaData,
+      previousBlockHash: this.getLatestBlock().blockHash,
+      previousBlockInfo,
+      timestamp,
+    })
+
+    // Add the block to the chain
+    this.chain = [blockToChain, ...this.chain]
 
     // TODO: Make it return a promise
   }
 
   // Only manufacturer with access token can call this method
-  checkIN(blockKey, blockKeyInfo) {
+  checkIN(drugDataHash, drugMetaData) {
     // Received content should be encryption with public and private keys: https://www.youtube.com/watch?v=GSIDS_lvRv4
     // TODO: Decrypt with authority private key
 
     // TODO: Decrypt with manufacturer public key
 
-    // TODO: Check for hash value collision before CHECK IN
+    // TODO: Check that the drugDataHash hasn't already been checked IN or OUT
 
     // Add the block to the chain
-    this.addBlock(blockKey, blockKeyInfo) // TODO: Deal with promise handing..
+    this.addBlock(null, drugDataHash, drugMetaData, null) // TODO: Deal with promise handing..
   }
 
   // Public can call this method
-  checkOUT(blockToChain) {
-    // No matter if the drug is genuine or falisified - it's attempt to be checked out will be recorded
+  checkOUT(drugData, drugMetaData) {
+    // Verify that the drug hash has been CHECKED IN
+    // FIXME:
 
-    // TODO: Consider if the same end-user ID should be able to check-out twice the same
+    // TODO: Consider if attempt should be added to the chain..
+    // Current implementation does not add it
 
-    this.addBlock(blockToChain) // TODO: Deal with promise handing..
+    // FIXME:
+    // Check that the drugh has has not already been CHECKED OUT
+    // Add it to the chain anyway - since it needs to be recorded
 
-    // const previousChained = this.lookupTable[`${blockToChain.masterDataHash}`] // will be undefined if never chained before
-    // if (previousChained) {
-    //   if (previousChained.index.length == 1) {
-    //     return {
-    //       succes: 'THE DRUG IS CONSIDERED GENUINE',
-    //     }
-    //   } else {
-    //     return {
-    //       error:
-    //         'WARNING: DO NOT CONSUME THIS DRUG!\n\nIt has already been CHECKED OUT and should therefore be considered as a falisifed medicine',
-    //     }
-    //   }
-    // } else {
-    //   return {
-    //     error:
-    //       'WARNING: DO NOT CONSUME THIS DRUG!\n\nIt has NOT been reported to be produced by an authorized manufacture and should therefore be considered as a falisifed medicine',
-    //   }
-    // }
-  }
-
-  isChainValid() {
-    for (let i = 1; i < this.chain.length; i++) {
-      const currentBlock = this.chain[i]
-      const previousBlock = this.chain[i - 1]
-
-      if (currentBlock.hash !== currentBlock.calculateHash()) {
-        return false
-      }
-
-      if (currentBlock.previousHash !== previousBlock.hash) {
-        return false
-      }
-    }
-
-    return true
+    this.addBlock(drugData, null, drugMetaData, null) // TODO: Deal with promise handing..
   }
 }
 

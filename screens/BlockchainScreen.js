@@ -1,57 +1,40 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, { PureComponent } from 'react'
+import { StyleSheet, View, FlatList, ScrollView } from 'react-native'
+
+import map from 'lodash/map'
 
 import Header from '../components/basic/Header'
 import BlockCard from '../components/BlockCard'
 
 import Blockchain from '../cloudComputing/Blockchain'
 
-export default class BlockchainScreen extends React.Component {
+export default class BlockchainScreen extends PureComponent {
   static navigationOptions = {
     header: <Header title="Blockchain" />,
   }
 
   render() {
-    const BC = new Blockchain()
-    console.log(JSON.stringify(BC, null, 4))
-    BC.checkIN(
-      { manufacturer: 'Jukka Labs', doseAQuantity: 100, doseAUnits: 'mg' },
-      { manufacturer: 'Jukka Labs' }
-    )
-
-    console.log(JSON.stringify(BC, null, 4))
-
-    const {
-      blockHash,
-      timestamp,
-      blockKeyHash,
-      previousHash,
-      blockKey,
-      blockKeyInfo,
-      previousBlockInfo,
-    } = BC.getLatestBlock()
+    const BC = new Blockchain() // FIXME: pass by prop or use Context API
 
     return (
-      <View style={styles.container}>
-        <BlockCard
-          blockHash={blockHash}
-          timestamp={timestamp}
-          blockKeyHash={blockKeyHash}
-          previousHash={previousHash}
-          blockKey={blockKey}
-          blockKeyInfo={blockKeyInfo}
-          previousBlockInfo={previousBlockInfo}
-        />
-      </View>
+      <ScrollView style={{ flex: 1, marginTop: 10 }}>
+        {map(BC.chain, block => (
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'center' }}
+            key={block.blockHash}
+          >
+            <BlockCard
+              blockHash={block.blockHash}
+              timestamp={block.timestamp}
+              drugDataHash={block.drugDataHash}
+              previousBlockHash={block.previousBlockHash}
+              drugData={block.drugData}
+              drugMetaData={block.drugMetaData}
+              previousBlockInfo={block.previousBlockInfo}
+            />
+          </View>
+        ))}
+      </ScrollView>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-})
