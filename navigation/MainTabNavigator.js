@@ -18,7 +18,7 @@ const ManufactureStack = createStackNavigator({
 })
 
 ManufactureStack.navigationOptions = {
-  tabBarLabel: 'Manufacture',
+  tabBarLabel: 'MANUFACTURE',
   tabBarOptions: {
     activeTintColor: Colors.tintColor,
   },
@@ -32,7 +32,7 @@ const PatientStack = createStackNavigator({
 })
 
 PatientStack.navigationOptions = {
-  tabBarLabel: 'Patient',
+  tabBarLabel: 'PATIENT',
   tabBarOptions: {
     activeTintColor: Colors.tintColor,
   },
@@ -44,7 +44,7 @@ const BlockchainStack = createStackNavigator({
 })
 
 BlockchainStack.navigationOptions = {
-  tabBarLabel: 'Blockchain',
+  tabBarLabel: 'BLOCKCHAIN',
   tabBarOptions: {
     activeTintColor: Colors.tintColor,
   },
@@ -68,8 +68,8 @@ DiagnosticStack.navigationOptions = {
 }
 
 export default createBottomTabNavigator({
-  BlockchainStack,
-  PatientStack,
   ManufactureStack,
+  PatientStack,
+  BlockchainStack,
   //DiagnosticStack,
 })

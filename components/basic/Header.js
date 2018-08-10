@@ -8,7 +8,7 @@ import Colors from '../../constants/Colors'
 const Header = ({ style, title }) => {
   return (
     <View style={[styles.container, style]}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.text}>{title.toUpperCase()}</Text>
     </View>
   )
 }
@@ -25,9 +25,9 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'Aldrich',
-    fontSize: 24,
+    fontSize: 28,
     color: Colors.headerTextColor,
-    marginBottom: 5,
+    marginBottom: 2,
   },
 })
 
