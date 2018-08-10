@@ -6,6 +6,25 @@ import Colors from '../../constants/Colors'
 
 // create a component
 class InfoRow extends PureComponent {
+  dateChecker = value => {
+    const isoformat =
+      '^\\d{4}-\\d{2}-\\d{2}' + // Match YYYY-MM-DD
+      '((T\\d{2}:\\d{2}(:\\d{2})?)' + // Match THH:mm:ss
+      '(\\.\\d{1,6})?' + // Match .sssss
+      '(Z|(\\+|-)\\d{2}:\\d{2})?)?$' // Time zone (Z or +hh:mm)
+
+    const matcher = new RegExp(isoformat)
+    if (
+      typeof value === 'string' &&
+      matcher.test(value) &&
+      !isNaN(Date.parse(value))
+    ) {
+      return value.slice(0, 10)
+    }
+
+    return value
+  }
+
   render() {
     const { style, setting, value } = this.props
 
@@ -13,7 +32,7 @@ class InfoRow extends PureComponent {
       <View style={[styles.container, style]}>
         <Text style={styles.leftText}>{setting}</Text>
 
-        <Text style={styles.rightText}>{value}</Text>
+        <Text style={styles.rightText}>{this.dateChecker(value)}</Text>
       </View>
     )
   }
