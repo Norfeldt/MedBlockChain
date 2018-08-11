@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     height: 55,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: Colors.headerColor,
-    borderColor: Colors.headerLine,
+    backgroundColor: Colors.panel,
+    borderColor: Colors.panelOutline,
     borderBottomWidth: StyleSheet.hairlineWidth,
     ...Platform.select({
       ios: {
@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
         shadowRadius: 1,
         shadowOffset: {
           height: 1,
-          width: 0.3,
         },
       },
       android: {
@@ -41,7 +40,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'Aldrich',
     fontSize: 28,
-    color: Colors.headerTextColor,
+    color: Colors.dark,
     marginBottom: 2,
   },
 })

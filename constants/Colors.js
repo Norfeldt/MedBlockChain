@@ -9,6 +9,8 @@ export default {
   tabBar: '#fefefe',
   headerColor: '#fefefe',
   headerLine: '#999999',
+  panel: '#F0F0F0',
+  panelOutline: '#999999',
   headerTextColor: '#333333',
   scrollBG: '#FFFFFF',
   errorBackground: 'red',

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, Text } from 'react-native'
 import {
   createStackNavigator,
   createBottomTabNavigator,
@@ -13,15 +13,39 @@ import BlockchainScreen from '../screens/BlockchainScreen'
 
 import Colors from '../constants/Colors'
 
+const tabBarOptions = {
+  activeTintColor: Colors.themeColor,
+  labelStyle: {
+    fontFamily: 'Aldrich',
+    fontSize: 10,
+  },
+  style: {
+    backgroundColor: Colors.panel,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000000',
+        shadowOpacity: 0.1,
+        shadowRadius: 1,
+        shadowOffset: {
+          height: -1,
+        },
+        paddingTop: 1,
+      },
+      android: {
+        elevation: 1,
+        position: 'relative',
+      },
+    }),
+  },
+}
+
 const ManufactureStack = createStackNavigator({
   manufacture: ManufactureScreen,
 })
 
 ManufactureStack.navigationOptions = {
   tabBarLabel: 'MANUFACTURE',
-  tabBarOptions: {
-    activeTintColor: Colors.tintColor,
-  },
+  tabBarOptions,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name="manufacture" />
   ),
@@ -33,9 +57,7 @@ const PatientStack = createStackNavigator({
 
 PatientStack.navigationOptions = {
   tabBarLabel: 'PATIENT',
-  tabBarOptions: {
-    activeTintColor: Colors.tintColor,
-  },
+  tabBarOptions,
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="patient" />,
 }
 
@@ -45,9 +67,7 @@ const BlockchainStack = createStackNavigator({
 
 BlockchainStack.navigationOptions = {
   tabBarLabel: 'BLOCKCHAIN',
-  tabBarOptions: {
-    activeTintColor: Colors.tintColor,
-  },
+  tabBarOptions,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name="block_chain" />
   ),
@@ -59,9 +79,7 @@ const DiagnosticStack = createStackNavigator({
 
 DiagnosticStack.navigationOptions = {
   tabBarLabel: 'Diagnostic',
-  tabBarOptions: {
-    activeTintColor: Colors.tintColor,
-  },
+  tabBarOptions,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name="diagnostic" />
   ),
