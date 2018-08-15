@@ -15,14 +15,11 @@ export default class BlockchainScreen extends PureComponent {
   }
 
   render() {
-    // FIXME: pass by prop or use Context API
-
     return (
       <ContextConsumer>
         {context => {
           return (
             <ScrollView style={blockStyle.scrollView}>
-              {/* <Text>{JSON.stringify(context.blockchain, null, 4)}</Text> */}
               {map(context.blockchain.chain, block => (
                 <View style={blockStyle.scrollItem} key={block.blockHash}>
                   <BlockCard
@@ -33,6 +30,7 @@ export default class BlockchainScreen extends PureComponent {
                     drugData={block.drugData}
                     drugMetaData={block.drugMetaData}
                     previousBlockInfo={block.previousBlockInfo}
+                    hashAlgorithmName={block.hashAlgorithmName}
                   />
                 </View>
               ))}

@@ -1,6 +1,6 @@
 // Derived from https://www.youtube.com/watch?v=zVqczFZr124
-const Block = require('./Block')
-const SHA256 = require('crypto-js/sha256')
+const { Block, getHashOfDrugData } = require('./Block')
+import SHA256 from 'crypto-js/sha256'
 
 class Blockchain {
   constructor() {
@@ -8,60 +8,29 @@ class Blockchain {
 
     // TODO: make a lookup table and consider how it can be added to the blockchain as well
     // https://stackoverflow.com/questions/48817283/searching-for-an-item-in-a-blockchain
-
-    // DEMO CHAIN - Adding some demonstration blocks to the chain
-    // Will be using addBlock() instead of checkIN() or checkOUT() because timestamp is needed
-
-    //// Manufacturer CHECK IN 1st produced drug
-    // FIXME: use/get data matching Manufacture screen produced
-    this.addBlock({
-      drugData: null,
-      drugDataHash: this.getHashOf({ DrugADose: 100 }),
-      drugMetaData: { Manufacture: 'Jukka Labs' },
-      timestamp: new Date(2018, 6 - 1, 30),
-    })
-
-    //// Patient CHECK OUT 1st produced drug
-    this.addBlock({
-      drugData: { Manufacture: 'Jukka Labs', DrugADose: 100 },
-      drugDataHash: null,
-      drugMetaData: {
-        PatintID:
-          '1CA71187ECCBCE79E1F0272B74DCD1538335E4679A37D0ACF4A4C59D13461D54',
-      },
-      timestamp: new Date(2018, 7 - 1, 3),
-    })
-
-    //// Manufacturer CHECK IN 2nd produced drug
-    this.addBlock({
-      drugData: null,
-      drugDataHash: this.getHashOf({ DrugADose: 80 }),
-      drugMetaData: { Manufacture: 'Jukka Labs' },
-      timestamp: new Date(2018, 7 - 1, 4),
-    })
   }
 
   createGensisBlock() {
-    const hashNA = this.getHashOf('N/A')
+    // TODO: Confirm that it's SHA256 that is being used in the blocks..
+
+    const hashNA = SHA256('N/A')
+      .toString()
+      .toUpperCase()
     // Block( drugData, drugMetaData, previousBlockHash, previousBlockInfo, timestamp)
     return new Block({
       drugData: null,
       drugDataHash: null,
       drugMetaData: { BlockCreator: 'Authorized Unit' },
-      previousBlockHash: this.getHashOf('N/A' + hashNA + hashNA),
+      previousBlockHash: SHA256('N/A' + hashNA + hashNA)
+        .toString()
+        .toUpperCase(),
       previousBlockInfo: {
-        timestamp: new Date(2018, 6 - 1, 24).toISOString(),
+        timestamp: new Date(2018, 6 - 1, 24, 12).toISOString(),
         previousBlockHash: hashNA,
         drugDataHash: hashNA,
       },
-      timestamp: new Date(2018, 6 - 1, 24),
+      timestamp: new Date(2018, 6 - 1, 24, 12),
     })
-  }
-
-  getHashOf(key) {
-    return SHA256(key)
-      .toString()
-      .toUpperCase()
   }
 
   getLatestBlock() {

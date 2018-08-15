@@ -10,7 +10,6 @@ import {
 
 import invert from 'invert-color'
 import trim from 'lodash/trim'
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
 import Card from './basic/Card'
 import FontIcon from './basic/FontIcon'
@@ -34,11 +33,21 @@ export default class BlockCard extends PureComponent {
       previousBlockHash,
       drugData,
       drugMetaData,
+      hashAlgorithmName,
     } = this.props
 
-    BlockButton = ({ style, title, hash }) => (
+    BlockButton = ({ style, title, value, valueIsHash = true }) => (
       <TouchableOpacity
-        style={[hashBlockContainer(hash), blockStyle.shadow, style]}
+        style={[
+          valueIsHash && hashBlockContainer(value),
+          !valueIsHash && blockStyle.drugData,
+          {
+            borderColor: Colors.headerLine,
+            borderRadius: 7,
+          },
+          blockStyle.shadow,
+          style,
+        ]}
         onPress={() => {
           this.setState({
             showBlockInfo: this.state.showBlockInfo == title ? null : title,
@@ -48,12 +57,19 @@ export default class BlockCard extends PureComponent {
         <Text
           style={[
             textStyle.subheader,
-            { color: invert(`#${hash.slice(0, 6)}`, true) },
+            {
+              color: valueIsHash
+                ? invert(`#${value.slice(0, 6)}`, true)
+                : '#000000',
+            },
           ]}
         >
           {title}
         </Text>
-        <Text style={hashBlockText(hash)}>{`${hash.slice(0, 10)}...`}</Text>
+
+        <Text
+          style={valueIsHash ? hashBlockText(value) : textStyle.hash}
+        >{`${value.slice(0, 10)}...`}</Text>
       </TouchableOpacity>
     )
 
@@ -106,7 +122,7 @@ export default class BlockCard extends PureComponent {
             paddingBottom: 5,
           }}
         >
-          <Text style={textStyle.subheader}>SHA256(</Text>
+          <Text style={textStyle.subheader}>{hashAlgorithmName}(</Text>
 
           <Text style={hashBlockText(Colors.headerLine.slice(1, 7))}>
             {`${timestamp.slice(0, 3)}...${timestamp.slice(
@@ -173,7 +189,7 @@ export default class BlockCard extends PureComponent {
                     paddingBottom: 5,
                   }}
                 >
-                  <Text style={textStyle.subheader}>SHA256(</Text>
+                  <Text style={textStyle.subheader}>{hashAlgorithmName}(</Text>
 
                   <Text
                     style={[
@@ -211,6 +227,24 @@ export default class BlockCard extends PureComponent {
             />
           )
 
+        case 'TIMESTAMP':
+          return (
+            <View style={blockStyle.blockInfo}>
+              <Text style={textStyle.subheader}>TIMESTAMP</Text>
+
+              <View style={hashBlockContainer(Colors.headerLine.slice(1, 7))}>
+                <Text
+                  style={[
+                    hashBlockText('ffffff'),
+                    { backgroundColor: 'transparent' },
+                  ]}
+                >
+                  {timestamp}
+                </Text>
+              </View>
+            </View>
+          )
+
         default:
           return null
       }
@@ -218,20 +252,24 @@ export default class BlockCard extends PureComponent {
 
     return (
       <Card>
-        <Text style={textStyle.header}>{`${distanceInWordsToNow(
-          this.props.timestamp
-        )} ago`}</Text>
         <View style={blockStyle.column}>
           <View
             style={{ flex: 4, justifyContent: 'space-between', padding: 5 }}
           >
             <BlockButton
               style={{ marginBottom: 5 }}
-              title="DRUG DATA"
-              hash={drugDataHash}
+              title="TIMESTAMP"
+              value={timestamp}
+              valueIsHash={false}
             />
 
-            <BlockButton title="PREVIOUS HASH" hash={previousBlockHash} />
+            <BlockButton
+              style={{ marginBottom: 5 }}
+              title="DRUG DATA"
+              value={drugDataHash}
+            />
+
+            <BlockButton title="PREVIOUS HASH" value={previousBlockHash} />
           </View>
 
           <View
@@ -244,7 +282,9 @@ export default class BlockCard extends PureComponent {
             }}
           >
             <View style={{ flex: 3 }} />
-            <Text style={[{ flex: 1 }, textStyle.nano]}>SHA256</Text>
+            <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+              <Text style={textStyle.nano}>SHA256</Text>
+            </View>
             <View
               style={{
                 flex: 1,
@@ -261,13 +301,15 @@ export default class BlockCard extends PureComponent {
               padding: 3,
             }}
           >
-            <FontIcon
-              name={drugData ? 'check_out' : 'check_in'}
-              size={45}
-              color={Colors.headerLine}
-              style={{ textAlign: 'center', marginVertical: 5 }}
-            />
-            <BlockButton title="BLOCK HASH" hash={blockHash} />
+            <View style={{ justifyContent: 'center', flex: 1 }}>
+              <FontIcon
+                name={drugData ? 'check_out' : 'check_in'}
+                size={70}
+                color={`#${this.props.drugDataHash.slice(0, 6)}`}
+                style={[{ textAlign: 'center' }, blockStyle.shadow]}
+              />
+            </View>
+            <BlockButton title="BLOCK HASH" value={blockHash} />
           </View>
         </View>
 
@@ -360,7 +402,7 @@ const textStyle = StyleSheet.create({
   },
   hash: {
     fontFamily: 'NovaMono',
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
   },
 })

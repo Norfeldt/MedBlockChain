@@ -1,5 +1,11 @@
 const SHA256 = require('crypto-js/sha256')
 
+getHashOfDrugData = drugData => {
+  return SHA256(JSON.stringify(drugData))
+    .toString()
+    .toUpperCase()
+}
+
 class Block {
   constructor({
     drugData,
@@ -17,13 +23,10 @@ class Block {
     this.previousBlockHash = previousBlockHash
     this.previousBlockInfo = previousBlockInfo
 
-    this.hashFunctionName = 'SHA256'
-    // FIXME: allow to CHECK IN and not just check out
+    this.hashAlgorithmName = 'SHA256'
     this.drugDataHash = drugDataHash
       ? drugDataHash
-      : SHA256(JSON.stringify(drugData))
-          .toString()
-          .toUpperCase()
+      : getHashOfDrugData(drugData)
     this.blockHash = SHA256(
       this.timestamp + this.drugDataHash + this.previousBlockHash
     )
@@ -32,4 +35,4 @@ class Block {
   }
 }
 
-module.exports = Block
+module.exports = { Block, getHashOfDrugData }
