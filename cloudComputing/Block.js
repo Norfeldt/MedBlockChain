@@ -1,3 +1,4 @@
+import Conventions from '../constants/Conventions'
 const SHA256 = require('crypto-js/sha256')
 
 getHashOfDrugData = drugData => {
@@ -16,8 +17,8 @@ class Block {
     timestamp,
   }) {
     this.timestamp = timestamp
-      ? timestamp.toISOString()
-      : new Date().toISOString()
+      ? Conventions.datetimeStr(timestamp)
+      : Conventions.datetimeStr()
     this.drugData = drugData
     this.drugMetaData = drugMetaData
     this.previousBlockHash = previousBlockHash

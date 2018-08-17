@@ -18,25 +18,22 @@ export default class HomeScreen extends Component {
 
   render() {
     return (
-      <ContextConsumer>
-        {context => {
-          return (
-            <ScrollView style={{ flex: 1, backgroundColor: Colors.scrollBG }}>
-              <View style={{ alignContent: 'center', paddingHorizontal: 10 }}>
-                <SectionTitle name="DRUG DATA" />
-                <ListData data={context.drugData} />
-                <SectionTitle name="DOSING" />
-                <DoseAdjuster />
-                <SectionTitle name="REGISTER" />
-                <Button title="CHECK IN" iconName="check_in" />
-                {/* // FIXME: List Previous checked IN drugs */}
-                <SectionTitle name="BLOCKCHAINED" />
-                <ManufactureHistory />
-              </View>
-            </ScrollView>
-          )
-        }}
-      </ContextConsumer>
+      <ScrollView style={{ flex: 1, backgroundColor: Colors.scrollBG }}>
+        <View style={{ alignContent: 'center', paddingHorizontal: 10 }}>
+          <SectionTitle name="DRUG DATA" />
+          <ContextConsumer>
+            {({ drugData }) => {
+              return <ListData data={drugData} />
+            }}
+          </ContextConsumer>
+          <SectionTitle name="DOSING" />
+          <DoseAdjuster />
+          <SectionTitle name="REGISTER" />
+          <Button title="CHECK IN" iconName="check_in" />
+          <SectionTitle name="BLOCKCHAINED" />
+          <ManufactureHistory />
+        </View>
+      </ScrollView>
     )
   }
 }

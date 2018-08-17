@@ -6,7 +6,7 @@ import QRCode from 'react-native-qrcode'
 import Colors from '../constants/Colors'
 import Layout from '../constants/Layout'
 import { ContextConsumer } from '../Context'
-import format from 'date-fns/format'
+import Conventions from '../constants/Conventions'
 import trim from 'lodash/trim'
 const SHA256 = require('crypto-js/sha256')
 
@@ -68,7 +68,7 @@ export default class ManufactureHistory extends PureComponent {
               >
                 {' '}
                 <Text style={textStyle.datetime}>
-                  {format(drug.productionDate, 'YYYY-MM-DD T HH:MM ZZ')}
+                  {Conventions.datetimeStr(drug.productionDate)}
                 </Text>
                 <DrugQR value={drugStr} />
                 <View

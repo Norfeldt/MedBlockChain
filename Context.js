@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-
-const SHA256 = require('crypto-js/sha256')
-
 import { getHashOfDrugData } from './cloudComputing/Block'
 import Blockchain from './cloudComputing/Blockchain'
+import Conventions from './constants/Conventions'
+
+const SHA256 = require('crypto-js/sha256')
 
 // Using the Context API used in react 16.3 - https://www.youtube.com/watch?v=XLJN4JfniH4
 const { Provider, Consumer: ContextConsumer } = React.createContext()
@@ -44,7 +44,7 @@ class ContextProvider extends Component {
 
   getDefaultDrugData = (
     manufacture,
-    productionDate = new Date().toISOString(),
+    productionDate = Conventions.datetimeStr(),
     hashSalt = this.makeHashSalt()
   ) => {
     return {
@@ -69,10 +69,13 @@ class ContextProvider extends Component {
     drugData.ActivePharmIngredient =
       value.toFixed(2) + drugData.ActivePharmIngredient.replace(/[\d\.]*/g, '')
     // Update the production date and create new hash
-    drugData.productionDate = new Date().toISOString()
+    drugData.productionDate = Conventions.datetimeStr()
     drugData.hashSalt = this.makeHashSalt()
+
+    // Make a new hash of the updated drug data
+    const drugDataHash = getHashOfDrugData(drugData)
     // Update the state
-    this.setState({ drugData })
+    this.setState({ drugData, drugDataHash })
   }
 
   setupDemoChain() {

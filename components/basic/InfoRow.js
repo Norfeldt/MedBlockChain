@@ -1,7 +1,7 @@
 //import liraries
 import React, { PureComponent } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-
+import Conventions from '../../constants/Conventions'
 import Colors from '../../constants/Colors'
 
 // create a component
@@ -19,7 +19,7 @@ class InfoRow extends PureComponent {
       matcher.test(value) &&
       !isNaN(Date.parse(value))
     ) {
-      return value.slice(0, 10)
+      return Conventions.datetimeStr(value)
     }
 
     return value
