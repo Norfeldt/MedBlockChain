@@ -21,10 +21,13 @@ class ContextProvider extends Component {
       drugMetaData: {
         manufacture,
       },
+      manufacturedDrugs: [],
+      patientDrugHistory: [],
     }
   }
 
   componentDidMount() {
+    // TODO: Consider if AsyncStorage is needed.. This is just a Proof-of-Concept
     this.setupDemoChain()
   }
 
@@ -74,7 +77,9 @@ class ContextProvider extends Component {
 
   setupDemoChain() {
     // Grab a mutable copy of the blockchain
-    const { blockchain } = { ...this.state }
+    const { blockchain, manufacturedDrugs, patientDrugHistory } = {
+      ...this.state,
+    }
 
     // Manufacturer CHECK IN 1st produced drug
     // Will be using Blockchain.addBlock() instead of checkIN() or checkOUT() because timestamp is needed
@@ -82,13 +87,13 @@ class ContextProvider extends Component {
     let timestamp = new Date(2018, 7, 1, 9)
     let hashSalt = 'AODAD 9A13A'
     const drugData01 = this.getDefaultDrugData(manufacture, timestamp, hashSalt)
+    manufacturedDrugs.unshift(drugData01)
     blockchain.addBlock({
       drugData: null,
       drugDataHash: getHashOfDrugData(drugData01),
       drugMetaData: { manufacture },
       timestamp,
     })
-    // FIXME: Add to ManufactureScreen
 
     //// Patient CHECK OUT 1st produced drug
     timestamp = new Date(2018, 7, 3, 16)
@@ -102,20 +107,21 @@ class ContextProvider extends Component {
       timestamp,
     })
     // FIXME: Add to PatientScreen
+    patientDrugHistory.unshift({ dateTaken: timestamp, drugData: drugData01 })
 
     //// Manufacturer CHECK IN 2nd produced drug
     timestamp = new Date(2018, 7, 4, 9)
     hashSalt = 'F45CC ABC99'
     const drugData02 = this.getDefaultDrugData(manufacture, timestamp, hashSalt)
+    manufacturedDrugs.unshift(drugData02)
     blockchain.addBlock({
       drugData: null,
       drugDataHash: getHashOfDrugData(drugData02),
       drugMetaData: { manufacture },
       timestamp,
     })
-    // FIXME: Add to ManufactureScreen
 
-    this.setState({ blockchain })
+    this.setState({ blockchain, manufacturedDrugs, patientDrugHistory })
   }
 
   render() {

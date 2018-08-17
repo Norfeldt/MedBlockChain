@@ -7,7 +7,7 @@ import SectionTitle from '../components/basic/SectionTitle'
 import Button from '../components/basic/Button'
 import ListData from '../components/ListData'
 import DoseAdjuster from '../components/DoseAdjuster'
-import DrugQR from '../components/DrugQR'
+import ManufactureHistory from '../components/ManufactureHistory'
 
 import Colors from '../constants/Colors'
 
@@ -31,6 +31,7 @@ export default class HomeScreen extends Component {
                 <Button title="CHECK IN" iconName="check_in" />
                 {/* // FIXME: List Previous checked IN drugs */}
                 <SectionTitle name="BLOCKCHAINED" />
+                <ManufactureHistory />
               </View>
             </ScrollView>
           )
