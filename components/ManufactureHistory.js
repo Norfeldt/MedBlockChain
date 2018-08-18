@@ -1,6 +1,4 @@
-import invert from 'invert-color'
 import map from 'lodash/map'
-import trim from 'lodash/trim'
 import React, { PureComponent } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import QRCode from 'react-native-qrcode'
@@ -9,6 +7,7 @@ import Colors from '../constants/Colors'
 import Conventions from '../constants/Conventions'
 import Layout from '../constants/Layout'
 import { ContextConsumer } from '../Context'
+import HashBlock from './basic/HashBlock'
 
 class DrugQR extends PureComponent {
   render() {
@@ -51,10 +50,6 @@ export default class ManufactureHistory extends PureComponent {
       <ContextConsumer>
         {({ manufacturedDrugs }) =>
           map(manufacturedDrugs, (drug, index) => {
-            const drugStr = JSON.stringify(drug)
-            const drugHash = getHashOfDrugData(drug)
-            const hashColor = `#${drugHash.slice(0, 6)}`
-            const hashTextColor = invert(hashColor, true)
             return (
               <View
                 key={index}
@@ -68,19 +63,8 @@ export default class ManufactureHistory extends PureComponent {
                 <Text style={textStyle.datetime}>
                   {Conventions.datetimeStr(drug.productionDate)}
                 </Text>
-                <DrugQR value={drugStr} />
-                <View
-                  style={{
-                    backgroundColor: hashColor,
-                    margin: 10,
-                    padding: 10,
-                    borderRadius: 7,
-                  }}
-                >
-                  <Text
-                    style={[textStyle.hash, { color: hashTextColor }]}
-                  >{`${trim(drugHash.replace(/(.{32})/g, '$1\n'))}`}</Text>
-                </View>
+                <DrugQR value={JSON.stringify(drug)} />
+                <HashBlock value={getHashOfDrugData(drug)} />
               </View>
             )
           })

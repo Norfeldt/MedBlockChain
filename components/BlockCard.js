@@ -13,6 +13,7 @@ import trim from 'lodash/trim'
 
 import Card from './basic/Card'
 import FontIcon from './basic/FontIcon'
+import HashBlock from './basic/HashBlock'
 import ListData from './ListData'
 
 import Colors from '../constants/Colors'
@@ -74,25 +75,6 @@ export default class BlockCard extends PureComponent {
       </TouchableOpacity>
     )
 
-    BlockHash = ({ hash = '00ff00', style }) => (
-      <View
-        style={[
-          { borderRadius: 7, backgroundColor: `#${hash.slice(0, 6)}` },
-          style,
-        ]}
-      >
-        <Text
-          style={[
-            textStyle.hash,
-            {
-              color: invert(`#${hash.slice(0, 6)}`, true),
-              padding: 10,
-            },
-          ]}
-        >{`${trim(hash.replace(/(.{32})/g, '$1\n'))}`}</Text>
-      </View>
-    )
-
     ChainingInfo = ({ timestamp, previousBlockHash, drugDataHash, hash }) => (
       <View style={blockStyle.blockInfo}>
         <Text style={textStyle.subheader}>TIMESTAMP</Text>
@@ -109,10 +91,10 @@ export default class BlockCard extends PureComponent {
         </View>
 
         <Text style={textStyle.subheader}>DRUG DATA HASH</Text>
-        <BlockHash hash={drugDataHash} />
+        <HashBlock value={drugDataHash} />
 
         <Text style={textStyle.subheader}>PREVIOUS HASH</Text>
-        <BlockHash hash={previousBlockHash} />
+        <HashBlock value={previousBlockHash} />
 
         <View
           style={{
@@ -146,7 +128,7 @@ export default class BlockCard extends PureComponent {
 
           <Text style={textStyle.subheader}>)</Text>
         </View>
-        <BlockHash hash={hash} />
+        <HashBlock value={hash} />
       </View>
     )
 
@@ -205,7 +187,7 @@ export default class BlockCard extends PureComponent {
                   <Text style={textStyle.subheader}>)</Text>
                 </View>
 
-                <BlockHash hash={drugDataHash} />
+                <HashBlock value={drugDataHash} />
               </View>
             )
           } else {
@@ -213,7 +195,7 @@ export default class BlockCard extends PureComponent {
               <View style={blockStyle.blockInfo}>
                 <ListData data={drugMetaData} />
                 <Text style={textStyle.subheader}>CHECKED IN</Text>
-                <BlockHash hash={this.props.drugDataHash} />
+                <HashBlock value={this.props.drugDataHash} />
               </View>
             )
           }
