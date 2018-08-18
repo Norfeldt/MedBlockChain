@@ -29,7 +29,18 @@ export default class HomeScreen extends Component {
           <SectionTitle name="DOSING" />
           <DoseAdjuster />
           <SectionTitle name="REGISTER" />
-          <Button title="CHECK IN" iconName="check_in" />
+          <ContextConsumer>
+            {({ checkIN }) => {
+              return (
+                <Button
+                  title="CHECK IN"
+                  iconName="check_in"
+                  onPress={checkIN}
+                />
+              )
+            }}
+          </ContextConsumer>
+
           <SectionTitle name="BLOCKCHAINED" />
           <ManufactureHistory />
         </View>

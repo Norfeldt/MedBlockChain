@@ -44,30 +44,27 @@ class ContextProvider extends Component {
 
   getDefaultDrugData = (
     manufacture,
-    productionDate = Conventions.datetimeStr(),
+    productionDate = Conventions.datetimeStr(new Date()),
     hashSalt = this.makeHashSalt()
   ) => {
     return {
       manufacture,
+      ActivePharmIngredient: 'Ephedrine',
+      dose: '4.25 mg',
       productionDate,
       hashSalt,
-      ActivePharmIngredient: '4.25 mg',
     }
   }
 
   getDoseRange = () => ({ minDose: 0, maxDose: 20 })
 
-  getDose = () =>
-    parseFloat(
-      this.state.drugData.ActivePharmIngredient.replace(/[^\d\.]*/g, '')
-    ) // convert the dose from string to number - keeping it as string in order to preserve measuring units
+  getDose = () => parseFloat(this.state.drugData.dose.replace(/[^\d\.]*/g, '')) // convert the dose from string to number - keeping it as string in order to preserve measuring units
 
   setDose = value => {
     // Grab a copy of the drug data in the state
     const { drugData } = { ...this.state }
     // Update the dose (string)
-    drugData.ActivePharmIngredient =
-      value.toFixed(2) + drugData.ActivePharmIngredient.replace(/[\d\.]*/g, '')
+    drugData.dose = value.toFixed(2) + drugData.dose.replace(/[\d\.]*/g, '')
     // Update the production date and create new hash
     drugData.productionDate = Conventions.datetimeStr()
     drugData.hashSalt = this.makeHashSalt()
@@ -127,6 +124,23 @@ class ContextProvider extends Component {
     this.setState({ blockchain, manufacturedDrugs, patientDrugHistory })
   }
 
+  checkIN = () => {
+    // Update the global blockchain (locally without mutating state)
+    const { blockchain, drugDataHash, drugMetaData } = { ...this.state }
+    blockchain.checkIN({ drugDataHash, drugMetaData })
+
+    // Update the list of manufactured drugs
+    const { manufacturedDrugs, drugData } = { ...this.state }
+    manufacturedDrugs.unshift({ ...drugData })
+
+    // Reset production date and hash salt
+    drugData.productionDate = Conventions.datetimeStr()
+    drugData.hashSalt = this.makeHashSalt()
+
+    // Update the state
+    this.setState({ blockchain, drugData, manufacturedDrugs })
+  }
+
   render() {
     return (
       <Provider
@@ -135,6 +149,7 @@ class ContextProvider extends Component {
           getDose: this.getDose,
           getDoseRange: this.getDoseRange,
           setDose: this.setDose,
+          checkIN: this.checkIN,
         }}
       >
         {this.props.children}

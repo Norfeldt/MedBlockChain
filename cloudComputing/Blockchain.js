@@ -64,7 +64,7 @@ class Blockchain {
   }
 
   // Only manufacturer with access token can call this method
-  checkIN(drugDataHash, drugMetaData) {
+  checkIN({ drugDataHash, drugMetaData }) {
     // Received content should be encryption with public and private keys: https://www.youtube.com/watch?v=GSIDS_lvRv4
     // TODO: Decrypt with authority private key
 
@@ -73,7 +73,12 @@ class Blockchain {
     // TODO: Check that the drugDataHash hasn't already been checked IN or OUT
 
     // Add the block to the chain
-    this.addBlock(null, drugDataHash, drugMetaData, null) // TODO: Deal with promise handing..
+    this.addBlock({
+      drugData: null,
+      drugDataHash,
+      drugMetaData,
+      timestamp: null,
+    }) // TODO: Deal with promise handing..
   }
 
   // Public can call this method
