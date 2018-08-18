@@ -43,6 +43,7 @@ export default class BlockCard extends PureComponent {
           !valueIsHash && blockStyle.drugData,
           {
             borderColor: Colors.headerLine,
+            borderWidth: StyleSheet.hairlineWidth,
             borderRadius: 7,
           },
           blockStyle.shadow,
@@ -96,7 +97,7 @@ export default class BlockCard extends PureComponent {
       <View style={blockStyle.blockInfo}>
         <Text style={textStyle.subheader}>TIMESTAMP</Text>
 
-        <View style={hashBlockContainer(Colors.headerLine.slice(1, 7))}>
+        <View style={hashBlockContainer(Colors.timestampBG.slice(1, 7))}>
           <Text
             style={[
               hashBlockText('ffffff'),
@@ -124,7 +125,7 @@ export default class BlockCard extends PureComponent {
         >
           <Text style={textStyle.subheader}>{hashAlgorithmName}(</Text>
 
-          <Text style={hashBlockText(Colors.headerLine.slice(1, 7))}>
+          <Text style={hashBlockText(Colors.timestampBG.slice(1, 7))}>
             {`${timestamp.slice(0, 3)}...${timestamp.slice(
               timestamp.length - 3,
               timestamp.length
@@ -232,7 +233,7 @@ export default class BlockCard extends PureComponent {
             <View style={blockStyle.blockInfo}>
               <Text style={textStyle.subheader}>TIMESTAMP</Text>
 
-              <View style={hashBlockContainer(Colors.headerLine.slice(1, 7))}>
+              <View style={hashBlockContainer(Colors.timestampBG.slice(1, 7))}>
                 <Text
                   style={[
                     hashBlockText('ffffff'),
@@ -283,7 +284,7 @@ export default class BlockCard extends PureComponent {
           >
             <View style={{ flex: 3 }} />
             <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-              <Text style={textStyle.nano}>SHA256</Text>
+              <Text style={textStyle.nano}>{hashAlgorithmName}</Text>
             </View>
             <View
               style={{
@@ -341,7 +342,7 @@ const blockStyle = StyleSheet.create({
     marginBottom: 5,
   },
   drugData: {
-    backgroundColor: Colors.headerLine,
+    backgroundColor: Colors.timestampBG,
     borderColor: Colors.tintColor,
     borderWidth: StyleSheet.hairlineWidth,
     marginBottom: 5,
