@@ -126,7 +126,8 @@ class ContextProvider extends Component {
 
   checkIN = () => {
     // Update the global blockchain (locally without mutating state)
-    const { blockchain, drugDataHash, drugMetaData } = { ...this.state }
+    const { blockchain, drugMetaData } = { ...this.state }
+    let { drugDataHash } = { ...this.state }
     blockchain.checkIN({ drugDataHash, drugMetaData })
 
     // Update the list of manufactured drugs
@@ -136,9 +137,10 @@ class ContextProvider extends Component {
     // Reset production date and hash salt
     drugData.productionDate = Conventions.datetimeStr()
     drugData.hashSalt = this.makeHashSalt()
+    drugDataHash = getHashOfDrugData({ ...drugData })
 
     // Update the state
-    this.setState({ blockchain, drugData, manufacturedDrugs })
+    this.setState({ blockchain, drugData, drugDataHash, manufacturedDrugs })
   }
 
   render() {

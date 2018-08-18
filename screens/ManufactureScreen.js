@@ -10,6 +10,7 @@ import DoseAdjuster from '../components/DoseAdjuster'
 import ManufactureHistory from '../components/ManufactureHistory'
 
 import Colors from '../constants/Colors'
+import HashBlock from '../components/basic/HashBlock'
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -30,13 +31,17 @@ export default class HomeScreen extends Component {
           <DoseAdjuster />
           <SectionTitle name="REGISTER" />
           <ContextConsumer>
-            {({ checkIN }) => {
+            {({ drugDataHash, checkIN }) => {
               return (
-                <Button
-                  title="CHECK IN"
-                  iconName="check_in"
-                  onPress={checkIN}
-                />
+                <View>
+                  <HashBlock value={drugDataHash} />
+
+                  <Button
+                    title="CHECK IN"
+                    iconName="check_in"
+                    onPress={checkIN}
+                  />
+                </View>
               )
             }}
           </ContextConsumer>
