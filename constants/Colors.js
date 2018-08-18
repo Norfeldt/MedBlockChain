@@ -6,6 +6,7 @@ export default {
   idleColor,
   tabIconDefault: idleColor,
   tabIconSelected: tintColor,
+  timestampBG: '#EEEEEE',
   tabBar: '#fefefe',
   headerColor: '#fefefe',
   headerLine: '#999999',
