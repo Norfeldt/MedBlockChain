@@ -1,14 +1,14 @@
 import invert from 'invert-color'
 import map from 'lodash/map'
+import trim from 'lodash/trim'
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import QRCode from 'react-native-qrcode'
+import { getHashOfDrugData } from '../cloudComputing/Block'
 import Colors from '../constants/Colors'
+import Conventions from '../constants/Conventions'
 import Layout from '../constants/Layout'
 import { ContextConsumer } from '../Context'
-import Conventions from '../constants/Conventions'
-import trim from 'lodash/trim'
-const SHA256 = require('crypto-js/sha256')
 
 class DrugQR extends PureComponent {
   render() {
@@ -52,9 +52,7 @@ export default class ManufactureHistory extends PureComponent {
         {({ manufacturedDrugs }) =>
           map(manufacturedDrugs, (drug, index) => {
             const drugStr = JSON.stringify(drug)
-            const drugHash = SHA256(drugStr)
-              .toString()
-              .toUpperCase()
+            const drugHash = getHashOfDrugData(drug)
             const hashColor = `#${drugHash.slice(0, 6)}`
             const hashTextColor = invert(hashColor, true)
             return (
