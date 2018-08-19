@@ -1,64 +1,35 @@
 //import liraries
-import React from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
-import subDays from 'date-fns/sub_days'
-
-import DrugCard from './DrugCard'
+import map from 'lodash/map'
+import React, { PureComponent } from 'react'
+import { ScrollView } from 'react-native'
+import { ContextConsumer } from '../Context'
+import Card from './basic/Card'
+import Text from './basic/Text'
+import ListData from './ListData'
+import distanceInWords from 'date-fns/distance_in_words'
 
 // create a component
-const DrugHistory = () => {
-  return (
-    <ScrollView style={{ flex: 1 }}>
-      <DrugCard
-        dateTaken={subDays(new Date(), 1)}
-        manufacture={'Jukka Labs'}
-        productionDate={subDays(new Date(), 15)}
-        subADose={3}
-        subAUnits={'mg'}
-        subBDose={90}
-        subBUnits={'mg'}
-        salt={'DHW29'}
-        checked_out={true}
-      />
-
-      <DrugCard
-        dateTaken={subDays(new Date(), 4)}
-        manufacture={'Jukka Labs'}
-        productionDate={subDays(new Date(), 20)}
-        subADose={4}
-        subAUnits={'mg'}
-        subBDose={80}
-        subBUnits={'mg'}
-        salt={'U1W2D'}
-        checked_out={true}
-      />
-
-      <DrugCard
-        dateTaken={subDays(new Date(), 7)}
-        manufacture={'Jukka Labs'}
-        productionDate={subDays(new Date(), 25)}
-        subADose={7}
-        subAUnits={'mg'}
-        subBDose={50}
-        subBUnits={'mg'}
-        salt={'IWH32'}
-        checked_out={true}
-      />
-
-      <DrugCard
-        dateTaken={subDays(new Date(), 9)}
-        manufacture={'Jukka Labs'}
-        productionDate={subDays(new Date(), 26)}
-        subADose={5}
-        subAUnits={'mg'}
-        subBDose={75}
-        subBUnits={'mg'}
-        salt={'86GAA'}
-        checked_out={true}
-      />
-    </ScrollView>
-  )
+export default class DrugHistory extends PureComponent {
+  render() {
+    return (
+      <ContextConsumer>
+        {({ patientDrugHistory }) => {
+          return (
+            <ScrollView style={{ flex: 1 }}>
+              {map(patientDrugHistory, ({ dateTaken, drugData }, index) => {
+                return (
+                  <Card key={index}>
+                    <Text type="h3">
+                      {distanceInWords(dateTaken, new Date())} ago
+                    </Text>
+                    <ListData data={drugData} />
+                  </Card>
+                )
+              })}
+            </ScrollView>
+          )
+        }}
+      </ContextConsumer>
+    )
+  }
 }
-
-//make this component available to the app
-export default DrugHistory

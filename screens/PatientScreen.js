@@ -1,14 +1,8 @@
-import React from 'react'
-import { Text, View, ScrollView, StyleSheet } from 'react-native'
 import { BarCodeScanner, Permissions } from 'expo'
-import Dialog from 'react-native-dialog'
-
-import dateFomatter from 'date-fns/format'
-
-import Header from '../components/basic/Header'
-import InfoRow from '../components/basic/InfoRow'
-import DrugCard from '../components/DrugCard'
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
 import Button from '../components/basic/Button'
+import Header from '../components/basic/Header'
 import DrugHistory from '../components/DrugHistory'
 
 const barCodeDataTemp = {
@@ -31,11 +25,9 @@ export default class HomeScreen extends React.Component {
     scanning: false,
   }
 
-  _handleBarCodeRead = ({ type, data }) => {
+  barCodeReadComplete = ({ type, data }) => {
     const barCodeData = { ...JSON.parse(data) }
-
     // TODO: do some validation of barCodeData
-
     this.setState({ barCodeData, scanning: false })
   }
 
@@ -47,7 +39,7 @@ export default class HomeScreen extends React.Component {
         return (
           <View style={{ flex: 1, marginBottom: 10 }}>
             <BarCodeScanner
-              onBarCodeRead={this._handleBarCodeRead}
+              onBarCodeRead={this.barCodeReadComplete}
               style={StyleSheet.absoluteFill}
             />
           </View>
@@ -98,11 +90,6 @@ export default class HomeScreen extends React.Component {
 
     return (
       <View style={styles.container}>
-        <InfoRow
-          setting="Today's Date"
-          value={`${dateFomatter(new Date(), 'YYYY-MM-DD')}`}
-        />
-
         <RenderView />
       </View>
     )
