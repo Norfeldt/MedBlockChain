@@ -9,7 +9,6 @@ import {
 } from 'react-native'
 
 import invert from 'invert-color'
-import trim from 'lodash/trim'
 
 import Card from './basic/Card'
 import FontIcon from './basic/FontIcon'
