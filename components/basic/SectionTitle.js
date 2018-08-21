@@ -29,7 +29,6 @@ export default class SectionTitle extends PureComponent {
 
 const blockStyle = StyleSheet.create({
   section: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     paddingTop: 15,
