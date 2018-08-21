@@ -33,7 +33,7 @@ const blockStyle = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     paddingTop: 15,
-    paddingBottom: 5,
+    paddingBottom: 10,
   },
 })
 
