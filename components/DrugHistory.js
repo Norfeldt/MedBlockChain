@@ -7,6 +7,8 @@ import Card from './basic/Card'
 import Text from './basic/Text'
 import ListData from './ListData'
 import distanceInWords from 'date-fns/distance_in_words'
+import HashBlock from './basic/HashBlock'
+import { getHashOfDrugData } from '../cloudComputing/Block'
 
 // create a component
 export default class DrugHistory extends PureComponent {
@@ -23,6 +25,7 @@ export default class DrugHistory extends PureComponent {
                       {distanceInWords(dateTaken, new Date())} ago
                     </Text>
                     <ListData data={drugData} />
+                    <HashBlock value={getHashOfDrugData(drugData)} />
                   </Card>
                 )
               })}
