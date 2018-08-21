@@ -1,19 +1,11 @@
 import { BarCodeScanner, Permissions } from 'expo'
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import Button from '../components/basic/Button'
 import Header from '../components/basic/Header'
+import SectionTitle from '../components/basic/SectionTitle'
 import DrugHistory from '../components/DrugHistory'
-
-const barCodeDataTemp = {
-  MANUFACTURE_NAME: null,
-  PRODUCTION_DATE: null,
-  DRUG_A_VALUE: null,
-  DRUG_A_UNITS: null,
-  DRUG_B_VALUE: null,
-  DRUG_B_UNITS: null,
-  HASH_SALT: null,
-}
+import Colors from '../constants/Colors'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -21,7 +13,7 @@ export default class HomeScreen extends React.Component {
   }
 
   state = {
-    barCodeData: barCodeDataTemp,
+    barCodeData: null,
     scanning: false,
   }
 
@@ -46,8 +38,8 @@ export default class HomeScreen extends React.Component {
         )
       } else {
         return (
-          <View style={{ flex: 1 }}>
-            {barCodeData === barCodeDataTemp && (
+          <ScrollView style={blockStyles.container}>
+            {!barCodeData && (
               <Button
                 title="SCAN DRUG"
                 iconName="QR_Code"
@@ -62,44 +54,22 @@ export default class HomeScreen extends React.Component {
               />
             )}
 
-            {barCodeData != barCodeDataTemp && (
-              <DrugCard
-                dateTaken={null}
-                manufacture={barCodeData.MANUFACTURE_NAME}
-                productionDate={barCodeData.PRODUCTION_DATE}
-                subADose={barCodeData.DRUG_A_VALUE}
-                subAUnits={barCodeData.DRUG_A_UNITS}
-                subBDose={barCodeData.DRUG_B_VALUE}
-                subBUnits={barCodeData.DRUG_B_UNITS}
-                salt={barCodeData.HASH_SALT}
-                checked_out={false}
-                onCancelPress={() => {
-                  this.setState({ barCodeData: barCodeDataTemp })
-                }}
-                onCheckInPress={() => {
-                  alert('TODO Centralized block-chain')
-                }}
-              />
-            )}
+            <SectionTitle name="Medication History" />
 
             <DrugHistory />
-          </View>
+          </ScrollView>
         )
       }
     }
 
-    return (
-      <View style={styles.container}>
-        <RenderView />
-      </View>
-    )
+    return <RenderView />
   }
 }
 
-const styles = StyleSheet.create({
+const blockStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.scrollBG,
     paddingHorizontal: 10,
   },
 })

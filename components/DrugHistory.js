@@ -1,7 +1,7 @@
 //import liraries
 import map from 'lodash/map'
 import React, { PureComponent } from 'react'
-import { ScrollView } from 'react-native'
+import { View } from 'react-native'
 import { ContextConsumer } from '../Context'
 import Card from './basic/Card'
 import Text from './basic/Text'
@@ -15,7 +15,7 @@ export default class DrugHistory extends PureComponent {
       <ContextConsumer>
         {({ patientDrugHistory }) => {
           return (
-            <ScrollView style={{ flex: 1 }}>
+            <View style={{ flex: 1 }}>
               {map(patientDrugHistory, ({ dateTaken, drugData }, index) => {
                 return (
                   <Card key={index}>
@@ -26,7 +26,7 @@ export default class DrugHistory extends PureComponent {
                   </Card>
                 )
               })}
-            </ScrollView>
+            </View>
           )
         }}
       </ContextConsumer>
