@@ -1,6 +1,6 @@
 import map from 'lodash/map'
 import React, { PureComponent } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Alert } from 'react-native'
 import QRCode from 'react-native-qrcode'
 import { getHashOfDrugData } from '../cloudComputing/Block'
 import Colors from '../constants/Colors'
@@ -52,20 +52,23 @@ export default class ManufactureHistory extends PureComponent {
         {({ manufacturedDrugs }) =>
           map(manufacturedDrugs, (drug, index) => {
             return (
-              <View
+              <TouchableOpacity
                 key={index}
                 style={{
                   borderBottomColor: Colors.dark,
                   borderBottomWidth: StyleSheet.hairlineWidth,
                   marginBottom: 5,
                 }}
+                onPress={() =>
+                  Alert.alert('QR Information', JSON.stringify(drug))
+                }
               >
                 <Text type="timestampHeader">
                   {Conventions.datetimeStr(drug.productionDate)}
                 </Text>
                 <DrugQR value={JSON.stringify(drug)} />
                 <HashBlock value={getHashOfDrugData(drug)} />
-              </View>
+              </TouchableOpacity>
             )
           })
         }
