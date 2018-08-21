@@ -1,6 +1,6 @@
 import map from 'lodash/map'
 import React, { PureComponent } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import QRCode from 'react-native-qrcode'
 import { getHashOfDrugData } from '../cloudComputing/Block'
 import Colors from '../constants/Colors'
@@ -8,6 +8,7 @@ import Conventions from '../constants/Conventions'
 import Layout from '../constants/Layout'
 import { ContextConsumer } from '../Context'
 import HashBlock from './basic/HashBlock'
+import Text from './basic/Text'
 
 class DrugQR extends PureComponent {
   render() {
@@ -20,7 +21,7 @@ class DrugQR extends PureComponent {
         style={{
           flexDirection: 'row',
           justifyContent: 'center',
-          padding: 10,
+          padding: 5,
         }}
       >
         <View
@@ -56,11 +57,10 @@ export default class ManufactureHistory extends PureComponent {
                 style={{
                   borderBottomColor: Colors.dark,
                   borderBottomWidth: StyleSheet.hairlineWidth,
-                  marginBottom: 20,
+                  marginBottom: 5,
                 }}
               >
-                {' '}
-                <Text style={textStyle.datetime}>
+                <Text type="timestampHeader">
                   {Conventions.datetimeStr(drug.productionDate)}
                 </Text>
                 <DrugQR value={JSON.stringify(drug)} />
@@ -73,17 +73,3 @@ export default class ManufactureHistory extends PureComponent {
     )
   }
 }
-
-const textStyle = StyleSheet.create({
-  datetime: {
-    color: Colors.headerLine,
-    fontFamily: 'Aldrich',
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  hash: {
-    fontFamily: 'NovaMono',
-    fontSize: 14,
-    textAlign: 'center',
-  },
-})
