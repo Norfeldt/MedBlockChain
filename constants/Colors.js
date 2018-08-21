@@ -22,4 +22,5 @@ export default {
   themeColor: '#003399',
   passiveText: idleColor,
   dark: '#333333',
+  passive: '#999999',
 }

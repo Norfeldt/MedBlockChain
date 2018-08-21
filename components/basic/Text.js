@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Text as RNText, StyleSheet } from 'react-native'
+import Colors from '../../constants/Colors'
 
 export default class Text extends PureComponent {
   render() {
@@ -42,4 +43,14 @@ const textStyle = StyleSheet.create({
     paddingVertical: 10,
   },
   p,
+  passiveHeader: {
+    color: Colors.passive,
+    textAlign: 'center',
+    paddingVertical: 5,
+  },
+  code: {
+    fontFamily: 'NovaMono',
+    fontSize: 14,
+    textAlign: 'center',
+  },
 })

@@ -1,7 +1,8 @@
 import invert from 'invert-color'
 import trim from 'lodash/trim'
 import React, { PureComponent } from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
+import Text from './Text'
 
 export default class HashBlock extends PureComponent {
   render() {
@@ -16,14 +17,9 @@ export default class HashBlock extends PureComponent {
           borderRadius: 7,
         }}
       >
-        <Text
-          style={{
-            color,
-            fontFamily: 'NovaMono',
-            fontSize: 14,
-            textAlign: 'center',
-          }}
-        >{`${trim(this.props.value.replace(/(.{32})/g, '$1\n'))}`}</Text>
+        <Text type="code" style={[{ color }, this.props.textStyle]}>{`${trim(
+          this.props.value.replace(/(.{32})/g, '$1\n')
+        )}`}</Text>
       </View>
     )
   }
