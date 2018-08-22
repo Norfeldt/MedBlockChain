@@ -3,11 +3,11 @@ import trim from 'lodash/trim'
 import React, { PureComponent } from 'react'
 import { View } from 'react-native'
 import Text from './Text'
+import { getHashColors } from '../../constants/Colors'
 
 export default class HashBlock extends PureComponent {
   render() {
-    const backgroundColor = `#${this.props.value.slice(0, 6)}`
-    const color = invert(backgroundColor, true)
+    const { backgroundColor, color } = getHashColors(this.props.value)
     return (
       <View
         style={{
