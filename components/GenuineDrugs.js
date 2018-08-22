@@ -1,7 +1,6 @@
 import map from 'lodash/map'
 import React, { PureComponent } from 'react'
 import {
-  StyleSheet,
   View,
   ScrollView,
   TouchableOpacity,
@@ -9,7 +8,7 @@ import {
   Platform,
 } from 'react-native'
 import { getHashOfDrugData } from '../cloudComputing/Block'
-import Colors, { hashColors } from '../constants/Colors'
+import { getHashColors } from '../constants/Colors'
 import Layout from '../constants/Layout'
 import { ContextConsumer } from '../Context'
 import FontIcon from './basic/FontIcon'
@@ -49,7 +48,7 @@ export default class GenuineDrugs extends PureComponent {
                         name="drug"
                         size={width * 0.3}
                         color={
-                          hashColors(getHashOfDrugData(drug)).backgroundColor
+                          getHashColors(getHashOfDrugData(drug)).backgroundColor
                         }
                         style={{
                           ...Platform.select({
