@@ -20,11 +20,10 @@ export default class GenuineDrugs extends PureComponent {
     } = Layout
     return (
       <ContextConsumer>
-        {/* FIXME: use availableDrugs from state instead (need to make it) */}
-        {({ manufacturedDrugs }) => {
+        {({ genuineDrugs, checkOUT }) => {
           return (
             <ScrollView horizontal={true} style={this.props.style}>
-              {map(manufacturedDrugs, (drug, index) => {
+              {map(genuineDrugs, (drug, index) => {
                 return (
                   <TouchableOpacity
                     key={index}
@@ -34,7 +33,16 @@ export default class GenuineDrugs extends PureComponent {
                     }}
                     onPress={() =>
                       // FIXME: CheckOUT drug
-                      Alert.alert('QR Information', JSON.stringify(drug))
+                      Alert.alert('QR Information', JSON.stringify(drug), [
+                        {
+                          text: 'Cancel',
+                          onPress: () => console.log('Cancel Pressed'),
+                        },
+                        {
+                          text: 'CHECK IN',
+                          onPress: () => checkOUT(drug),
+                        },
+                      ])
                     }
                   >
                     <View

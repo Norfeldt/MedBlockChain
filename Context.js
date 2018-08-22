@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { getHashOfDrugData } from './cloudComputing/Block'
 import Blockchain from './cloudComputing/Blockchain'
 import Conventions from './constants/Conventions'
+import remove from 'lodash/remove'
 
 const SHA256 = require('crypto-js/sha256')
 
@@ -22,6 +23,7 @@ class ContextProvider extends Component {
         manufacture,
       },
       manufacturedDrugs: [],
+      genuineDrugs: [],
       patientDrugHistory: [],
     }
   }
@@ -77,7 +79,12 @@ class ContextProvider extends Component {
 
   setupDemoChain() {
     // Grab a mutable copy of the blockchain
-    const { blockchain, manufacturedDrugs, patientDrugHistory } = {
+    const {
+      blockchain,
+      manufacturedDrugs,
+      genuineDrugs,
+      patientDrugHistory,
+    } = {
       ...this.state,
     }
 
@@ -87,13 +94,16 @@ class ContextProvider extends Component {
     let timestamp = new Date(2018, 7, 1, 9)
     let hashSalt = 'AODAD 9A13A'
     const drugData01 = this.getDefaultDrugData(manufacture, timestamp, hashSalt)
-    manufacturedDrugs.unshift(drugData01)
     blockchain.addBlock({
       drugData: null,
       drugDataHash: getHashOfDrugData(drugData01),
       drugMetaData: { manufacture },
       timestamp,
     })
+
+    // Update the records of manufactured and available drugs
+    manufacturedDrugs.unshift(drugData01)
+    genuineDrugs.unshift(drugData01)
 
     //// Patient CHECK OUT 1st produced drug
     timestamp = new Date(2018, 7, 3, 16)
@@ -106,14 +116,15 @@ class ContextProvider extends Component {
       },
       timestamp,
     })
-    // FIXME: Add to PatientScreen
+
+    // Update the records of available drugs and drug taken history
+    remove(genuineDrugs, drugData01)
     patientDrugHistory.unshift({ dateTaken: timestamp, drugData: drugData01 })
 
     //// Manufacturer CHECK IN 2nd produced drug
     timestamp = new Date(2018, 7, 4, 9)
     hashSalt = 'F45CC ABC99'
     const drugData02 = this.getDefaultDrugData(manufacture, timestamp, hashSalt)
-    manufacturedDrugs.unshift(drugData02)
     blockchain.addBlock({
       drugData: null,
       drugDataHash: getHashOfDrugData(drugData02),
@@ -121,6 +132,11 @@ class ContextProvider extends Component {
       timestamp,
     })
 
+    // Update the records of manufactured and available drugs
+    manufacturedDrugs.unshift(drugData02)
+    genuineDrugs.unshift(drugData02)
+
+    // Finally update the state
     this.setState({ blockchain, manufacturedDrugs, patientDrugHistory })
   }
 
@@ -134,13 +150,38 @@ class ContextProvider extends Component {
     const { manufacturedDrugs, drugData } = { ...this.state }
     manufacturedDrugs.unshift({ ...drugData })
 
+    // Update the list of genuine available drugs
+    const { genuineDrugs } = { ...this.state }
+    genuineDrugs.unshift({ ...drugData })
+
     // Reset production date and hash salt
     drugData.productionDate = Conventions.datetimeStr()
     drugData.hashSalt = this.makeHashSalt()
     drugDataHash = getHashOfDrugData({ ...drugData })
 
     // Update the state
-    this.setState({ blockchain, drugData, drugDataHash, manufacturedDrugs })
+    this.setState({
+      blockchain,
+      drugData,
+      drugDataHash,
+      manufacturedDrugs,
+      genuineDrugs,
+    })
+  }
+
+  checkOUT = drugData => {
+    // Get a copy of the blockchain and state records
+    const { blockchain, genuineDrugs, patientDrugHistory } = { ...this.state }
+    blockchain.checkOUT({ drugData })
+
+    // Remove from available drugs
+    remove(genuineDrugs, drugData)
+
+    // Add to drug taken history
+    const dateTaken = new Date()
+    patientDrugHistory.unshift({ dateTaken, drugData })
+
+    this.setState({ blockchain, genuineDrugs, patientDrugHistory })
   }
 
   render() {
@@ -152,6 +193,7 @@ class ContextProvider extends Component {
           getDoseRange: this.getDoseRange,
           setDose: this.setDose,
           checkIN: this.checkIN,
+          checkOUT: this.checkOUT,
         }}
       >
         {this.props.children}

@@ -82,7 +82,7 @@ class Blockchain {
   }
 
   // Public can call this method
-  checkOUT(drugData, drugMetaData) {
+  checkOUT(drugData) {
     // Verify that the drug hash has been CHECKED IN
     // FIXME:
 
@@ -93,7 +93,7 @@ class Blockchain {
     // Check that the drugh has has not already been CHECKED OUT
     // Add it to the chain anyway - since it needs to be recorded
 
-    this.addBlock(drugData, null, drugMetaData, null) // TODO: Deal with promise handing..
+    this.addBlock(drugData, null, null, null) // TODO: Deal with promise handing..
   }
 }
 

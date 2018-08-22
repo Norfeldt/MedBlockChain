@@ -54,7 +54,9 @@ export default class HomeScreen extends React.Component {
                 })
               }}
             />
+
             <Text style={{ color: Colors.themeColor }}>OR PICK</Text>
+
             <GenuineDrugs />
 
             <SectionTitle name="MEDICATION HISTORY" />
