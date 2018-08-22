@@ -1,7 +1,9 @@
+import invert from 'invert-color'
+
 const tintColor = '#003399'
 const idleColor = '#999999'
 
-export default {
+export const palette = {
   tintColor,
   idleColor,
   tabIconDefault: idleColor,
@@ -24,3 +26,11 @@ export default {
   dark: '#333333',
   passive: '#999999',
 }
+
+export function hashColors(hash) {
+  const backgroundColor = `#${hash.slice(0, 6)}`
+  const color = invert(backgroundColor, true)
+  return { backgroundColor, color }
+}
+
+export default palette
