@@ -6,6 +6,8 @@ import Header from '../components/basic/Header'
 import SectionTitle from '../components/basic/SectionTitle'
 import DrugHistory from '../components/DrugHistory'
 import Colors from '../constants/Colors'
+import GenuineDrugs from '../components/GenuineDrugs'
+import Text from '../components/basic/Text'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -39,22 +41,23 @@ export default class HomeScreen extends React.Component {
       } else {
         return (
           <ScrollView style={blockStyles.container}>
-            {!barCodeData && (
-              <Button
-                title="SCAN DRUG"
-                iconName="QR_Code"
-                onPress={async () => {
-                  const { status } = await Permissions.askAsync(
-                    Permissions.CAMERA
-                  )
-                  this.setState({
-                    scanning: status === 'granted',
-                  })
-                }}
-              />
-            )}
+            <SectionTitle name="AVAILABLE DRUGS" />
+            <Button
+              title="SCAN DRUG"
+              iconName="QR_Code"
+              onPress={async () => {
+                const { status } = await Permissions.askAsync(
+                  Permissions.CAMERA
+                )
+                this.setState({
+                  scanning: status === 'granted',
+                })
+              }}
+            />
+            <Text style={{ color: Colors.themeColor }}>OR PICK</Text>
+            <GenuineDrugs />
 
-            <SectionTitle name="Medication History" />
+            <SectionTitle name="MEDICATION HISTORY" />
 
             <DrugHistory />
           </ScrollView>
