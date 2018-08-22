@@ -1,6 +1,12 @@
 //import liraries
 import React, { PureComponent } from 'react'
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native'
+import {
+  TouchableOpacity,
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+} from 'react-native'
 
 import Colors from '../../constants/Colors'
 
@@ -26,7 +32,7 @@ export default class Button extends PureComponent {
         <View
           style={[
             styles.btnContainer,
-            { backgroundColor: buttonColor ? buttonColor : Colors.tintColor },
+            { backgroundColor: buttonColor ? buttonColor : Colors.themeColor },
           ]}
         >
           <Text style={styles.btnText}>{title}</Text>
@@ -55,6 +61,21 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.tintColor,
     borderColor: Colors.dark,
     borderWidth: StyleSheet.hairlineWidth,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000000',
+        shadowOpacity: 0.3,
+        shadowRadius: 1,
+        shadowOffset: {
+          height: 1,
+          width: 0.3,
+        },
+      },
+      android: {
+        elevation: 1,
+        position: 'relative',
+      },
+    }),
   },
   btnContainer: {
     flex: 1,
