@@ -1,6 +1,7 @@
 // Derived from https://www.youtube.com/watch?v=zVqczFZr124
 const { Block, getHashOfDrugData } = require('./Block')
 import SHA256 from 'crypto-js/sha256'
+import { datetimeStr } from '../constants/Conventions'
 
 class Blockchain {
   constructor() {
@@ -25,7 +26,7 @@ class Blockchain {
         .toString()
         .toUpperCase(),
       previousBlockInfo: {
-        timestamp: new Date(2018, 6 - 1, 24, 12).toISOString(),
+        timestamp: datetimeStr(new Date(2018, 6 - 1, 24, 12)),
         previousBlockHash: hashNA,
         drugDataHash: hashNA,
       },
