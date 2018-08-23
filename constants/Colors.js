@@ -27,10 +27,10 @@ export const palette = {
   passive: '#999999',
 }
 
+export default palette
+
 export function getHashColors(hash) {
   const backgroundColor = `#${hash.slice(0, 6)}`
   const color = invert(backgroundColor, true)
   return { backgroundColor, color }
 }
-
-export default palette

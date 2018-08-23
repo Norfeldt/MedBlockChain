@@ -1,21 +1,21 @@
+import invert from 'invert-color'
 import React, { PureComponent } from 'react'
 import {
-  View,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  Platform,
   LayoutAnimation,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native'
-
-import invert from 'invert-color'
-
+import Colors from '../constants/Colors'
 import Card from './basic/Card'
 import FontIcon from './basic/FontIcon'
 import HashBlock from './basic/HashBlock'
-import ListData from './ListData'
 
-import Colors from '../constants/Colors'
+import ChainingInfo from './BlockCardFractions/ChainingInfo'
+
+import ListData from './ListData'
 
 export default class BlockCard extends PureComponent {
   constructor(props) {
@@ -74,63 +74,6 @@ export default class BlockCard extends PureComponent {
       </TouchableOpacity>
     )
 
-    ChainingInfo = ({ timestamp, previousBlockHash, drugDataHash, hash }) => (
-      <View style={blockStyle.blockInfo}>
-        <Text style={textStyle.subheader}>TIMESTAMP</Text>
-
-        <View style={hashBlockContainer(Colors.timestampBG.slice(1, 7))}>
-          <Text
-            style={[
-              hashBlockText('ffffff'),
-              { backgroundColor: 'transparent' },
-            ]}
-          >
-            {timestamp}
-          </Text>
-        </View>
-
-        <Text style={textStyle.subheader}>DRUG DATA HASH</Text>
-        <HashBlock value={drugDataHash} />
-
-        <Text style={textStyle.subheader}>PREVIOUS HASH</Text>
-        <HashBlock value={previousBlockHash} />
-
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingTop: 10,
-            paddingBottom: 5,
-          }}
-        >
-          <Text style={textStyle.subheader}>{hashAlgorithmName}(</Text>
-
-          <Text style={hashBlockText(Colors.timestampBG.slice(1, 7))}>
-            {`${timestamp.slice(0, 3)}...${timestamp.slice(
-              timestamp.length - 3,
-              timestamp.length
-            )}`}
-          </Text>
-
-          <Text
-            style={hashBlockText(previousBlockHash)}
-          >{`${previousBlockHash.slice(0, 3)}...${previousBlockHash.slice(
-            64 - 3,
-            64
-          )}`}</Text>
-
-          <Text style={hashBlockText(drugDataHash)}>{`${drugDataHash.slice(
-            0,
-            3
-          )}...${drugDataHash.slice(64 - 3, 64)}`}</Text>
-
-          <Text style={textStyle.subheader}>)</Text>
-        </View>
-        <HashBlock value={hash} />
-      </View>
-    )
-
     BlockInfo = () => {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
 
@@ -143,6 +86,7 @@ export default class BlockCard extends PureComponent {
               previousBlockHash={this.props.previousBlockInfo.previousBlockHash}
               drugDataHash={this.props.previousBlockInfo.drugDataHash}
               hash={this.props.previousBlockHash}
+              hashAlgorithmName={this.props.hashAlgorithmName}
             />
           )
 
@@ -206,6 +150,7 @@ export default class BlockCard extends PureComponent {
               previousBlockHash={this.props.previousBlockHash}
               drugDataHash={this.props.drugDataHash}
               hash={this.props.blockHash}
+              hashAlgorithmName={this.props.hashAlgorithmName}
             />
           )
 
