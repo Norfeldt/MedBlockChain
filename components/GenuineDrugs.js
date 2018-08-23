@@ -32,8 +32,7 @@ export default class GenuineDrugs extends PureComponent {
                       paddingRight: 5,
                     }}
                     onPress={() =>
-                      // FIXME: CheckOUT drug
-                      Alert.alert('QR Information', JSON.stringify(drug), [
+                      Alert.alert('DRUG DATA', JSON.stringify(drug), [
                         {
                           text: 'Cancel',
                           onPress: () => console.log('Cancel Pressed'),
