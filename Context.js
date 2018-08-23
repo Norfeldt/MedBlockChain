@@ -92,7 +92,7 @@ class ContextProvider extends Component {
     // Will be using Blockchain.addBlock() instead of checkIN() or checkOUT() because timestamp is needed
     const { manufacture } = this.state.drugMetaData
     let timestamp = new Date(2018, 7, 1, 9)
-    let hashSalt = 'AODAD 9A13A'
+    let hashSalt = 'A8DAD 9A13A'
     const drugData01 = this.getDefaultDrugData(manufacture, timestamp, hashSalt)
     blockchain.addBlock({
       drugData: null,
