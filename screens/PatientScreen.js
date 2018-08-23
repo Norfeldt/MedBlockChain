@@ -8,7 +8,7 @@ import DrugHistory from '../components/DrugHistory'
 import Colors from '../constants/Colors'
 import GenuineDrugs from '../components/GenuineDrugs'
 import Text from '../components/basic/Text'
-
+import { ContextConsumer } from '../Context'
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: <Header title="Patient" />,
@@ -55,7 +55,17 @@ export default class HomeScreen extends React.Component {
               }}
             />
 
-            <Text style={{ color: Colors.themeColor }}>OR PICK</Text>
+            <ContextConsumer>
+              {({ genuineDrugs }) => {
+                if (genuineDrugs.length != 0) {
+                  return (
+                    <Text style={{ color: Colors.themeColor }}>OR PICK</Text>
+                  )
+                } else {
+                  return null
+                }
+              }}
+            </ContextConsumer>
 
             <GenuineDrugs />
 
