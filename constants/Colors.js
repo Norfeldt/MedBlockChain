@@ -25,6 +25,7 @@ export const palette = {
   passiveText: idleColor,
   dark: '#333333',
   passive: '#999999',
+  warning: '#990000',
 }
 
 export default palette
