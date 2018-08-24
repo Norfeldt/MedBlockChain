@@ -17,6 +17,7 @@ import CheckINInfo from './BlockCardFractions/CheckINInfo'
 import TimestampInfo from './BlockCardFractions/TimestampInfo'
 import ListData from './ListData'
 import CheckOUTInfo from './BlockCardFractions/CheckOUTInfo'
+import BlockButton from './BlockCardFractions/BlockButton'
 
 export default class BlockCard extends PureComponent {
   constructor(props) {
@@ -24,6 +25,13 @@ export default class BlockCard extends PureComponent {
     this.state = {
       showBlockInfo: null,
     }
+  }
+
+  onButtonPress = buttonTitle => {
+    this.setState({
+      showBlockInfo:
+        this.state.showBlockInfo == buttonTitle ? null : buttonTitle,
+    })
   }
 
   render() {
@@ -36,44 +44,6 @@ export default class BlockCard extends PureComponent {
       drugMetaData,
       hashAlgorithmName,
     } = this.props
-
-    BlockButton = ({ style, title, value, valueIsHash = true }) => (
-      <TouchableOpacity
-        style={[
-          valueIsHash && hashBlockContainer(value),
-          !valueIsHash && blockStyle.drugData,
-          {
-            borderColor: Colors.headerLine,
-            borderWidth: StyleSheet.hairlineWidth,
-            borderRadius: 7,
-          },
-          blockStyle.shadow,
-          style,
-        ]}
-        onPress={() => {
-          this.setState({
-            showBlockInfo: this.state.showBlockInfo == title ? null : title,
-          })
-        }}
-      >
-        <Text
-          style={[
-            textStyle.subheader,
-            {
-              color: valueIsHash
-                ? invert(`#${value.slice(0, 6)}`, true)
-                : '#000000',
-            },
-          ]}
-        >
-          {title}
-        </Text>
-
-        <Text
-          style={valueIsHash ? hashBlockText(value) : textStyle.hash}
-        >{`${value.slice(0, 10)}...`}</Text>
-      </TouchableOpacity>
-    )
 
     BlockInfo = () => {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
@@ -135,6 +105,7 @@ export default class BlockCard extends PureComponent {
             style={{ flex: 4, justifyContent: 'space-between', padding: 5 }}
           >
             <BlockButton
+              onPress={this.onButtonPress}
               style={{ marginBottom: 5 }}
               title="TIMESTAMP"
               value={timestamp}
@@ -142,12 +113,17 @@ export default class BlockCard extends PureComponent {
             />
 
             <BlockButton
+              onPress={this.onButtonPress}
               style={{ marginBottom: 5 }}
               title="DRUG DATA"
               value={drugDataHash}
             />
 
-            <BlockButton title="PREVIOUS HASH" value={previousBlockHash} />
+            <BlockButton
+              onPress={this.onButtonPress}
+              title="PREVIOUS HASH"
+              value={previousBlockHash}
+            />
           </View>
 
           <View
@@ -187,7 +163,11 @@ export default class BlockCard extends PureComponent {
                 style={[{ textAlign: 'center' }, blockStyle.shadow]}
               />
             </View>
-            <BlockButton title="BLOCK HASH" value={blockHash} />
+            <BlockButton
+              onPress={this.onButtonPress}
+              title="BLOCK HASH"
+              value={blockHash}
+            />
           </View>
         </View>
 
