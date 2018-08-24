@@ -13,8 +13,10 @@ import Card from './basic/Card'
 import FontIcon from './basic/FontIcon'
 import HashBlock from './basic/HashBlock'
 import ChainingInfo from './BlockCardFractions/ChainingInfo'
+import CheckINInfo from './BlockCardFractions/CheckINInfo'
 import TimestampInfo from './BlockCardFractions/TimestampInfo'
 import ListData from './ListData'
+import CheckOUTInfo from './BlockCardFractions/CheckOUTInfo'
 
 export default class BlockCard extends PureComponent {
   constructor(props) {
@@ -91,54 +93,19 @@ export default class BlockCard extends PureComponent {
 
         case 'DRUG DATA':
           if (drugData) {
-            const key = JSON.stringify(drugData)
             return (
-              <View style={blockStyle.blockInfo}>
-                <ListData data={drugData} />
-                <View
-                  style={{
-                    backgroundColor: Colors.headerLine,
-                    borderRadius: 7,
-                    padding: 10,
-                  }}
-                >
-                  <Text style={textStyle.hash}>{key}</Text>
-                </View>
-
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    paddingTop: 10,
-                    paddingBottom: 5,
-                  }}
-                >
-                  <Text style={textStyle.subheader}>{hashAlgorithmName}(</Text>
-
-                  <Text
-                    style={[
-                      textStyle.hash,
-                      { backgroundColor: Colors.headerLine },
-                    ]}
-                  >{`${key.slice(0, 10)}...${key.slice(
-                    key.length - 10,
-                    key.length
-                  )}`}</Text>
-
-                  <Text style={textStyle.subheader}>)</Text>
-                </View>
-
-                <HashBlock value={drugDataHash} />
-              </View>
+              <CheckOUTInfo
+                drugData={drugData}
+                drugDataHash={drugDataHash}
+                hashAlgorithmName={hashAlgorithmName}
+              />
             )
           } else {
             return (
-              <View style={blockStyle.blockInfo}>
-                <ListData data={drugMetaData} />
-                <Text style={textStyle.subheader}>CHECKED IN</Text>
-                <HashBlock value={this.props.drugDataHash} />
-              </View>
+              <CheckINInfo
+                drugMetaData={drugMetaData}
+                drugDataHash={drugDataHash}
+              />
             )
           }
 
