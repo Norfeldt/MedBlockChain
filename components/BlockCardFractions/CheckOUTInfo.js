@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native'
 import Colors from '../../constants/Colors'
 import HashBlock, { styleHashBlock } from '../basic/HashBlock'
 import Text from '../basic/Text'
-import BlockHashVisualized from './BlockHashVisualized'
 import ListData from '../ListData'
 
 export default class CheckOUTInfo extends PureComponent {
