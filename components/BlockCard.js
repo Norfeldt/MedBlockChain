@@ -12,9 +12,8 @@ import Colors from '../constants/Colors'
 import Card from './basic/Card'
 import FontIcon from './basic/FontIcon'
 import HashBlock from './basic/HashBlock'
-
 import ChainingInfo from './BlockCardFractions/ChainingInfo'
-
+import TimestampInfo from './BlockCardFractions/TimestampInfo'
 import ListData from './ListData'
 
 export default class BlockCard extends PureComponent {
@@ -155,22 +154,7 @@ export default class BlockCard extends PureComponent {
           )
 
         case 'TIMESTAMP':
-          return (
-            <View style={blockStyle.blockInfo}>
-              <Text style={textStyle.subheader}>TIMESTAMP</Text>
-
-              <View style={hashBlockContainer(Colors.timestampBG.slice(1, 7))}>
-                <Text
-                  style={[
-                    hashBlockText('ffffff'),
-                    { backgroundColor: 'transparent' },
-                  ]}
-                >
-                  {timestamp}
-                </Text>
-              </View>
-            </View>
-          )
+          return <TimestampInfo timestamp={timestamp} />
 
         default:
           return null
