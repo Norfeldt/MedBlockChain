@@ -6,7 +6,12 @@ export default class BlockConnector extends PureComponent {
   render() {
     const lineWidth = 2
     return (
-      <View style={{ flexDirection: 'row', height: this.props.height || 30 }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          height: this.props.height || 30,
+        }}
+      >
         <View style={{ flex: 20 }} />
 
         <View style={{ flex: 60 }}>

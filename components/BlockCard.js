@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
-import { LayoutAnimation, Platform, StyleSheet, Text, View } from 'react-native'
-import Colors from '../constants/Colors'
+import { LayoutAnimation, View } from 'react-native'
 import Card from './basic/Card'
-import FontIcon from './basic/FontIcon'
 import BlockButton from './BlockCardFractions/BlockButton'
 import BlockConnector from './BlockCardFractions/BlockConnector'
 import ChainingInfo from './BlockCardFractions/ChainingInfo'
 import CheckINInfo from './BlockCardFractions/CheckINInfo'
 import CheckOUTInfo from './BlockCardFractions/CheckOUTInfo'
+import CheckStatus from './BlockCardFractions/CheckStatus'
+import MiddlePart from './BlockCardFractions/MiddlePart'
 import TimestampInfo from './BlockCardFractions/TimestampInfo'
 
 export default class BlockCard extends PureComponent {
@@ -91,11 +91,14 @@ export default class BlockCard extends PureComponent {
 
     return (
       <View>
-        <Card style={{ marginBottom: 0 }}>
-          <View style={blockStyle.column}>
-            <View
-              style={{ flex: 4, justifyContent: 'space-between', padding: 5 }}
-            >
+        <Card style={{ padding: 5, marginBottom: 0 }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}
+          >
+            <View style={{ flex: 4, justifyContent: 'space-between' }}>
               <BlockButton
                 onPress={this.onButtonPress}
                 style={{ marginBottom: 5 }}
@@ -106,45 +109,24 @@ export default class BlockCard extends PureComponent {
 
               <BlockButton
                 onPress={this.onButtonPress}
-                style={{ marginBottom: 5 }}
                 title="DRUG DATA"
                 value={drugDataHash}
               />
 
               <BlockButton
+                style={{ marginTop: 5 }}
                 onPress={this.onButtonPress}
                 title="PREVIOUS HASH"
                 value={previousBlockHash}
               />
             </View>
 
-            <View
-              style={{
-                flex: 1,
-                borderLeftColor: Colors.headerLine,
-                borderLeftWidth: 1,
-                marginVertical: 5,
-                marginHorizontal: 5,
-              }}
-            >
-              <View style={{ flex: 3 }} />
-              <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-                <Text style={textStyle.nano}>{hashAlgorithmName}</Text>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  borderTopColor: Colors.headerLine,
-                  borderTopWidth: 1,
-                }}
-              />
-            </View>
+            <MiddlePart hashAlgorithmName={hashAlgorithmName} />
 
             <View
               style={{
                 flex: 4,
                 justifyContent: 'space-between',
-                padding: 3,
               }}
             >
               <BlockButton
@@ -153,94 +135,15 @@ export default class BlockCard extends PureComponent {
                 value={blockHash}
               />
 
-              <View style={{ justifyContent: 'center', flex: 1 }}>
-                <FontIcon
-                  name={drugData ? 'check_out' : 'check_in'}
-                  size={70}
-                  color={`#${this.props.drugDataHash.slice(0, 6)}`}
-                  style={[{ textAlign: 'center' }, blockStyle.shadow]}
-                />
-              </View>
+              <CheckStatus drugData={drugData} drugDataHash={drugDataHash} />
             </View>
           </View>
 
           <BlockInfo />
         </Card>
+
         <BlockConnector />
       </View>
     )
   }
 }
-
-const blockStyle = StyleSheet.create({
-  column: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 5,
-  },
-  drugData: {
-    backgroundColor: Colors.passiveBG,
-    borderColor: Colors.tintColor,
-    borderWidth: StyleSheet.hairlineWidth,
-    marginBottom: 5,
-    padding: 5,
-  },
-  blockInfo: {
-    paddingVertical: 5,
-    borderTopColor: Colors.headerLine,
-    borderTopWidth: 1,
-  },
-  shadow: {
-    ...Platform.select({
-      ios: {
-        shadowColor: '#000000',
-        shadowOpacity: 0.3,
-        shadowRadius: 1,
-        shadowOffset: {
-          height: 1,
-          width: 0.3,
-        },
-      },
-      android: {
-        elevation: 1,
-        position: 'relative',
-      },
-    }),
-  },
-})
-
-const defaultText = {
-  fontFamily: 'Aldrich',
-  fontSize: 12,
-  textAlign: 'center',
-}
-
-const textStyle = StyleSheet.create({
-  defaultText,
-  header: {
-    ...defaultText,
-    fontSize: 18,
-    marginVertical: 10,
-  },
-  subheader: {
-    ...defaultText,
-    paddingTop: 5,
-    paddingBottom: 2,
-    fontSize: 14,
-  },
-  right: {
-    ...defaultText,
-    textAlign: 'right',
-  },
-  nano: {
-    ...defaultText,
-    color: Colors.headerLine,
-    fontSize: 7,
-    textAlign: 'center',
-  },
-  hash: {
-    fontFamily: 'NovaMono',
-    fontSize: 14,
-    textAlign: 'center',
-  },
-})
