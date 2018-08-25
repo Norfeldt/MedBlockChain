@@ -109,13 +109,14 @@ export default class BlockCard extends PureComponent {
 
               <BlockButton
                 onPress={this.onButtonPress}
+                style={{ marginBottom: 5 }}
                 title="DRUG DATA"
                 value={drugDataHash}
               />
 
               <BlockButton
-                style={{ marginTop: 5 }}
                 onPress={this.onButtonPress}
+                style={{ marginBottom: 5 }}
                 title="PREVIOUS HASH"
                 value={previousBlockHash}
               />
