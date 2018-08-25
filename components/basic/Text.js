@@ -40,7 +40,7 @@ const textStyle = StyleSheet.create({
     paddingVertical: 10,
   },
   p,
-  timestampHeader: {
+  passiveHeader: {
     fontFamily: 'NovaMono',
     fontSize: 16,
     textAlign: 'center',

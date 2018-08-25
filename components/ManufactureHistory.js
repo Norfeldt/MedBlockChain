@@ -63,7 +63,7 @@ export default class ManufactureHistory extends PureComponent {
                   Alert.alert('QR Information', JSON.stringify(drug))
                 }
               >
-                <Text type="timestampHeader">
+                <Text type="passiveHeader">
                   {Conventions.datetimeStr(drug.productionDate)}
                 </Text>
                 <DrugQR value={JSON.stringify(drug)} />
