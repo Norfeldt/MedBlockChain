@@ -8,7 +8,7 @@ export const palette = {
   idleColor,
   tabIconDefault: idleColor,
   tabIconSelected: tintColor,
-  timestampBG: '#EEEEEE',
+  passiveBG: '#EEEEEE',
   tabBar: '#fefefe',
   headerColor: '#fefefe',
   headerLine: '#999999',
@@ -18,14 +18,13 @@ export const palette = {
   scrollBG: '#FFFFFF',
   errorBackground: 'red',
   errorText: '#fff',
-  warningBackground: '#EAEB5E',
-  warningText: '#666804',
   noticeBackground: tintColor,
   themeColor: '#003399',
   passiveText: idleColor,
   dark: '#333333',
   passive: '#999999',
   warning: '#990000',
+  warningBackground: '#EAEB5E',
 }
 
 export default palette

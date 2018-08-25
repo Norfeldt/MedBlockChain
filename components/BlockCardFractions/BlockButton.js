@@ -8,7 +8,7 @@ export default class BlockButton extends PureComponent {
     const { title, value, onPress, style } = this.props
     const { backgroundColor, color } = value.match(/^([a-zA-Z0-9]{15,})$/)
       ? getHashColors(value)
-      : { backgroundColor: Colors.timestampBG, color: Colors.dark }
+      : { backgroundColor: Colors.passiveBG, color: Colors.dark }
 
     return (
       <TouchableOpacity

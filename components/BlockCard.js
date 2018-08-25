@@ -179,7 +179,7 @@ const blockStyle = StyleSheet.create({
     marginBottom: 5,
   },
   drugData: {
-    backgroundColor: Colors.timestampBG,
+    backgroundColor: Colors.passiveBG,
     borderColor: Colors.tintColor,
     borderWidth: StyleSheet.hairlineWidth,
     marginBottom: 5,

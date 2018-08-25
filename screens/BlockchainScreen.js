@@ -39,7 +39,7 @@ export default class BlockchainScreen extends PureComponent {
               <Card
                 style={{
                   alignSelf: 'center',
-                  backgroundColor: Colors.timestampBG,
+                  backgroundColor: Colors.passiveBG,
                 }}
               >
                 <Text type="code">VOID SPACE</Text>

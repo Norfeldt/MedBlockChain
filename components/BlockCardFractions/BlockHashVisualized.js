@@ -29,7 +29,7 @@ export default class componentName extends PureComponent {
         >
           <Text type="code">{hashAlgorithmName}(</Text>
 
-          <Text type="code" style={{ backgroundColor: Colors.timestampBG }}>
+          <Text type="code" style={{ backgroundColor: Colors.passiveBG }}>
             {shortStr(timestamp)}
           </Text>
 

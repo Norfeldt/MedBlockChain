@@ -26,7 +26,7 @@ export default class ChainingInfo extends PureComponent {
         </Text>
         <View
           style={{
-            backgroundColor: Colors.timestampBG,
+            backgroundColor: Colors.passiveBG,
             ...styleHashBlock,
           }}
         >

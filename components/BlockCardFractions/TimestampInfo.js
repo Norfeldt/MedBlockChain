@@ -19,7 +19,7 @@ export default class TimestampInfo extends PureComponent {
         </Text>
         <View
           style={{
-            backgroundColor: Colors.timestampBG,
+            backgroundColor: Colors.passiveBG,
             ...styleHashBlock,
           }}
         >
