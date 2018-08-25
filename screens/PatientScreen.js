@@ -7,8 +7,9 @@ import SectionTitle from '../components/basic/SectionTitle'
 import DrugHistory from '../components/DrugHistory'
 import Colors from '../constants/Colors'
 import GenuineDrugs from '../components/GenuineDrugs'
+import FalsifiedDrugs from '../components/FalsifiedDrugs'
 import Text from '../components/basic/Text'
-import { ContextConsumer } from '../Context'
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: <Header title="Patient" />,
@@ -55,19 +56,13 @@ export default class HomeScreen extends React.Component {
               }}
             />
 
-            <ContextConsumer>
-              {({ genuineDrugs }) => {
-                if (genuineDrugs.length != 0) {
-                  return (
-                    <Text style={{ color: Colors.themeColor }}>OR PICK</Text>
-                  )
-                } else {
-                  return null
-                }
-              }}
-            </ContextConsumer>
+            <Text style={{ color: Colors.themeColor }}>OR PICK</Text>
 
-            <GenuineDrugs />
+            <ScrollView horizontal={true}>
+              <GenuineDrugs style={{ flexDirection: 'row' }} />
+              <View style={{ borderLeftWidth: 1 }} />
+              <FalsifiedDrugs />
+            </ScrollView>
 
             <SectionTitle name="MEDICATION HISTORY" />
 

@@ -1,12 +1,6 @@
 import map from 'lodash/map'
 import React, { PureComponent } from 'react'
-import {
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Alert,
-  Platform,
-} from 'react-native'
+import { Alert, Platform, TouchableOpacity, View } from 'react-native'
 import { getHashOfDrugData } from '../cloudComputing/Block'
 import { getHashColors } from '../constants/Colors'
 import Layout from '../constants/Layout'
@@ -22,7 +16,7 @@ export default class GenuineDrugs extends PureComponent {
       <ContextConsumer>
         {({ genuineDrugs, checkOUT }) => {
           return (
-            <ScrollView horizontal={true} style={this.props.style}>
+            <View style={this.props.style}>
               {map(genuineDrugs, (drug, index) => {
                 return (
                   <TouchableOpacity
@@ -79,7 +73,7 @@ export default class GenuineDrugs extends PureComponent {
                   </TouchableOpacity>
                 )
               })}
-            </ScrollView>
+            </View>
           )
         }}
       </ContextConsumer>

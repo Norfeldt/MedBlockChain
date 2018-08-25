@@ -169,13 +169,15 @@ class ContextProvider extends Component {
     })
   }
 
-  checkOUT = drugData => {
+  checkOUT = (drugData, falsified) => {
     // Get a copy of the blockchain and state records
     const { blockchain, genuineDrugs, patientDrugHistory } = { ...this.state }
     blockchain.checkOUT({ drugData })
 
     // Remove from available drugs
-    remove(genuineDrugs, drugData)
+    if (!falsified) {
+      remove(genuineDrugs, drugData)
+    }
 
     // Add to drug taken history
     const dateTaken = new Date()
@@ -194,6 +196,7 @@ class ContextProvider extends Component {
           setDose: this.setDose,
           checkIN: this.checkIN,
           checkOUT: this.checkOUT,
+          getFalsifiedDrug: this.getDefaultDrugData,
         }}
       >
         {this.props.children}
