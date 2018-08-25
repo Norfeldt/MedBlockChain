@@ -1,23 +1,14 @@
-import invert from 'invert-color'
 import React, { PureComponent } from 'react'
-import {
-  LayoutAnimation,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
+import { LayoutAnimation, Platform, StyleSheet, Text, View } from 'react-native'
 import Colors from '../constants/Colors'
 import Card from './basic/Card'
 import FontIcon from './basic/FontIcon'
-import HashBlock from './basic/HashBlock'
+import BlockButton from './BlockCardFractions/BlockButton'
+import BlockConnector from './BlockCardFractions/BlockConnector'
 import ChainingInfo from './BlockCardFractions/ChainingInfo'
 import CheckINInfo from './BlockCardFractions/CheckINInfo'
-import TimestampInfo from './BlockCardFractions/TimestampInfo'
-import ListData from './ListData'
 import CheckOUTInfo from './BlockCardFractions/CheckOUTInfo'
-import BlockButton from './BlockCardFractions/BlockButton'
+import TimestampInfo from './BlockCardFractions/TimestampInfo'
 
 export default class BlockCard extends PureComponent {
   constructor(props) {
@@ -99,98 +90,87 @@ export default class BlockCard extends PureComponent {
     }
 
     return (
-      <Card>
-        <View style={blockStyle.column}>
-          <View
-            style={{ flex: 4, justifyContent: 'space-between', padding: 5 }}
-          >
-            <BlockButton
-              onPress={this.onButtonPress}
-              style={{ marginBottom: 5 }}
-              title="TIMESTAMP"
-              value={timestamp}
-              valueIsHash={false}
-            />
+      <View>
+        <Card style={{ marginBottom: 0 }}>
+          <View style={blockStyle.column}>
+            <View
+              style={{ flex: 4, justifyContent: 'space-between', padding: 5 }}
+            >
+              <BlockButton
+                onPress={this.onButtonPress}
+                style={{ marginBottom: 5 }}
+                title="TIMESTAMP"
+                value={timestamp}
+                valueIsHash={false}
+              />
 
-            <BlockButton
-              onPress={this.onButtonPress}
-              style={{ marginBottom: 5 }}
-              title="DRUG DATA"
-              value={drugDataHash}
-            />
+              <BlockButton
+                onPress={this.onButtonPress}
+                style={{ marginBottom: 5 }}
+                title="DRUG DATA"
+                value={drugDataHash}
+              />
 
-            <BlockButton
-              onPress={this.onButtonPress}
-              title="PREVIOUS HASH"
-              value={previousBlockHash}
-            />
-          </View>
-
-          <View
-            style={{
-              flex: 1,
-              borderLeftColor: Colors.headerLine,
-              borderLeftWidth: 1,
-              marginVertical: 5,
-              marginHorizontal: 5,
-            }}
-          >
-            <View style={{ flex: 3 }} />
-            <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-              <Text style={textStyle.nano}>{hashAlgorithmName}</Text>
+              <BlockButton
+                onPress={this.onButtonPress}
+                title="PREVIOUS HASH"
+                value={previousBlockHash}
+              />
             </View>
+
             <View
               style={{
                 flex: 1,
-                borderTopColor: Colors.headerLine,
-                borderTopWidth: 1,
+                borderLeftColor: Colors.headerLine,
+                borderLeftWidth: 1,
+                marginVertical: 5,
+                marginHorizontal: 5,
               }}
-            />
-          </View>
-
-          <View
-            style={{
-              flex: 4,
-              justifyContent: 'space-between',
-              padding: 3,
-            }}
-          >
-            <View style={{ justifyContent: 'center', flex: 1 }}>
-              <FontIcon
-                name={drugData ? 'check_out' : 'check_in'}
-                size={70}
-                color={`#${this.props.drugDataHash.slice(0, 6)}`}
-                style={[{ textAlign: 'center' }, blockStyle.shadow]}
+            >
+              <View style={{ flex: 3 }} />
+              <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+                <Text style={textStyle.nano}>{hashAlgorithmName}</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  borderTopColor: Colors.headerLine,
+                  borderTopWidth: 1,
+                }}
               />
             </View>
-            <BlockButton
-              onPress={this.onButtonPress}
-              title="BLOCK HASH"
-              value={blockHash}
-            />
-          </View>
-        </View>
 
-        <BlockInfo />
-      </Card>
+            <View
+              style={{
+                flex: 4,
+                justifyContent: 'space-between',
+                padding: 3,
+              }}
+            >
+              <BlockButton
+                onPress={this.onButtonPress}
+                title="BLOCK HASH"
+                value={blockHash}
+              />
+
+              <View style={{ justifyContent: 'center', flex: 1 }}>
+                <FontIcon
+                  name={drugData ? 'check_out' : 'check_in'}
+                  size={70}
+                  color={`#${this.props.drugDataHash.slice(0, 6)}`}
+                  style={[{ textAlign: 'center' }, blockStyle.shadow]}
+                />
+              </View>
+            </View>
+          </View>
+
+          <BlockInfo />
+        </Card>
+        <BlockConnector />
+      </View>
     )
   }
 }
-
-hashBlockContainer = hash => ({
-  backgroundColor: `#${hash.slice(0, 6)}`,
-  borderColor: Colors.headerLine,
-  borderRadius: 7,
-  padding: 5,
-})
-
-hashBlockText = hash => [
-  textStyle.hash,
-  {
-    color: invert(`#${hash.slice(0, 6)}`, true),
-    backgroundColor: `#${hash.slice(0, 6)}`,
-  },
-]
 
 const blockStyle = StyleSheet.create({
   column: {

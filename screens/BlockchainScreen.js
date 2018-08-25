@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, ScrollView, StyleSheet, Text } from 'react-native'
+import { View, ScrollView, StyleSheet } from 'react-native'
 
 import map from 'lodash/map'
 
@@ -8,6 +8,8 @@ import Header from '../components/basic/Header'
 import BlockCard from '../components/BlockCard'
 
 import Colors from '../constants/Colors'
+import Card from '../components/basic/Card'
+import Text from '../components/basic/Text'
 
 export default class BlockchainScreen extends PureComponent {
   static navigationOptions = {
@@ -34,6 +36,15 @@ export default class BlockchainScreen extends PureComponent {
                   />
                 </View>
               ))}
+              <Card
+                style={{
+                  alignSelf: 'center',
+                  backgroundColor: Colors.timestampBG,
+                }}
+              >
+                <Text type="code">VOID SPACE</Text>
+              </Card>
+              <View style={{ height: 10 }} />
             </ScrollView>
           )
         }}
@@ -44,8 +55,8 @@ export default class BlockchainScreen extends PureComponent {
 
 const blockStyle = StyleSheet.create({
   scrollView: {
-    flex: 1,
-    paddingTop: 10,
+    paddingVertical: 10,
+    marginVertical: 0,
     backgroundColor: Colors.scrollBG,
   },
   scrollItem: { flexDirection: 'row', justifyContent: 'center' },
