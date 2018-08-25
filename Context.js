@@ -119,7 +119,7 @@ class ContextProvider extends Component {
 
     // Update the records of available drugs and drug taken history
     remove(genuineDrugs, drugData01)
-    patientDrugHistory.unshift({ dateTaken: timestamp, drugData: drugData01 })
+    patientDrugHistory.push({ dateTaken: timestamp, drugData: drugData01 })
 
     //// Manufacturer CHECK IN 2nd produced drug
     timestamp = new Date(2018, 7, 4, 9)
@@ -133,8 +133,8 @@ class ContextProvider extends Component {
     })
 
     // Update the records of manufactured and available drugs
-    manufacturedDrugs.unshift(drugData02)
-    genuineDrugs.unshift(drugData02)
+    manufacturedDrugs.push(drugData02)
+    genuineDrugs.push(drugData02)
 
     // Finally update the state
     this.setState({ blockchain, manufacturedDrugs, patientDrugHistory })
@@ -148,11 +148,11 @@ class ContextProvider extends Component {
 
     // Update the list of manufactured drugs
     const { manufacturedDrugs, drugData } = { ...this.state }
-    manufacturedDrugs.unshift({ ...drugData })
+    manufacturedDrugs.push({ ...drugData })
 
     // Update the list of genuine available drugs
     const { genuineDrugs } = { ...this.state }
-    genuineDrugs.unshift({ ...drugData })
+    genuineDrugs.push({ ...drugData })
 
     // Reset production date and hash salt
     drugData.productionDate = Conventions.datetimeStr()
