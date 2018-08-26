@@ -31,10 +31,7 @@ export default class App extends React.Component {
 
   _loadResourcesAsync = async () => {
     return Promise.all([
-      Asset.loadAsync([
-        require('./assets/images/robot-dev.png'),
-        require('./assets/images/robot-prod.png'),
-      ]),
+      // Asset.loadAsync([require('./assets/images/<FileName>.png')]),
       Font.loadAsync({
         Aldrich: require('./assets/fonts/Aldrich-Regular.ttf'),
         NovaMono: require('./assets/fonts/NovaMono.ttf'),
