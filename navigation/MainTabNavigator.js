@@ -86,8 +86,8 @@ DiagnosticStack.navigationOptions = {
 }
 
 export default createBottomTabNavigator({
-  BlockchainStack,
-  PatientStack,
   ManufactureStack,
+  PatientStack,
+  BlockchainStack,
   //DiagnosticStack,
 })
