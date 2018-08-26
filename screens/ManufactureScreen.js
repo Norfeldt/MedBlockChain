@@ -29,7 +29,7 @@ export default class HomeScreen extends Component {
           </ContextConsumer>
           <SectionTitle name="DOSING" />
           <DoseAdjuster />
-          <SectionTitle name="REGISTER" />
+          <SectionTitle name="CHECK IN" />
           <ContextConsumer>
             {({ drugDataHash, checkIN }) => {
               return (
