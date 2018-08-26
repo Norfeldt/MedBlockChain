@@ -9,6 +9,7 @@ import Colors from '../constants/Colors'
 import GenuineDrugs from '../components/GenuineDrugs'
 import FalsifiedDrugs from '../components/FalsifiedDrugs'
 import Text from '../components/basic/Text'
+import { ContextConsumer } from '../Context'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -16,28 +17,28 @@ export default class HomeScreen extends React.Component {
   }
 
   state = {
-    barCodeData: null,
     scanning: false,
   }
 
-  barCodeReadComplete = ({ type, data }) => {
-    const barCodeData = { ...JSON.parse(data) }
-    // TODO: do some validation of barCodeData
-    this.setState({ barCodeData, scanning: false })
-  }
-
   render() {
-    const { barCodeData, scanning } = this.state
+    const { scanning } = this.state
 
     RenderView = props => {
       if (scanning) {
         return (
-          <View style={{ flex: 1, marginBottom: 10 }}>
-            <BarCodeScanner
-              onBarCodeRead={this.barCodeReadComplete}
-              style={StyleSheet.absoluteFill}
-            />
-          </View>
+          <ContextConsumer>
+            {({ checkOUT }) => (
+              <View style={{ flex: 1, marginBottom: 10 }}>
+                <BarCodeScanner
+                  onBarCodeRead={({ type, data }) => {
+                    checkOUT({ ...JSON.parse(data) })
+                    this.setState({ scanning: false })
+                  }}
+                  style={StyleSheet.absoluteFill}
+                />
+              </View>
+            )}
+          </ContextConsumer>
         )
       } else {
         return (
