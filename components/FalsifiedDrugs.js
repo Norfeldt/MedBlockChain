@@ -12,7 +12,7 @@ export default class FalsifiedDrugs extends PureComponent {
     } = Layout
     return (
       <ContextConsumer>
-        {({ manufacturedDrugs, checkOUT, getFalsifiedDrug }) => {
+        {({ manufacturedDrugs, genuineDrugs, checkOUT, getFalsifiedDrug }) => {
           return (
             <TouchableOpacity
               onPress={() =>
@@ -27,7 +27,14 @@ export default class FalsifiedDrugs extends PureComponent {
                     {
                       text: 'CHECKED IN BUT NOT OUT',
                       onPress: () => {
-                        checkOUT(manufacturedDrugs[1], true)
+                        if (genuineDrugs.length == 0) {
+                          Alert.alert(
+                            'IMPOSSIBLE',
+                            'You need to manufacture and CHECK IN some drugs first'
+                          )
+                        } else {
+                          checkOUT(genuineDrugs[0], true)
+                        }
                       },
                     },
                     {

@@ -19,10 +19,10 @@ export default class BlockchainScreen extends PureComponent {
   render() {
     return (
       <ContextConsumer>
-        {context => {
+        {({ blockchain }) => {
           return (
             <ScrollView style={blockStyle.scrollView}>
-              {map(context.blockchain.chain, block => (
+              {map(blockchain.chain, block => (
                 <View style={blockStyle.scrollItem} key={block.blockHash}>
                   <BlockCard
                     blockHash={block.blockHash}
@@ -33,9 +33,20 @@ export default class BlockchainScreen extends PureComponent {
                     drugMetaData={block.drugMetaData}
                     previousBlockInfo={block.previousBlockInfo}
                     hashAlgorithmName={block.hashAlgorithmName}
+                    multipleCheckOUT={blockchain.falsifiedMedicine.multipleCheckOUT.has(
+                      block.drugDataHash
+                    )}
+                    neverCheckedIN={blockchain.falsifiedMedicine.neverCheckedIN.has(
+                      block.drugDataHash
+                    )}
                   />
+                  <Text>
+                    {blockchain.falsifiedMedicine.neverCheckedIN.has(
+                      block.drugDataHash
+                    )}
+                  </Text>
                 </View>
-              ))}
+              )).reverse()}
               <Card
                 style={{
                   alignSelf: 'center',

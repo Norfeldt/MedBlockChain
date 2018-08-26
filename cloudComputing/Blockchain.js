@@ -9,6 +9,14 @@ class Blockchain {
 
     // TODO: make a lookup table and consider how it can be added to the blockchain as well
     // https://stackoverflow.com/questions/48817283/searching-for-an-item-in-a-blockchain
+    this.findCheckIN = {}
+    this.findCheckOUT = {}
+
+    // Falsified medicine
+    this.falsifiedMedicine = {
+      multipleCheckOUT: new Set(),
+      neverCheckedIN: new Set(),
+    }
   }
 
   createGensisBlock() {
@@ -30,12 +38,12 @@ class Blockchain {
         previousBlockHash: hashNA,
         drugDataHash: hashNA,
       },
-      timestamp: new Date(2018, 6 - 1, 24, 12),
+      timestamp: datetimeStr(new Date(2018, 6 - 1, 24, 12)),
     })
   }
 
   getLatestBlock() {
-    return this.chain[0]
+    return this.chain[this.chain.length - 1]
   }
 
   // Only authorized unit can call this method
@@ -59,7 +67,33 @@ class Blockchain {
     })
 
     // Add the block to the chain
-    this.chain = [blockToChain, ...this.chain]
+    this.chain.push(blockToChain)
+
+    // Update the "lookup tables"/"search engines"
+    const index = this.chain.length - 1
+    const hash = blockToChain.drugDataHash
+    const { multipleCheckOUT, neverCheckedIN } = this.falsifiedMedicine
+    // Check IN case - this.checkIN only allows one
+    if (drugData == null) {
+      this.findCheckIN[hash] = index
+    }
+    // Check OUT case - multiple checkout are possible and indicate falsified medicine
+    else {
+      // Before adding it, check of multiple occurances
+      if (!this.findCheckOUT.hasOwnProperty(hash)) {
+        this.findCheckOUT[hash] = []
+      } else {
+        // WARNING this drug has been checked OUT multiple times
+        multipleCheckOUT.add(hash)
+      }
+      // Add this occurance
+      this.findCheckOUT[hash].push(index)
+
+      // WARNING this drug has never been checked IN by an authorized manufacturer
+      if (!this.findCheckIN.hasOwnProperty(hash)) {
+        neverCheckedIN.add(hash)
+      }
+    }
 
     // TODO: Make it return a promise
   }
@@ -71,15 +105,19 @@ class Blockchain {
 
     // TODO: Decrypt with manufacturer public key
 
-    // TODO: Check that the drugDataHash hasn't already been checked IN or OUT
-
-    // Add the block to the chain
-    this.addBlock({
-      drugData: null,
-      drugDataHash,
-      drugMetaData,
-      timestamp: null,
-    }) // TODO: Deal with promise handing..
+    // Check that the drugDataHash hasn't already been checked IN
+    if (!this.findCheckIN.hasOwnProperty(drugDataHash)) {
+      // Add the block to the chain
+      this.addBlock({
+        drugData: null,
+        drugDataHash,
+        drugMetaData,
+        timestamp: null,
+      })
+      // TODO: return promise succesful
+    } else {
+      // TODO: return promise failed
+    }
   }
 
   // Public can call this method

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { LayoutAnimation, View } from 'react-native'
+import { LayoutAnimation, View, Text } from 'react-native'
 import Card from './basic/Card'
 import BlockButton from './BlockCardFractions/BlockButton'
 import BlockConnector from './BlockCardFractions/BlockConnector'
@@ -9,6 +9,8 @@ import CheckOUTInfo from './BlockCardFractions/CheckOUTInfo'
 import CheckStatus from './BlockCardFractions/CheckStatus'
 import MiddlePart from './BlockCardFractions/MiddlePart'
 import TimestampInfo from './BlockCardFractions/TimestampInfo'
+import Colors from '../constants/Colors'
+import Warning from './BlockCardFractions/Warning'
 
 export default class BlockCard extends PureComponent {
   constructor(props) {
@@ -34,6 +36,8 @@ export default class BlockCard extends PureComponent {
       drugData,
       drugMetaData,
       hashAlgorithmName,
+      multipleCheckOUT,
+      neverCheckedIN,
     } = this.props
 
     BlockInfo = () => {
@@ -88,10 +92,20 @@ export default class BlockCard extends PureComponent {
           return null
       }
     }
-
+    const falsified = multipleCheckOUT || neverCheckedIN
     return (
       <View>
-        <Card style={{ padding: 5, marginBottom: 0 }}>
+        <Card
+          style={{
+            padding: 5,
+            marginBottom: 0,
+            backgroundColor: falsified ? Colors.warningBackground : 'white',
+          }}
+        >
+          <Warning
+            multipleCheckOUT={multipleCheckOUT}
+            neverCheckedIN={neverCheckedIN}
+          />
           <View
             style={{
               flexDirection: 'row',

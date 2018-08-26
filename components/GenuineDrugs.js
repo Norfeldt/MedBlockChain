@@ -32,7 +32,7 @@ export default class GenuineDrugs extends PureComponent {
                           onPress: () => console.log('Cancel Pressed'),
                         },
                         {
-                          text: 'CHECK IN',
+                          text: 'CHECK OUT',
                           onPress: () => checkOUT(drug),
                         },
                       ])
