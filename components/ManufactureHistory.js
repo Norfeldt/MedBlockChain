@@ -70,7 +70,7 @@ export default class ManufactureHistory extends PureComponent {
                 <HashBlock value={getHashOfDrugData(drug)} />
               </TouchableOpacity>
             )
-          })
+          }).reverse()
         }
       </ContextConsumer>
     )
