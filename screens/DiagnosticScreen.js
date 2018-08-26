@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native'
 
-import FontIcon from '../components/FontIcon'
+import FontIcon from '../components/basic/FontIcon'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {

@@ -1,27 +1,51 @@
 import React from 'react'
-import { Platform } from 'react-native'
+import { Platform, Text } from 'react-native'
 import {
   createStackNavigator,
   createBottomTabNavigator,
 } from 'react-navigation'
 
-import TabBarIcon from '../components/TabBarIcon'
+import TabBarIcon from '../components/basic/TabBarIcon'
 import DiagnosticScreen from '../screens/DiagnosticScreen'
 import ManufactureScreen from '../screens/ManufactureScreen'
 import PatientScreen from '../screens/PatientScreen'
-import SerializationScreen from '../screens/SerializationScreen'
+import BlockchainScreen from '../screens/BlockchainScreen'
 
 import Colors from '../constants/Colors'
+
+const tabBarOptions = {
+  activeTintColor: Colors.themeColor,
+  labelStyle: {
+    fontFamily: 'Aldrich',
+    fontSize: 10,
+  },
+  style: {
+    backgroundColor: Colors.panel,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000000',
+        shadowOpacity: 0.1,
+        shadowRadius: 1,
+        shadowOffset: {
+          height: -1,
+        },
+        paddingTop: 1,
+      },
+      android: {
+        elevation: 1,
+        position: 'relative',
+      },
+    }),
+  },
+}
 
 const ManufactureStack = createStackNavigator({
   manufacture: ManufactureScreen,
 })
 
 ManufactureStack.navigationOptions = {
-  tabBarLabel: 'Manufacture',
-  tabBarOptions: {
-    activeTintColor: Colors.tintColor,
-  },
+  tabBarLabel: 'MANUFACTURE',
+  tabBarOptions,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name="manufacture" />
   ),
@@ -32,22 +56,18 @@ const PatientStack = createStackNavigator({
 })
 
 PatientStack.navigationOptions = {
-  tabBarLabel: 'Patient',
-  tabBarOptions: {
-    activeTintColor: Colors.tintColor,
-  },
+  tabBarLabel: 'PATIENT',
+  tabBarOptions,
   tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="patient" />,
 }
 
-const SerializationStack = createStackNavigator({
-  Serialization: SerializationScreen,
+const BlockchainStack = createStackNavigator({
+  Blockchain: BlockchainScreen,
 })
 
-SerializationStack.navigationOptions = {
-  tabBarLabel: 'Serialization',
-  tabBarOptions: {
-    activeTintColor: Colors.tintColor,
-  },
+BlockchainStack.navigationOptions = {
+  tabBarLabel: 'BLOCKCHAIN',
+  tabBarOptions,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name="block_chain" />
   ),
@@ -59,17 +79,15 @@ const DiagnosticStack = createStackNavigator({
 
 DiagnosticStack.navigationOptions = {
   tabBarLabel: 'Diagnostic',
-  tabBarOptions: {
-    activeTintColor: Colors.tintColor,
-  },
+  tabBarOptions,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name="diagnostic" />
   ),
 }
 
 export default createBottomTabNavigator({
-  PatientStack,
   ManufactureStack,
-  SerializationStack,
+  PatientStack,
+  BlockchainStack,
   //DiagnosticStack,
 })

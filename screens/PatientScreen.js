@@ -1,26 +1,15 @@
-import React from 'react'
-import { Text, View, ScrollView, StyleSheet } from 'react-native'
 import { BarCodeScanner, Permissions } from 'expo'
-import Dialog from 'react-native-dialog'
-
-import dateFomatter from 'date-fns/format'
-import subDays from 'date-fns/sub_days'
-
-import Header from '../components/Header'
-import InfoRow from '../components/InfoRow'
-import Card from '../components/Card'
-import Button from '../components/Button'
-import MedicationHistory from '../components/MedicationHistory'
-
-const barCodeDataTemp = {
-  MANUFACTURE_NAME: null,
-  PRODUCTION_DATE: null,
-  DRUG_A_VALUE: null,
-  DRUG_A_UNITS: null,
-  DRUG_B_VALUE: null,
-  DRUG_B_UNITS: null,
-  HASH_SALT: null,
-}
+import React from 'react'
+import { StyleSheet, View, ScrollView } from 'react-native'
+import Button from '../components/basic/Button'
+import Header from '../components/basic/Header'
+import SectionTitle from '../components/basic/SectionTitle'
+import DrugHistory from '../components/DrugHistory'
+import Colors from '../constants/Colors'
+import GenuineDrugs from '../components/GenuineDrugs'
+import FalsifiedDrugs from '../components/FalsifiedDrugs'
+import Text from '../components/basic/Text'
+import { ContextConsumer } from '../Context'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -28,92 +17,70 @@ export default class HomeScreen extends React.Component {
   }
 
   state = {
-    barCodeData: barCodeDataTemp,
     scanning: false,
   }
 
-  _handleBarCodeRead = ({ type, data }) => {
-    const barCodeData = { ...JSON.parse(data) }
-
-    // TODO: do some validation of barCodeData
-
-    this.setState({ barCodeData, scanning: false })
-  }
-
   render() {
-    const { barCodeData, scanning } = this.state
+    const { scanning } = this.state
 
     RenderView = props => {
       if (scanning) {
         return (
-          <View style={{ flex: 1, marginBottom: 10 }}>
-            <BarCodeScanner
-              onBarCodeRead={this._handleBarCodeRead}
-              style={StyleSheet.absoluteFill}
-            />
-          </View>
+          <ContextConsumer>
+            {({ checkOUT }) => (
+              <View style={{ flex: 1, marginBottom: 10 }}>
+                <BarCodeScanner
+                  onBarCodeRead={({ type, data }) => {
+                    checkOUT({ ...JSON.parse(data) })
+                    this.setState({ scanning: false })
+                  }}
+                  style={StyleSheet.absoluteFill}
+                />
+              </View>
+            )}
+          </ContextConsumer>
         )
       } else {
         return (
-          <View style={{ flex: 1 }}>
-            {barCodeData === barCodeDataTemp && (
-              <Button
-                title="SCAN DRUG"
-                iconName="QR_Code"
-                onPress={async () => {
-                  const { status } = await Permissions.askAsync(
-                    Permissions.CAMERA
-                  )
-                  this.setState({
-                    scanning: status === 'granted',
-                  })
-                }}
-              />
-            )}
+          <ScrollView style={blockStyles.container}>
+            <SectionTitle name="AVAILABLE DRUGS" />
+            <Button
+              title="SCAN DRUG"
+              iconName="QR_Code"
+              onPress={async () => {
+                const { status } = await Permissions.askAsync(
+                  Permissions.CAMERA
+                )
+                this.setState({
+                  scanning: status === 'granted',
+                })
+              }}
+            />
 
-            {barCodeData != barCodeDataTemp && (
-              <Card
-                dateTaken={null}
-                manufacture={barCodeData.MANUFACTURE_NAME}
-                productionDate={barCodeData.PRODUCTION_DATE}
-                subADose={barCodeData.DRUG_A_VALUE}
-                subAUnits={barCodeData.DRUG_A_UNITS}
-                subBDose={barCodeData.DRUG_B_VALUE}
-                subBUnits={barCodeData.DRUG_B_UNITS}
-                salt={barCodeData.HASH_SALT}
-                checked_out={false}
-                onCancelPress={() => {
-                  this.setState({ barCodeData: barCodeDataTemp })
-                }}
-                onCheckInPress={() => {
-                  alert('TODO Centralized block-chain')
-                }}
-              />
-            )}
+            <Text style={{ color: Colors.themeColor }}>OR PICK</Text>
 
-            <MedicationHistory />
-          </View>
+            <ScrollView horizontal={true}>
+              <GenuineDrugs style={{ flexDirection: 'row' }} />
+              <View style={{ borderLeftWidth: 1 }} />
+              <FalsifiedDrugs />
+            </ScrollView>
+
+            <SectionTitle name="MEDICATION HISTORY" />
+
+            <DrugHistory />
+          </ScrollView>
         )
       }
     }
 
-    return (
-      <View style={styles.container}>
-        <InfoRow
-          setting="Today's Date"
-          value={`${dateFomatter(new Date(), 'YYYY-MM-DD')}`}
-        />
-
-        <RenderView />
-      </View>
-    )
+    return <RenderView />
   }
 }
 
-const styles = StyleSheet.create({
+const blockStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.scrollBG,
     paddingHorizontal: 10,
   },
 })
