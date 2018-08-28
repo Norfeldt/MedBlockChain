@@ -13,7 +13,7 @@ export default class HomeScreen extends React.Component {
     return (
       <ScrollView style={styles.container}>
         <SectionTitle name="PRO. HEALTHCARE" />
-        <OptionSwitch name="doctor" desc="Patient record" />
+        <OptionSwitch name="doctor" desc="Patient records" />
 
         <SectionTitle name="INTERNET OF THINGS" />
         <OptionSwitch name="weight_iot" desc="Weight" />
@@ -22,17 +22,18 @@ export default class HomeScreen extends React.Component {
         <OptionSwitch name="smartwatch" />
 
         <SectionTitle name="SERVICES" />
+        <OptionSwitch name="dna" desc="Genetics" />
         <OptionSwitch name="spendings" />
         <OptionSwitch name="fitness_center" desc="Fitness usage" />
 
         <SectionTitle name="SOCIAL ACTIVITIES" />
-        <OptionSwitch name="facebook" fontAwesome={true} />
-        <OptionSwitch name="twitter" fontAwesome={true} />
-        <OptionSwitch name="instagram" fontAwesome={true} />
-        <OptionSwitch name="snapchat" fontAwesome={true} />
-        <OptionSwitch name="youtube" fontAwesome={true} />
-        <OptionSwitch name="reddit" fontAwesome={true} />
-        <OptionSwitch name="meetup" fontAwesome={true} />
+        <OptionSwitch name="facebook" font="FontAwesome" />
+        <OptionSwitch name="twitter" font="FontAwesome" />
+        <OptionSwitch name="instagram" font="FontAwesome" />
+        <OptionSwitch name="snapchat" font="FontAwesome" />
+        <OptionSwitch name="youtube" font="FontAwesome" />
+        <OptionSwitch name="reddit" font="FontAwesome" />
+        <OptionSwitch name="meetup" font="FontAwesome" />
         <View style={{ height: 20 }} />
       </ScrollView>
     )

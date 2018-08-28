@@ -3,30 +3,13 @@ import { View, StyleSheet, Switch } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons'
 import FontIcon from './basic/FontIcon'
 import Text from './basic/Text'
+import Colors from '../constants/Colors'
 
 export default class App extends PureComponent {
   render() {
-    const { name, desc, fontAwesome } = this.props
+    const { name, desc, font } = this.props
     const title = desc || name
 
-    const Icon = () => {
-      if (fontAwesome) {
-        return (
-          <FontAwesome
-            name={name}
-            size={30}
-            style={{ marginRight: 10, width: 30 }}
-          />
-        )
-      }
-      return (
-        <FontIcon
-          name={name}
-          size={30}
-          style={{ marginRight: 10, width: 30 }}
-        />
-      )
-    }
     return (
       <View
         style={{
@@ -37,7 +20,13 @@ export default class App extends PureComponent {
         }}
       >
         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end' }}>
-          <Icon />
+          <FontIcon
+            name={name}
+            font={font}
+            size={30}
+            style={{ marginRight: 10, width: 30 }}
+            color={Colors.themeColor}
+          />
           <Text style={{ flex: 1, fontSize: 22, textAlign: 'left' }}>
             {title.toUpperCase()}
           </Text>
