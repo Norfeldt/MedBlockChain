@@ -1,13 +1,10 @@
+import debounce from 'lodash/debounce'
 import React, { PureComponent } from 'react'
 import { View } from 'react-native'
-import Text from './basic/Text'
 import Slider from 'react-native-slider'
-
-import debounce from 'lodash/debounce'
-
-import { ContextConsumer } from '../Context'
-
 import Colors from '../constants/Colors'
+import { ContextConsumer } from '../Context'
+import Text from './basic/Text'
 
 export default class DoseAdjuster extends PureComponent {
   render() {
