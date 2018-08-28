@@ -86,8 +86,8 @@ MonitoringStack.navigationOptions = {
 }
 
 export default createBottomTabNavigator({
-  MonitoringStack,
   ManufactureStack,
+  MonitoringStack,
   PatientStack,
   BlockchainStack,
 })

@@ -1,16 +1,15 @@
 import React, { Component } from 'react'
 import { ScrollView, View } from 'react-native'
-
-import { ContextConsumer } from '../Context'
+import Button from '../components/basic/Button'
+import HashBlock from '../components/basic/HashBlock'
 import Header from '../components/basic/Header'
 import SectionTitle from '../components/basic/SectionTitle'
-import Button from '../components/basic/Button'
-import ListData from '../components/ListData'
 import DoseAdjuster from '../components/DoseAdjuster'
+import ListData from '../components/ListData'
 import ManufactureHistory from '../components/ManufactureHistory'
-
 import Colors from '../constants/Colors'
-import HashBlock from '../components/basic/HashBlock'
+import { ContextConsumer } from '../Context'
+import DosePrescription from '../components/DosePrescription'
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -28,6 +27,7 @@ export default class HomeScreen extends Component {
             }}
           </ContextConsumer>
           <SectionTitle name="DOSING" />
+          <DosePrescription />
           <DoseAdjuster />
           <SectionTitle name="CHECK IN" />
           <ContextConsumer>
