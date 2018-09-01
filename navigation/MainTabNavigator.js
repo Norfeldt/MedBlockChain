@@ -6,7 +6,7 @@ import {
 } from 'react-navigation'
 
 import TabBarIcon from '../components/basic/TabBarIcon'
-import DiagnosticScreen from '../screens/DiagnosticScreen'
+import MonitoringScreen from '../screens/MonitoringScreen'
 import ManufactureScreen from '../screens/ManufactureScreen'
 import PatientScreen from '../screens/PatientScreen'
 import BlockchainScreen from '../screens/BlockchainScreen'
@@ -73,21 +73,21 @@ BlockchainStack.navigationOptions = {
   ),
 }
 
-const DiagnosticStack = createStackNavigator({
-  diagnostic: DiagnosticScreen,
+const MonitoringStack = createStackNavigator({
+  monitoring: MonitoringScreen,
 })
 
-DiagnosticStack.navigationOptions = {
-  tabBarLabel: 'Diagnostic',
+MonitoringStack.navigationOptions = {
+  tabBarLabel: 'Monitoring',
   tabBarOptions,
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name="diagnostic" />
+    <TabBarIcon focused={focused} name="monitoring" />
   ),
 }
 
 export default createBottomTabNavigator({
   ManufactureStack,
   PatientStack,
+  MonitoringStack,
   BlockchainStack,
-  //DiagnosticStack,
 })

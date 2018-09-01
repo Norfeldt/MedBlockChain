@@ -43,7 +43,7 @@ export default class HomeScreen extends React.Component {
       } else {
         return (
           <ScrollView style={blockStyles.container}>
-            <SectionTitle name="AVAILABLE DRUGS" />
+            <SectionTitle name="CHECK OUT" />
             <Button
               title="SCAN DRUG"
               iconName="QR_Code"
