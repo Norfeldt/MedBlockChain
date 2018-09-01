@@ -1,13 +1,17 @@
 import React, { PureComponent } from 'react'
-import { View, StyleSheet, Switch } from 'react-native'
-import { FontAwesome } from '@expo/vector-icons'
+import { Switch, View } from 'react-native'
+import Colors from '../constants/Colors'
+import { ContextConsumer } from '../Context'
 import FontIcon from './basic/FontIcon'
 import Text from './basic/Text'
-import Colors from '../constants/Colors'
 
 export default class App extends PureComponent {
+  state = {
+    value: false,
+  }
+
   render() {
-    const { name, desc, font } = this.props
+    const { name, desc, font, LPI, UPI } = this.props
     const title = desc || name
 
     return (
@@ -19,7 +23,13 @@ export default class App extends PureComponent {
           paddingVertical: 5,
         }}
       >
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end' }}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+          }}
+        >
           <FontIcon
             name={name}
             font={font}
@@ -32,7 +42,21 @@ export default class App extends PureComponent {
           </Text>
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'flex-end' }}>
-          <Switch />
+          <ContextConsumer>
+            {({ updatePrescriptionDose }) => {
+              return (
+                <Switch
+                  onValueChange={value => {
+                    const impact = value ? +1 : -1
+                    updatePrescriptionDose(LPI * impact, UPI * impact)
+                    this.setState({ value })
+                  }}
+                  value={this.state.value}
+                  onTintColor={Colors.themeColor}
+                />
+              )
+            }}
+          </ContextConsumer>
         </View>
       </View>
     )

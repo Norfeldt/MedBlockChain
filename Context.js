@@ -25,6 +25,7 @@ class ContextProvider extends Component {
       manufacturedDrugs: [],
       genuineDrugs: [],
       patientDrugHistory: [],
+      prescriptionDose: [0, 100, 0],
     }
   }
 
@@ -186,6 +187,18 @@ class ContextProvider extends Component {
     this.setState({ blockchain, genuineDrugs, patientDrugHistory })
   }
 
+  updatePrescriptionDose = (left, right) => {
+    let [leftFlex, middleFlex, rightFlex] = [...this.state.prescriptionDose]
+
+    this.setState({
+      prescriptionDose: [
+        leftFlex + (left || 0),
+        middleFlex,
+        rightFlex + (right || 0),
+      ],
+    })
+  }
+
   render() {
     return (
       <Provider
@@ -197,6 +210,7 @@ class ContextProvider extends Component {
           checkIN: this.checkIN,
           checkOUT: this.checkOUT,
           getFalsifiedDrug: this.getDefaultDrugData,
+          updatePrescriptionDose: this.updatePrescriptionDose,
         }}
       >
         {this.props.children}

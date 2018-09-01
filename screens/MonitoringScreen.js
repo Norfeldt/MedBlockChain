@@ -20,27 +20,42 @@ export default class HomeScreen extends React.Component {
 
         <ScrollView style={styles.scroll}>
           <SectionTitle name="PRO. HEALTHCARE" />
-          <OptionSwitch name="doctor" desc="Patient records" />
+          <OptionSwitch
+            name="doctor"
+            desc="Patient records"
+            LPI={20}
+            UPI={10}
+          />
 
           <SectionTitle name="INTERNET OF THINGS" />
-          <OptionSwitch name="weight_iot" desc="Weight" />
-          <OptionSwitch name="sleep_iot" desc="Sleep tracking" />
-          <OptionSwitch name="walk" desc="Step count" />
-          <OptionSwitch name="smartwatch" />
+          <OptionSwitch name="weight_iot" desc="Weight" UPI={5} />
+          <OptionSwitch
+            name="sleep_iot"
+            desc="Sleep tracking"
+            LPI={10}
+            UPI={5}
+          />
+          <OptionSwitch name="walk" desc="Step count" LPI={5} />
+          <OptionSwitch name="smartwatch" desc="Wearables" LPI={15} />
 
           <SectionTitle name="SERVICES" />
-          <OptionSwitch name="dna" desc="Genetics" />
-          <OptionSwitch name="spendings" />
-          <OptionSwitch name="fitness_center" desc="Fitness usage" />
+          <OptionSwitch name="dna" desc="Genetic Profile" LPI={20} UPI={30} />
+          <OptionSwitch name="spendings" LPI={10} UPI={10} />
+          <OptionSwitch
+            name="fitness_center"
+            desc="Fitness Usage"
+            LPI={2}
+            UPI={2}
+          />
 
           <SectionTitle name="SOCIAL ACTIVITIES" />
-          <OptionSwitch name="facebook" font="FontAwesome" />
-          <OptionSwitch name="twitter" font="FontAwesome" />
-          <OptionSwitch name="instagram" font="FontAwesome" />
-          <OptionSwitch name="snapchat" font="FontAwesome" />
-          <OptionSwitch name="youtube" font="FontAwesome" />
-          <OptionSwitch name="reddit" font="FontAwesome" />
-          <OptionSwitch name="meetup" font="FontAwesome" />
+          <OptionSwitch name="facebook" font="FontAwesome" LPI={15} UPI={2} />
+          <OptionSwitch name="twitter" font="FontAwesome" LPI={7} UPI={2} />
+          <OptionSwitch name="instagram" font="FontAwesome" LPI={7} UPI={2} />
+          <OptionSwitch name="snapchat" font="FontAwesome" LPI={7} UPI={2} />
+          <OptionSwitch name="youtube" font="FontAwesome" LPI={7} UPI={2} />
+          <OptionSwitch name="reddit" font="FontAwesome" LPI={2} />
+          <OptionSwitch name="meetup" font="FontAwesome" LPI={1} />
           <View style={{ height: 20 }} />
         </ScrollView>
       </View>
