@@ -13,7 +13,7 @@ class ContextProvider extends Component {
   constructor(props) {
     super(props)
 
-    const manufacture = 'Rantanen Labs'
+    const manufacture = 'CPHarma'
     const drugData = this.getDefaultDrugData(manufacture)
     this.state = {
       blockchain: new Blockchain(),
@@ -52,14 +52,14 @@ class ContextProvider extends Component {
   ) => {
     return {
       manufacture,
-      ActivePharmIngredient: 'Ephedrine',
-      dose: '4.25 mg',
+      ActivePharmIngredient: 'rosuvastatin',
+      dose: '5 mg',
       productionDate,
       hashSalt,
     }
   }
 
-  getDoseRange = () => ({ minDose: 0, maxDose: 20 })
+  getDoseRange = () => ({ minDose: 0, maxDose: 40 })
 
   getDose = () => parseFloat(this.state.drugData.dose.replace(/[^\d\.]*/g, '')) // convert the dose from string to number - keeping it as string in order to preserve measuring units
 
@@ -67,7 +67,7 @@ class ContextProvider extends Component {
     // Grab a copy of the drug data in the state
     const { drugData } = { ...this.state }
     // Update the dose (string)
-    drugData.dose = value.toFixed(2) + drugData.dose.replace(/[\d\.]*/g, '')
+    drugData.dose = value.toFixed(0) + drugData.dose.replace(/[\d\.]*/g, '')
     // Update the production date and create new hash
     drugData.productionDate = Conventions.datetimeStr()
     drugData.hashSalt = this.makeHashSalt()

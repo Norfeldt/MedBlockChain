@@ -16,8 +16,8 @@ export default class DoseAdjuster extends PureComponent {
             <View
               style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
             >
-              <Text style={{ flex: 15, fontSize: 12 }}>
-                {minDose.toFixed(2)}
+              <Text style={{ flex: 7, fontSize: 12 }}>
+                {minDose.toFixed(0)}
               </Text>
               <Slider
                 style={{ flex: 70, height: 60, alignSelf: 'stretch' }}
@@ -25,11 +25,11 @@ export default class DoseAdjuster extends PureComponent {
                 minimumValue={minDose}
                 maximumValue={maxDose}
                 value={context.getDose()}
-                step={0.25}
+                step={1}
                 onValueChange={debounce(value => context.setDose(value), 50)}
               />
-              <Text style={{ flex: 15, fontSize: 12 }}>
-                {maxDose.toFixed(2)}
+              <Text style={{ flex: 7, fontSize: 12 }}>
+                {maxDose.toFixed(0)}
               </Text>
             </View>
           )
