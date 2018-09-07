@@ -1,16 +1,16 @@
 import Conventions from '../constants/Conventions'
 const SHA256 = require('crypto-js/sha256')
 
-getHashOfDrugData = drugData => {
-  return SHA256(JSON.stringify(drugData))
+getHashOfproductData = productData => {
+  return SHA256(JSON.stringify(productData))
     .toString()
     .toUpperCase()
 }
 
 class Block {
   constructor({
-    drugData,
-    drugDataHash,
+    productData,
+    productDataHash,
     drugMetaData,
     previousBlockHash,
     previousBlockInfo,
@@ -19,21 +19,21 @@ class Block {
     this.timestamp = timestamp
       ? Conventions.datetimeStr(timestamp)
       : Conventions.datetimeStr()
-    this.drugData = drugData
+    this.productData = productData
     this.drugMetaData = drugMetaData
     this.previousBlockHash = previousBlockHash
     this.previousBlockInfo = previousBlockInfo
 
     this.hashAlgorithmName = 'SHA256'
-    this.drugDataHash = drugDataHash
-      ? drugDataHash
-      : getHashOfDrugData(drugData)
+    this.productDataHash = productDataHash
+      ? productDataHash
+      : getHashOfproductData(productData)
     this.blockHash = SHA256(
-      this.timestamp + this.drugDataHash + this.previousBlockHash
+      this.timestamp + this.productDataHash + this.previousBlockHash
     )
       .toString()
       .toUpperCase()
   }
 }
 
-module.exports = { Block, getHashOfDrugData }
+module.exports = { Block, getHashOfproductData }

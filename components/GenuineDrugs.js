@@ -1,7 +1,7 @@
 import map from 'lodash/map'
 import React, { PureComponent } from 'react'
 import { Alert, Platform, TouchableOpacity, View } from 'react-native'
-import { getHashOfDrugData } from '../cloudComputing/Block'
+import { getHashOfproductData } from '../cloudComputing/Block'
 import { getHashColors } from '../constants/Colors'
 import Layout from '../constants/Layout'
 import { ContextConsumer } from '../Context'
@@ -26,7 +26,7 @@ export default class GenuineDrugs extends PureComponent {
                       paddingRight: 5,
                     }}
                     onPress={() =>
-                      Alert.alert('DRUG DATA', JSON.stringify(drug), [
+                      Alert.alert('PRODUCT DATA', JSON.stringify(drug), [
                         {
                           text: 'Cancel',
                           onPress: () => console.log('Cancel Pressed'),
@@ -49,7 +49,8 @@ export default class GenuineDrugs extends PureComponent {
                         name="drug"
                         size={width * 0.3}
                         color={
-                          getHashColors(getHashOfDrugData(drug)).backgroundColor
+                          getHashColors(getHashOfproductData(drug))
+                            .backgroundColor
                         }
                         style={{
                           ...Platform.select({

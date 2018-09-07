@@ -40,10 +40,10 @@ export default class FalsifiedDrugs extends PureComponent {
                     {
                       text: 'NEITHER CHECKED IN OR OUT',
                       onPress: () => {
-                        const drugData = getFalsifiedDrug(
+                        const productData = getFalsifiedDrug(
                           'Criminal Drug Dealer'
                         )
-                        checkOUT(drugData)
+                        checkOUT(productData)
                       },
                     },
                   ]

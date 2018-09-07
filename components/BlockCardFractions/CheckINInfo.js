@@ -7,7 +7,7 @@ import ListData from '../ListData'
 
 export default class CheckINInfo extends PureComponent {
   render() {
-    const { drugMetaData, drugDataHash } = this.props
+    const { drugMetaData, productDataHash } = this.props
 
     return (
       <View
@@ -16,7 +16,7 @@ export default class CheckINInfo extends PureComponent {
           borderTopWidth: StyleSheet.hairlineWidth,
         }}
       >
-        <Text type="h4">DRUG DATA</Text>
+        <Text type="h4">PRODUCT DATA</Text>
         <Text
           type="code"
           style={{ color: Colors.warning }}
@@ -27,7 +27,7 @@ export default class CheckINInfo extends PureComponent {
         <Text type="h4" style={{ paddingBottom: 0 }}>
           CHECKED IN
         </Text>
-        <HashBlock value={drugDataHash} />>
+        <HashBlock value={productDataHash} />>
       </View>
     )
   }

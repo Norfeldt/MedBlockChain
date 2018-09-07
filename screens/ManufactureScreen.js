@@ -20,10 +20,10 @@ export default class HomeScreen extends Component {
     return (
       <ScrollView style={{ flex: 1, backgroundColor: Colors.scrollBG }}>
         <View style={{ alignContent: 'center', paddingHorizontal: 10 }}>
-          <SectionTitle name="DRUG DATA" />
+          <SectionTitle name="PRODUCT DATA" />
           <ContextConsumer>
-            {({ drugData }) => {
-              return <ListData data={drugData} />
+            {({ productData }) => {
+              return <ListData data={productData} />
             }}
           </ContextConsumer>
           <SectionTitle name="DOSING" />
@@ -31,10 +31,10 @@ export default class HomeScreen extends Component {
           <DoseAdjuster />
           <SectionTitle name="CHECK IN" />
           <ContextConsumer>
-            {({ drugDataHash, checkIN }) => {
+            {({ productDataHash, checkIN }) => {
               return (
                 <View>
-                  <HashBlock value={drugDataHash} />
+                  <HashBlock value={productDataHash} />
 
                   <Button
                     title="CHECK IN"

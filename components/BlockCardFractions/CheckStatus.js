@@ -6,38 +6,38 @@ import { getHashColors } from '../../constants/Colors'
 
 export default class componentName extends PureComponent {
   render() {
-    const { drugData, drugDataHash } = this.props
+    const { productData, productDataHash } = this.props
     const iconSize = 60
     return (
       <View style={{ flex: 1, justifyContent: 'center' }}>
         <Text
           type="p"
           style={{
-            color: getHashColors(drugDataHash).backgroundColor,
+            color: getHashColors(productDataHash).backgroundColor,
           }}
         >
-          CHECKED {drugData ? 'OUT' : 'IN'}
+          CHECKED {productData ? 'OUT' : 'IN'}
         </Text>
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-          {!drugData && (
+          {!productData && (
             <FontIcon
               name="drug"
               size={iconSize}
-              color={getHashColors(drugDataHash).backgroundColor}
+              color={getHashColors(productDataHash).backgroundColor}
               style={[{ textAlign: 'center' }, blockStyle.shadow]}
             />
           )}
           <FontIcon
-            name={drugData ? 'check_out' : 'check_in'}
+            name={productData ? 'check_out' : 'check_in'}
             size={iconSize}
-            color={getHashColors(drugDataHash).backgroundColor}
+            color={getHashColors(productDataHash).backgroundColor}
             style={[{ textAlign: 'center' }, blockStyle.shadow]}
           />
-          {drugData && (
+          {productData && (
             <FontIcon
               name="drug"
               size={iconSize}
-              color={getHashColors(drugDataHash).backgroundColor}
+              color={getHashColors(productDataHash).backgroundColor}
               style={[{ textAlign: 'center' }, blockStyle.shadow]}
             />
           )}

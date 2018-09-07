@@ -27,22 +27,22 @@ export default class BlockchainScreen extends PureComponent {
                   <BlockCard
                     blockHash={block.blockHash}
                     timestamp={block.timestamp}
-                    drugDataHash={block.drugDataHash}
+                    productDataHash={block.productDataHash}
                     previousBlockHash={block.previousBlockHash}
-                    drugData={block.drugData}
+                    productData={block.productData}
                     drugMetaData={block.drugMetaData}
                     previousBlockInfo={block.previousBlockInfo}
                     hashAlgorithmName={block.hashAlgorithmName}
                     multipleCheckOUT={blockchain.falsifiedMedicine.multipleCheckOUT.has(
-                      block.drugDataHash
+                      block.productDataHash
                     )}
                     neverCheckedIN={blockchain.falsifiedMedicine.neverCheckedIN.has(
-                      block.drugDataHash
+                      block.productDataHash
                     )}
                   />
                   <Text>
                     {blockchain.falsifiedMedicine.neverCheckedIN.has(
-                      block.drugDataHash
+                      block.productDataHash
                     )}
                   </Text>
                 </View>

@@ -7,7 +7,7 @@ import ListData from '../ListData'
 
 export default class CheckOUTInfo extends PureComponent {
   render() {
-    const { drugData, drugDataHash, hashAlgorithmName } = this.props
+    const { productData, productDataHash, hashAlgorithmName } = this.props
     return (
       <View
         style={{
@@ -16,11 +16,11 @@ export default class CheckOUTInfo extends PureComponent {
         }}
       >
         <Text type="h4" style={{ paddingBottom: 0 }}>
-          DRUG DATA
+          PRODUCT DATA
         </Text>
-        <ListData data={drugData} />
+        <ListData data={productData} />
 
-        <HashBlock value={drugDataHash} />
+        <HashBlock value={productDataHash} />
       </View>
     )
   }

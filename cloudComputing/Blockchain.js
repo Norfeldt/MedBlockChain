@@ -1,5 +1,5 @@
 // Derived from https://www.youtube.com/watch?v=zVqczFZr124
-const { Block, getHashOfDrugData } = require('./Block')
+const { Block, getHashOfproductData } = require('./Block')
 import SHA256 from 'crypto-js/sha256'
 import { datetimeStr } from '../constants/Conventions'
 
@@ -25,10 +25,10 @@ class Blockchain {
     const hashNA = SHA256('N/A')
       .toString()
       .toUpperCase()
-    // Block( drugData, drugMetaData, previousBlockHash, previousBlockInfo, timestamp)
+    // Block( productData, drugMetaData, previousBlockHash, previousBlockInfo, timestamp)
     return new Block({
-      drugData: null,
-      drugDataHash: null,
+      productData: null,
+      productDataHash: null,
       drugMetaData: { BlockCreator: 'Authorized Unit' },
       previousBlockHash: SHA256('N/A' + hashNA + hashNA)
         .toString()
@@ -36,7 +36,7 @@ class Blockchain {
       previousBlockInfo: {
         timestamp: datetimeStr(new Date(2018, 6 - 1, 24, 12)),
         previousBlockHash: hashNA,
-        drugDataHash: hashNA,
+        productDataHash: hashNA,
       },
       timestamp: datetimeStr(new Date(2018, 6 - 1, 24, 12)),
     })
@@ -47,19 +47,19 @@ class Blockchain {
   }
 
   // Only authorized unit can call this method
-  addBlock({ drugData, drugDataHash, drugMetaData, timestamp }) {
+  addBlock({ productData, productDataHash, drugMetaData, timestamp }) {
     // Build block info for the latest block
     const previousBlockInfo = {
       timestamp: this.getLatestBlock().timestamp,
-      drugDataHash: this.getLatestBlock().drugDataHash,
+      productDataHash: this.getLatestBlock().productDataHash,
       previousBlockHash: this.getLatestBlock().previousBlockHash,
     }
 
     // Build the block to chain
-    // Block( drugData, drugMetaData, previousBlockHash, previousBlockInfo [, timestamp])
+    // Block( productData, drugMetaData, previousBlockHash, previousBlockInfo [, timestamp])
     const blockToChain = new Block({
-      drugData,
-      drugDataHash,
+      productData,
+      productDataHash,
       drugMetaData,
       previousBlockHash: this.getLatestBlock().blockHash,
       previousBlockInfo,
@@ -71,10 +71,10 @@ class Blockchain {
 
     // Update the "lookup tables"/"search engines"
     const index = this.chain.length - 1
-    const hash = blockToChain.drugDataHash
+    const hash = blockToChain.productDataHash
     const { multipleCheckOUT, neverCheckedIN } = this.falsifiedMedicine
     // Check IN case - this.checkIN only allows one
-    if (drugData == null) {
+    if (productData == null) {
       this.findCheckIN[hash] = index
     }
     // Check OUT case - multiple checkout are possible and indicate falsified medicine
@@ -99,18 +99,18 @@ class Blockchain {
   }
 
   // Only manufacturer with access token can call this method
-  checkIN({ drugDataHash, drugMetaData }) {
+  checkIN({ productDataHash, drugMetaData }) {
     // Received content should be encryption with public and private keys: https://www.youtube.com/watch?v=GSIDS_lvRv4
     // TODO: Decrypt with authority private key
 
     // TODO: Decrypt with manufacturer public key
 
-    // Check that the drugDataHash hasn't already been checked IN
-    if (!this.findCheckIN.hasOwnProperty(drugDataHash)) {
+    // Check that the productDataHash hasn't already been checked IN
+    if (!this.findCheckIN.hasOwnProperty(productDataHash)) {
       // Add the block to the chain
       this.addBlock({
-        drugData: null,
-        drugDataHash,
+        productData: null,
+        productDataHash,
         drugMetaData,
         timestamp: null,
       })
@@ -121,18 +121,12 @@ class Blockchain {
   }
 
   // Public can call this method
-  checkOUT(drugData) {
-    // Verify that the drug hash has been CHECKED IN
-    // FIXME:
+  checkOUT(productData) {
+    // TODO: Alert if the drug has not been CHECKED IN
 
-    // TODO: Consider if attempt should be added to the chain..
-    // Current implementation does not add it
+    // TODO: Alert if the drug already has been CHECKED OUT
 
-    // FIXME:
-    // Check that the drugh has has not already been CHECKED OUT
-    // Add it to the chain anyway - since it needs to be recorded
-
-    this.addBlock(drugData, null, null, null) // TODO: Deal with promise handing..
+    this.addBlock(productData, null, null, null) // TODO: Deal with promise handing..
   }
 }
 
