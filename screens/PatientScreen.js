@@ -1,6 +1,6 @@
 import { BarCodeScanner, Permissions } from 'expo'
 import React from 'react'
-import { StyleSheet, View, ScrollView } from 'react-native'
+import { StyleSheet, View, ScrollView, Alert } from 'react-native'
 import Button from '../components/basic/Button'
 import Header from '../components/basic/Header'
 import SectionTitle from '../components/basic/SectionTitle'
@@ -31,8 +31,18 @@ export default class HomeScreen extends React.Component {
               <View style={{ flex: 1, marginBottom: 10 }}>
                 <BarCodeScanner
                   onBarCodeRead={({ type, data }) => {
-                    checkOUT({ ...JSON.parse(data) })
                     this.setState({ scanning: false })
+
+                    Alert.alert('PRODUCT DATA', data, [
+                      {
+                        text: 'Cancel',
+                        onPress: () => console.log('Cancel Pressed'),
+                      },
+                      {
+                        text: 'CHECK OUT',
+                        onPress: () => checkOUT({ ...JSON.parse(data) }),
+                      },
+                    ])
                   }}
                   style={StyleSheet.absoluteFill}
                 />
