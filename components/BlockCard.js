@@ -102,7 +102,11 @@ export default class BlockCard extends PureComponent {
           style={{
             padding: 5,
             marginBottom: 0,
-            backgroundColor: falsified ? Colors.warningBackground : 'white',
+            backgroundColor: falsified
+              ? Colors.warningBackground
+              : Colors.scrollBG,
+            borderWidth: 2,
+            borderColor: Colors.themeColor,
           }}
         >
           <Warning
@@ -173,7 +177,7 @@ export default class BlockCard extends PureComponent {
                     alignItems: 'center',
                   }}
                 >
-                  <FontIcon name="aid" size={70} />
+                  <FontIcon name="aid" size={70} color={Colors.themeColor} />
                 </View>
               )}
             </View>
@@ -182,7 +186,9 @@ export default class BlockCard extends PureComponent {
           <BlockInfo />
         </Card>
 
-        {index !== 0 && <BlockConnector />}
+        {index !== 0 && (
+          <BlockConnector lineWidth={2} lineColor={Colors.themeColor} />
+        )}
       </View>
     )
   }
