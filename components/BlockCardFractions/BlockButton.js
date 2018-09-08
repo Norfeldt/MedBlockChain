@@ -6,9 +6,15 @@ import Colors, { getHashColors } from '../../constants/Colors'
 export default class BlockButton extends PureComponent {
   render() {
     const { title, value, onPress, style } = this.props
-    const { backgroundColor, color } = value.match(/^([a-zA-Z0-9]{15,})$/)
-      ? getHashColors(value)
-      : { backgroundColor: Colors.passiveBG, color: Colors.dark }
+    // const { backgroundColor, color } = value.match(/^([a-zA-Z0-9]{15,})$/)
+    //   ? getHashColors(value)
+    //   : { backgroundColor: Colors.passiveBG, color: Colors.dark }
+
+    // Client want's less of a rainbow blockchain
+    const { backgroundColor, color } =
+      title.toUpperCase() == 'PRODUCT DATA'
+        ? getHashColors(value)
+        : { backgroundColor: Colors.passiveBG, color: Colors.dark }
 
     return (
       <TouchableOpacity
