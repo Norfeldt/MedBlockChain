@@ -25,7 +25,7 @@ export default class BlockButton extends PureComponent {
         ]}
         onPress={() => {
           onPress(title)
-          this.setState({ value: !this.state.value })
+          this.setState({ value: true }) // gonna let it keep the color - even when closing the info
         }}
       >
         <Text type="p" style={{ fontSize: 14, color }}>
