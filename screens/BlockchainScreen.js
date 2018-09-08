@@ -22,9 +22,10 @@ export default class BlockchainScreen extends PureComponent {
         {({ blockchain }) => {
           return (
             <ScrollView style={blockStyle.scrollView}>
-              {map(blockchain.chain, block => (
+              {map(blockchain.chain, (block, index) => (
                 <View style={blockStyle.scrollItem} key={block.blockHash}>
                   <BlockCard
+                    index={index}
                     blockHash={block.blockHash}
                     timestamp={block.timestamp}
                     productDataHash={block.productDataHash}
@@ -47,15 +48,7 @@ export default class BlockchainScreen extends PureComponent {
                   </Text>
                 </View>
               )).reverse()}
-              <Card
-                style={{
-                  alignSelf: 'center',
-                  backgroundColor: Colors.passiveBG,
-                }}
-              >
-                <Text type="code">VOID SPACE</Text>
-              </Card>
-              <View style={{ height: 10 }} />
+              <View style={{ height: 30 }} />
             </ScrollView>
           )
         }}

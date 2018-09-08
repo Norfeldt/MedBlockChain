@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { LayoutAnimation, View, Text } from 'react-native'
+import { LayoutAnimation, View } from 'react-native'
 import Card from './basic/Card'
 import BlockButton from './BlockCardFractions/BlockButton'
 import BlockConnector from './BlockCardFractions/BlockConnector'
@@ -11,6 +11,7 @@ import MiddlePart from './BlockCardFractions/MiddlePart'
 import TimestampInfo from './BlockCardFractions/TimestampInfo'
 import Colors from '../constants/Colors'
 import Warning from './BlockCardFractions/Warning'
+import Text from '../components/basic/Text'
 
 export default class BlockCard extends PureComponent {
   constructor(props) {
@@ -29,6 +30,7 @@ export default class BlockCard extends PureComponent {
 
   render() {
     const {
+      index,
       blockHash,
       timestamp,
       productDataHash,
@@ -106,6 +108,8 @@ export default class BlockCard extends PureComponent {
             multipleCheckOUT={multipleCheckOUT}
             neverCheckedIN={neverCheckedIN}
           />
+
+          {index == 0 && <Text type="h3">GENESIS BLOCK</Text>}
           <View
             style={{
               flexDirection: 'row',
@@ -126,6 +130,7 @@ export default class BlockCard extends PureComponent {
                 style={{ marginBottom: 5 }}
                 title="PRODUCT DATA"
                 value={productDataHash}
+                colorize={index != 0}
               />
 
               <BlockButton
@@ -133,6 +138,7 @@ export default class BlockCard extends PureComponent {
                 style={{ marginBottom: 5 }}
                 title="PREVIOUS HASH"
                 value={previousBlockHash}
+                colorize={false}
               />
             </View>
 
@@ -148,19 +154,22 @@ export default class BlockCard extends PureComponent {
                 onPress={this.onButtonPress}
                 title="BLOCK HASH"
                 value={blockHash}
+                colorize={false}
               />
 
-              <CheckStatus
-                productData={productData}
-                productDataHash={productDataHash}
-              />
+              {index !== 0 && (
+                <CheckStatus
+                  productData={productData}
+                  productDataHash={productDataHash}
+                />
+              )}
             </View>
           </View>
 
           <BlockInfo />
         </Card>
 
-        <BlockConnector />
+        {index !== 0 && <BlockConnector />}
       </View>
     )
   }
