@@ -10,25 +10,57 @@ export default class DoseAdjuster extends PureComponent {
   render() {
     return (
       <ContextConsumer>
-        {context => {
-          const { minDose, maxDose } = context.getDoseRange()
+        {({ getDose, getDoseRange, setDose, prescriptionDose }) => {
+          const value = getDose()
+          const { minDose, maxDose } = getDoseRange()
+          const minPreDose =
+            (prescriptionDose[0] /
+              prescriptionDose.reduce((acc, val) => acc + val, 0)) *
+            maxDose
+
+          const maxPreDose =
+            ((prescriptionDose[0] + prescriptionDose[1]) /
+              prescriptionDose.reduce((acc, val) => acc + val, 0)) *
+            maxDose
+
           return (
             <View
               style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
             >
-              <Text style={{ flex: 7, fontSize: 12 }}>
+              <Text style={{ flex: 7, fontSize: 12, marginTop: 3 }}>
                 {minDose.toFixed(0)}
               </Text>
               <Slider
                 style={{ flex: 70, height: 60, alignSelf: 'stretch' }}
-                minimumTrackTintColor={Colors.tintColor}
+                thumbStyle={{
+                  width: 40,
+                  height: 40,
+                  backgroundColor: 'transparent',
+                  shadowColor: 'black',
+                  shadowOffset: { width: 0, height: 1 },
+                  shadowOpacity: 0.5,
+                  shadowRadius: 1,
+                }}
+                thumbImage={require('../assets/images/knob.png')}
+                trackStyle={{
+                  height: 10,
+                  borderRadius: 3,
+                  borderWidth: 1,
+                  borderColor: Colors.passive,
+                  backgroundColor: Colors.passiveBG,
+                }}
+                minimumTrackTintColor={
+                  value > minPreDose && value < maxPreDose
+                    ? Colors.possitive
+                    : Colors.warning
+                }
                 minimumValue={minDose}
                 maximumValue={maxDose}
-                value={context.getDose()}
+                value={value}
                 step={1}
-                onValueChange={debounce(value => context.setDose(value), 50)}
+                onValueChange={debounce(value => setDose(value), 50)}
               />
-              <Text style={{ flex: 7, fontSize: 12 }}>
+              <Text style={{ flex: 7, fontSize: 12, marginTop: 3 }}>
                 {maxDose.toFixed(0)}
               </Text>
             </View>
