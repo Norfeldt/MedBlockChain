@@ -25,7 +25,7 @@ export default class CheckINInfo extends PureComponent {
         <Text type="h4">META DATA</Text>
         <ListData data={drugMetaData} />
         <Text type="h4" style={{ paddingBottom: 0 }}>
-          CHECKED IN
+          CHECK IN
         </Text>
         <HashBlock value={productDataHash} />>
       </View>

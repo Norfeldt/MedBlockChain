@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import Colors from '../../constants/Colors'
-import HashBlock, { styleHashBlock } from '../basic/HashBlock'
+import HashBlock from '../basic/HashBlock'
 import Text from '../basic/Text'
 import ListData from '../ListData'
 
 export default class CheckOUTInfo extends PureComponent {
   render() {
-    const { productData, productDataHash, hashAlgorithmName } = this.props
+    const { productData, productDataHash } = this.props
     return (
       <View
         style={{

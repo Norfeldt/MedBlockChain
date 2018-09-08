@@ -19,7 +19,7 @@ export default class componentName extends PureComponent {
             },
           ]}
         >
-          CHECKED {productData ? 'OUT' : 'IN'}
+          CHECK {productData ? 'OUT' : 'IN'}
         </Text>
         <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
           {!productData && (
