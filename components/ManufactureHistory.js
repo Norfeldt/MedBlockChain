@@ -64,8 +64,6 @@ export default class ManufactureHistory extends PureComponent {
               <TouchableOpacity
                 key={index}
                 style={{
-                  borderBottomColor: Colors.dark,
-                  borderBottomWidth: StyleSheet.hairlineWidth,
                   paddingVertical: 5,
                   alignItems: 'center',
                 }}
