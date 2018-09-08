@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   btnText: {
-    flex: 1,
+    flex: 4,
     fontFamily: 'Aldrich',
     fontSize: 24,
     color: '#fff',
