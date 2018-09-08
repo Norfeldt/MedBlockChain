@@ -1,17 +1,16 @@
 import React from 'react'
-import { Platform, Text } from 'react-native'
+import { Platform } from 'react-native'
 import {
-  createStackNavigator,
   createBottomTabNavigator,
+  createStackNavigator,
 } from 'react-navigation'
-
 import TabBarIcon from '../components/basic/TabBarIcon'
-import MonitoringScreen from '../screens/MonitoringScreen'
-import ManufactureScreen from '../screens/ManufactureScreen'
-import PatientScreen from '../screens/PatientScreen'
-import BlockchainScreen from '../screens/BlockchainScreen'
-
 import Colors from '../constants/Colors'
+import BlockchainScreen from '../screens/BlockchainScreen'
+import ManufactureScreen from '../screens/ManufactureScreen'
+import MonitoringScreen from '../screens/MonitoringScreen'
+import PatientScreen from '../screens/PatientScreen'
+import { ContextConsumer } from '../Context'
 
 const tabBarOptions = {
   activeTintColor: Colors.themeColor,
@@ -47,7 +46,17 @@ ManufactureStack.navigationOptions = {
   tabBarLabel: 'MANUFACTURE',
   tabBarOptions,
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name="manufacture" />
+    <ContextConsumer>
+      {({ manufacturedDrugs }) => {
+        return (
+          <TabBarIcon
+            focused={focused}
+            name="manufacture"
+            counter={manufacturedDrugs.length}
+          />
+        )
+      }}
+    </ContextConsumer>
   ),
 }
 
@@ -58,7 +67,19 @@ const PatientStack = createStackNavigator({
 PatientStack.navigationOptions = {
   tabBarLabel: 'PATIENT',
   tabBarOptions,
-  tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="patient" />,
+  tabBarIcon: ({ focused }) => (
+    <ContextConsumer>
+      {({ genuineDrugs }) => {
+        return (
+          <TabBarIcon
+            focused={focused}
+            name="patient"
+            counter={genuineDrugs.length}
+          />
+        )
+      }}
+    </ContextConsumer>
+  ),
 }
 
 const BlockchainStack = createStackNavigator({
@@ -69,7 +90,17 @@ BlockchainStack.navigationOptions = {
   tabBarLabel: 'BLOCKCHAIN',
   tabBarOptions,
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name="block_chain" />
+    <ContextConsumer>
+      {({ blockchain }) => {
+        return (
+          <TabBarIcon
+            focused={focused}
+            name="block_chain"
+            counter={blockchain.chain.length}
+          />
+        )
+      }}
+    </ContextConsumer>
   ),
 }
 
