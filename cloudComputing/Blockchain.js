@@ -25,20 +25,22 @@ class Blockchain {
     const hashNA = SHA256('N/A')
       .toString()
       .toUpperCase()
+
+    const timestamp = datetimeStr(new Date(2018, 6 - 1, 24, 12))
     // Block( productData, drugMetaData, previousBlockHash, previousBlockInfo, timestamp)
     return new Block({
       productData: null,
       productDataHash: null,
       drugMetaData: { BlockCreator: 'Authorized Unit' },
-      previousBlockHash: SHA256('N/A' + hashNA + hashNA)
+      previousBlockHash: SHA256(timestamp + hashNA + hashNA)
         .toString()
         .toUpperCase(),
       previousBlockInfo: {
-        timestamp: datetimeStr(new Date(2018, 6 - 1, 24, 12)),
+        timestamp,
         previousBlockHash: hashNA,
         productDataHash: hashNA,
       },
-      timestamp: datetimeStr(new Date(2018, 6 - 1, 24, 12)),
+      timestamp,
     })
   }
 
