@@ -132,8 +132,8 @@ class ContextProvider extends Component {
     })
 
     //// Manufacturer CHECK IN 2nd produced drug
-    timestamp = new Date(2018, 7, 4, 9)
-    hashSalt = 'F45CC ABC99'
+    timestamp = new Date(2018, 8, 4, 14)
+    hashSalt = 'ABC99 ABC99'
     const productData02 = this.getDefaultproductData(
       productionUnit,
       timestamp,
