@@ -54,7 +54,10 @@ class ContextProvider extends Component {
       productionUnit,
       compound: 'rosuvastatin',
       dose: '5 mg',
-      productionTime,
+      productionTime:
+        typeof productionTime == 'string'
+          ? productionTime
+          : Conventions.datetimeStr(productionTime),
       hashSalt,
     }
   }
