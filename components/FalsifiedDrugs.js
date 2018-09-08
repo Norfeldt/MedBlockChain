@@ -30,7 +30,7 @@ export default class FalsifiedDrugs extends PureComponent {
                         if (genuineDrugs.length == 0) {
                           Alert.alert(
                             'IMPOSSIBLE',
-                            'You need to manufacture and CHECK IN some drugs first'
+                            'All products has been checked out. Manufacture and CHECK IN a product before trying again'
                           )
                         } else {
                           checkOUT(genuineDrugs[0], true)

@@ -55,7 +55,7 @@ export default class HomeScreen extends React.Component {
           <ScrollView style={blockStyles.container}>
             <SectionTitle name="CHECK OUT" />
             <Button
-              title="SCAN DRUG"
+              title="SCAN PRODUCT"
               iconName="QR_Code"
               onPress={async () => {
                 const { status } = await Permissions.askAsync(
