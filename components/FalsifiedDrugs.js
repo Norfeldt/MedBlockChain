@@ -58,13 +58,14 @@ export default class FalsifiedDrugs extends PureComponent {
                 }}
               >
                 <Text type="p" style={{ paddingBottom: 5, color: 'grey' }}>
-                  Falsified Drugs
+                  Falsified Medicine
                 </Text>
                 <FontIcon
                   name="drugDealer"
                   size={width * 0.25}
                   color={'grey'}
                   style={{
+                    paddingHorizontal: width * 0.1,
                     ...Platform.select({
                       ios: {
                         shadowColor: '#000000',
