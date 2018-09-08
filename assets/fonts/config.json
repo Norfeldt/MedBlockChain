@@ -1,5 +1,5 @@
 {
-  "name": "q180624",
+  "name": "fonticons",
   "css_prefix_text": "icon-",
   "css_use_suffix": false,
   "hinting": true,
@@ -284,6 +284,20 @@
       },
       "search": [
         "smartphone iphone"
+      ]
+    },
+    {
+      "uid": "4aae63230c2b1262e3f7bbb9338f5671",
+      "css": "aid",
+      "code": 59416,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M312.5 0V312.5H0V687.5H312.5V1000H687.5V687.5H1000V312.5H687.5V0H312.5Z",
+        "width": 1000
+      },
+      "search": [
+        "aid medical plus cross"
       ]
     }
   ]
