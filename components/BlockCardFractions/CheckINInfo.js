@@ -21,7 +21,7 @@ export default class CheckINInfo extends PureComponent {
           type="code"
           style={{ color: Colors.warning }}
         >{`SECRET INFORMATION!`}</Text>
-        <Text type="code">{`The information is only existing together with the genuine drug and will be exposed when it is checked into this blockchain\n`}</Text>
+        <Text type="code">{`The information is only existing together with the genuine medicine product and will be exposed when a CHECK OUT of this specific medicine product is added to the blockchain\n`}</Text>
         <Text type="h4">META DATA</Text>
         <ListData data={drugMetaData} />
         <Text type="h4" style={{ paddingBottom: 0 }}>
