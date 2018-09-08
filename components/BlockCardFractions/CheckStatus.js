@@ -12,9 +12,12 @@ export default class componentName extends PureComponent {
       <View style={{ flex: 1, justifyContent: 'center' }}>
         <Text
           type="p"
-          style={{
-            color: getHashColors(productDataHash).backgroundColor,
-          }}
+          style={[
+            blockStyle.shadow,
+            {
+              color: getHashColors(productDataHash).backgroundColor,
+            },
+          ]}
         >
           CHECKED {productData ? 'OUT' : 'IN'}
         </Text>
