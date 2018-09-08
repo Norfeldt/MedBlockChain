@@ -1,60 +1,124 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from 'react'
+import { Platform } from 'react-native'
+import {
+  createBottomTabNavigator,
+  createStackNavigator,
+} from 'react-navigation'
+import TabBarIcon from '../components/basic/TabBarIcon'
+import Colors from '../constants/Colors'
+import BlockchainScreen from '../screens/BlockchainScreen'
+import ManufactureScreen from '../screens/ManufactureScreen'
+import MonitoringScreen from '../screens/MonitoringScreen'
+import PatientScreen from '../screens/PatientScreen'
+import { ContextConsumer } from '../Context'
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+const tabBarOptions = {
+  activeTintColor: Colors.themeColor,
+  labelStyle: {
+    fontFamily: 'Aldrich',
+    fontSize: 10,
+  },
+  style: {
+    backgroundColor: Colors.panel,
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000000',
+        shadowOpacity: 0.1,
+        shadowRadius: 1,
+        shadowOffset: {
+          height: -1,
+        },
+        paddingTop: 1,
+      },
+      android: {
+        elevation: 1,
+        position: 'relative',
+      },
+    }),
+  },
+}
 
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-});
+const ManufactureStack = createStackNavigator({
+  manufacture: ManufactureScreen,
+})
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+ManufactureStack.navigationOptions = {
+  tabBarLabel: 'MANUFACTURE',
+  tabBarOptions,
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
+    <ContextConsumer>
+      {({ manufacturedDrugs }) => {
+        return (
+          <TabBarIcon
+            focused={focused}
+            name="manufacture"
+            counter={manufacturedDrugs.length}
+          />
+        )
+      }}
+    </ContextConsumer>
   ),
-};
+}
 
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
-});
+const PatientStack = createStackNavigator({
+  Patient: PatientScreen,
+})
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+PatientStack.navigationOptions = {
+  tabBarLabel: 'PATIENT',
+  tabBarOptions,
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link'}
-    />
+    <ContextConsumer>
+      {({ genuineDrugs }) => {
+        return (
+          <TabBarIcon
+            focused={focused}
+            name="patient"
+            counter={genuineDrugs.length}
+          />
+        )
+      }}
+    </ContextConsumer>
   ),
-};
+}
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
+const BlockchainStack = createStackNavigator({
+  Blockchain: BlockchainScreen,
+})
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+BlockchainStack.navigationOptions = {
+  tabBarLabel: 'BLOCKCHAIN',
+  tabBarOptions,
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options'}
-    />
+    <ContextConsumer>
+      {({ blockchain }) => {
+        return (
+          <TabBarIcon
+            focused={focused}
+            name="block_chain"
+            counter={blockchain.chain.length}
+          />
+        )
+      }}
+    </ContextConsumer>
   ),
-};
+}
+
+const MonitoringStack = createStackNavigator({
+  monitoring: MonitoringScreen,
+})
+
+MonitoringStack.navigationOptions = {
+  tabBarLabel: 'Monitoring',
+  tabBarOptions,
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name="monitoring" />
+  ),
+}
 
 export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-});
+  ManufactureStack,
+  PatientStack,
+  MonitoringStack,
+  BlockchainStack,
+})

@@ -28,4 +28,8 @@ buck-out/
 .vscode/
 
 # expo
-.expo/packager-info.json
+.expo/
+
+# Purchased icons
+assets/icons/
+assets/sketches/

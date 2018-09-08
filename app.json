@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "q180624",
-    "description": "A very interesting project.",
-    "slug": "q180624",
+    "name": "MedBlockChain",
+    "description": "Proof of concept for a medical blockchain in the battle against falsified medicine",
+    "slug": "medblockchain",
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],
@@ -17,9 +17,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     }
