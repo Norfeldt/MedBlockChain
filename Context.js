@@ -30,7 +30,6 @@ class ContextProvider extends Component {
   }
 
   componentDidMount() {
-    // TODO: Consider if AsyncStorage is needed.. This is just a Proof-of-Concept
     this.setupDemoChain()
   }
 
