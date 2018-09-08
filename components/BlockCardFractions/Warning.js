@@ -6,7 +6,12 @@ import Colors from '../../constants/Colors'
 
 export default class Warning extends PureComponent {
   renderWarning = warningText => (
-    <View style={{ flex: 1, justifyContent: 'center', paddingBottom: 10 }}>
+    <View
+      style={[
+        { flex: 1, justifyContent: 'center', paddingBottom: 10 },
+        this.props.style,
+      ]}
+    >
       <View
         style={{
           flexDirection: 'row',
@@ -38,10 +43,10 @@ export default class Warning extends PureComponent {
 
   render() {
     if (this.props.multipleCheckOUT) {
-      return this.renderWarning('Multiple CHECK OUT')
+      return this.renderWarning('MULTIPLE CHECK OUT')
     }
     if (this.props.neverCheckedIN) {
-      return this.renderWarning('No CHECK IN')
+      return this.renderWarning('NOT CHECKED IN BY\nAUTHORIZED MANUFACTURE ')
     }
 
     return null

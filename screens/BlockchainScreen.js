@@ -1,15 +1,11 @@
-import React, { PureComponent } from 'react'
-import { View, ScrollView, StyleSheet } from 'react-native'
-
 import map from 'lodash/map'
-
-import { ContextConsumer } from '../Context'
+import React, { PureComponent } from 'react'
+import { ScrollView, StyleSheet, View } from 'react-native'
 import Header from '../components/basic/Header'
-import BlockCard from '../components/BlockCard'
-
-import Colors from '../constants/Colors'
-import Card from '../components/basic/Card'
 import Text from '../components/basic/Text'
+import BlockCard from '../components/BlockCard'
+import Colors from '../constants/Colors'
+import { ContextConsumer } from '../Context'
 
 export default class BlockchainScreen extends PureComponent {
   static navigationOptions = {
@@ -41,11 +37,6 @@ export default class BlockchainScreen extends PureComponent {
                       block.productDataHash
                     )}
                   />
-                  <Text>
-                    {blockchain.falsifiedMedicine.neverCheckedIN.has(
-                      block.productDataHash
-                    )}
-                  </Text>
                 </View>
               )).reverse()}
               <View style={{ height: 30 }} />
