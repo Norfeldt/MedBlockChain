@@ -10,7 +10,7 @@ export default class ChainingInfo extends PureComponent {
     const {
       timestamp,
       previousBlockHash,
-      drugDataHash,
+      productDataHash,
       hash,
       hashAlgorithmName,
     } = this.props
@@ -34,9 +34,9 @@ export default class ChainingInfo extends PureComponent {
         </View>
 
         <Text type="h4" style={{ paddingBottom: 0 }}>
-          DRUG DATA HASH
+          PRODUCT DATA HASH
         </Text>
-        <HashBlock value={drugDataHash} />
+        <HashBlock value={productDataHash} />
 
         <Text type="h4" style={{ paddingBottom: 0 }}>
           PREVIOUS HASH
@@ -46,7 +46,7 @@ export default class ChainingInfo extends PureComponent {
         <BlockHashVisualized
           hashAlgorithmName={hashAlgorithmName}
           timestamp={timestamp}
-          drugDataHash={drugDataHash}
+          productDataHash={productDataHash}
           previousBlockHash={previousBlockHash}
           hash={hash}
         />

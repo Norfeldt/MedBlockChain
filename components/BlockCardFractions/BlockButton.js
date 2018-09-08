@@ -4,11 +4,15 @@ import Text from '../basic/Text'
 import Colors, { getHashColors } from '../../constants/Colors'
 
 export default class BlockButton extends PureComponent {
+  state = {
+    value: false,
+  }
   render() {
-    const { title, value, onPress, style } = this.props
-    const { backgroundColor, color } = value.match(/^([a-zA-Z0-9]{15,})$/)
-      ? getHashColors(value)
-      : { backgroundColor: Colors.passiveBG, color: Colors.dark }
+    const { title, value, onPress, colorize = true, style } = this.props
+    const { backgroundColor, color } =
+      (colorize || this.state.value) && value.match(/^([a-zA-Z0-9]{15,})$/)
+        ? getHashColors(value)
+        : { backgroundColor: Colors.passiveBG, color: Colors.dark }
 
     return (
       <TouchableOpacity
@@ -19,7 +23,10 @@ export default class BlockButton extends PureComponent {
           },
           style,
         ]}
-        onPress={() => onPress(title)}
+        onPress={() => {
+          onPress(title)
+          this.setState({ value: true }) // gonna let it keep the color - even when closing the info
+        }}
       >
         <Text type="p" style={{ fontSize: 14, color }}>
           {title}

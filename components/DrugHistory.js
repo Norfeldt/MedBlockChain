@@ -6,27 +6,47 @@ import { ContextConsumer } from '../Context'
 import Card from './basic/Card'
 import Text from './basic/Text'
 import ListData from './ListData'
-import distanceInWords from 'date-fns/distance_in_words'
 import HashBlock from './basic/HashBlock'
-import { getHashOfDrugData } from '../cloudComputing/Block'
+import { getHashOfproductData } from '../cloudComputing/Block'
+import Colors from '../constants/Colors'
+import Warning from './BlockCardFractions/Warning'
 
 // create a component
 export default class DrugHistory extends PureComponent {
   render() {
     return (
       <ContextConsumer>
-        {({ patientDrugHistory }) => {
+        {({ patientDrugHistory, blockchain: { falsifiedMedicine } }) => {
           return (
             <View style={{ flex: 1 }}>
-              {map(patientDrugHistory, ({ dateTaken, drugData }, index) => {
+              {map(patientDrugHistory, ({ dateTaken, productData }, index) => {
+                const hash = getHashOfproductData(productData)
+                const multipleCheckOUT = falsifiedMedicine.multipleCheckOUT.has(
+                  hash
+                )
+                const neverCheckedIN = falsifiedMedicine.neverCheckedIN.has(
+                  hash
+                )
                 return (
-                  <Card key={index}>
-                    <Text type="h3">
-                      {distanceInWords(dateTaken, new Date())} ago
-                    </Text>
-                    <ListData data={drugData} />
-                    <HashBlock value={getHashOfDrugData(drugData)} />
-                  </Card>
+                  <View key={index}>
+                    <Card
+                      style={{
+                        backgroundColor:
+                          multipleCheckOUT || neverCheckedIN
+                            ? Colors.warningBackground
+                            : Colors.scrollBG,
+                      }}
+                    >
+                      <Warning
+                        style={{ paddingTop: 10 }}
+                        multipleCheckOUT={multipleCheckOUT}
+                        neverCheckedIN={neverCheckedIN}
+                      />
+
+                      <ListData data={productData} />
+                      <HashBlock value={hash} />
+                    </Card>
+                  </View>
                 )
               })}
             </View>

@@ -27,7 +27,7 @@ export default class App extends PureComponent {
           style={{
             flex: 1,
             flexDirection: 'row',
-            alignItems: 'flex-end',
+            alignItems: 'center',
           }}
         >
           <FontIcon
@@ -37,7 +37,7 @@ export default class App extends PureComponent {
             style={{ marginRight: 10, width: 30 }}
             color={Colors.themeColor}
           />
-          <Text style={{ flex: 1, fontSize: 22, textAlign: 'left' }}>
+          <Text style={{ flex: 1, fontSize: 18, textAlign: 'left' }}>
             {title.toUpperCase()}
           </Text>
         </View>

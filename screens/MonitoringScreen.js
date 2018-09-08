@@ -26,6 +26,12 @@ export default class HomeScreen extends React.Component {
             LPI={20}
             UPI={10}
           />
+          <OptionSwitch
+            name="patient"
+            desc="Medication History"
+            LPI={25}
+            UPI={10}
+          />
 
           <SectionTitle name="INTERNET OF THINGS" />
           <OptionSwitch name="weight_iot" desc="Weight" UPI={5} />
@@ -40,22 +46,20 @@ export default class HomeScreen extends React.Component {
 
           <SectionTitle name="SERVICES" />
           <OptionSwitch name="dna" desc="Genetic Profile" LPI={20} UPI={30} />
-          <OptionSwitch name="spendings" LPI={10} UPI={10} />
+          <OptionSwitch name="smartphone" desc="Diet App" LPI={10} UPI={10} />
           <OptionSwitch
             name="fitness_center"
             desc="Fitness Usage"
             LPI={2}
             UPI={2}
           />
+          <OptionSwitch name="spendings" LPI={10} UPI={10} />
 
           <SectionTitle name="SOCIAL ACTIVITIES" />
           <OptionSwitch name="facebook" font="FontAwesome" LPI={15} UPI={2} />
           <OptionSwitch name="twitter" font="FontAwesome" LPI={7} UPI={2} />
           <OptionSwitch name="instagram" font="FontAwesome" LPI={7} UPI={2} />
-          <OptionSwitch name="snapchat" font="FontAwesome" LPI={7} UPI={2} />
-          <OptionSwitch name="youtube" font="FontAwesome" LPI={7} UPI={2} />
-          <OptionSwitch name="reddit" font="FontAwesome" LPI={2} />
-          <OptionSwitch name="meetup" font="FontAwesome" LPI={1} />
+          <OptionSwitch name="snapchat" font="FontAwesome" LPI={0} UPI={0} />
           <View style={{ height: 20 }} />
         </ScrollView>
       </View>

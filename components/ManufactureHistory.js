@@ -1,17 +1,23 @@
 import map from 'lodash/map'
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, TouchableOpacity, Alert } from 'react-native'
+import {
+  Alert,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Platform,
+} from 'react-native'
 import QRCode from 'react-native-qrcode'
-import { getHashOfDrugData } from '../cloudComputing/Block'
-import Colors from '../constants/Colors'
-import Conventions from '../constants/Conventions'
+import { getHashOfproductData } from '../cloudComputing/Block'
+import Colors, { getHashColors } from '../constants/Colors'
 import Layout from '../constants/Layout'
 import { ContextConsumer } from '../Context'
+import FontIcon from './basic/FontIcon'
 import HashBlock from './basic/HashBlock'
-import Text from './basic/Text'
 
 class DrugQR extends PureComponent {
   render() {
+    const { value, borderColor } = this.props
     const {
       window: { width },
       isSmallDevice,
@@ -27,15 +33,15 @@ class DrugQR extends PureComponent {
         <View
           style={{
             padding: 10,
-            borderColor: Colors.headerLine,
-            borderWidth: StyleSheet.hairlineWidth,
+            borderColor: borderColor,
+            borderWidth: 4,
             borderRadius: 20,
             backgroundColor: Colors.scrollBGLight,
           }}
         >
           <QRCode
-            value={this.props.value}
-            size={isSmallDevice ? width * 0.9 : width * 0.5}
+            value={value}
+            size={isSmallDevice ? width * 0.9 : width * 0.4}
             bgColor={Colors.dark}
             fgColor={Colors.scrollBGLight}
           />
@@ -47,6 +53,9 @@ class DrugQR extends PureComponent {
 
 export default class ManufactureHistory extends PureComponent {
   render() {
+    const {
+      window: { width },
+    } = Layout
     return (
       <ContextConsumer>
         {({ manufacturedDrugs }) =>
@@ -55,19 +64,47 @@ export default class ManufactureHistory extends PureComponent {
               <TouchableOpacity
                 key={index}
                 style={{
-                  borderBottomColor: Colors.dark,
-                  borderBottomWidth: StyleSheet.hairlineWidth,
-                  marginBottom: 5,
+                  paddingVertical: 5,
+                  alignItems: 'center',
                 }}
                 onPress={() =>
                   Alert.alert('QR Information', JSON.stringify(drug))
                 }
               >
-                <Text type="passiveHeader">
-                  {Conventions.datetimeStr(drug.productionDate)}
-                </Text>
-                <DrugQR value={JSON.stringify(drug)} />
-                <HashBlock value={getHashOfDrugData(drug)} />
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <FontIcon
+                    name="drug"
+                    size={width * 0.4}
+                    color={
+                      getHashColors(getHashOfproductData(drug)).backgroundColor
+                    }
+                    style={{
+                      ...Platform.select({
+                        ios: {
+                          shadowColor: '#000000',
+                          shadowOpacity: 0.3,
+                          shadowRadius: 1,
+                          shadowOffset: {
+                            height: 1,
+                            width: 0.3,
+                          },
+                        },
+                        android: {
+                          elevation: 1,
+                          position: 'relative',
+                        },
+                      }),
+                    }}
+                  />
+                  <DrugQR
+                    value={JSON.stringify(drug)}
+                    borderColor={
+                      getHashColors(getHashOfproductData(drug)).backgroundColor
+                    }
+                  />
+                </View>
+
+                <HashBlock value={getHashOfproductData(drug)} />
               </TouchableOpacity>
             )
           }).reverse()

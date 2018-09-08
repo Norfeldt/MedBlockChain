@@ -12,7 +12,7 @@ import Colors from '../../constants/Colors'
 
 import { createIconSetFromFontello } from '@expo/vector-icons'
 import fontelloConfig from '../../assets/fonts/config.json'
-const Icon = createIconSetFromFontello(fontelloConfig, 'q180624')
+const Icon = createIconSetFromFontello(fontelloConfig, 'fonticons')
 
 export default class Button extends PureComponent {
   render() {
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   btnText: {
-    flex: 1,
+    flex: 4,
     fontFamily: 'Aldrich',
     fontSize: 24,
     color: '#fff',

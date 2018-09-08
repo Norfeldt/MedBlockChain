@@ -19,21 +19,21 @@ export default class BlockConnector extends PureComponent {
             style={{
               flex: 1,
               borderLeftWidth: this.props.lineWidth || lineWidth,
-              borderLeftColor: Colors.passive,
+              borderLeftColor: this.props.lineColor || Colors.passive,
             }}
           />
           <View
             style={{
               flex: 0,
               borderBottomWidth: this.props.lineWidth || lineWidth,
-              borderBottomColor: Colors.passive,
+              borderBottomColor: this.props.lineColor || Colors.passive,
             }}
           />
           <View
             style={{
               flex: 1,
               borderRightWidth: this.props.lineWidth || lineWidth,
-              borderRightColor: Colors.passive,
+              borderRightColor: this.props.lineColor || Colors.passive,
             }}
           />
         </View>

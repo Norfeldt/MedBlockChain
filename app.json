@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Q180624",
+    "name": "MedBlockChain",
     "description": "A very interesting project.",
-    "slug": "Q180624",
+    "slug": "medblockchain",
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],

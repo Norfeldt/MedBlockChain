@@ -9,7 +9,7 @@ export default class componentName extends PureComponent {
     const {
       hashAlgorithmName,
       timestamp,
-      drugDataHash,
+      productDataHash,
       previousBlockHash,
       hash,
     } = this.props
@@ -33,8 +33,8 @@ export default class componentName extends PureComponent {
             {shortStr(timestamp)}
           </Text>
 
-          <Text type="code" style={getHashColors(drugDataHash)}>
-            {shortStr(drugDataHash)}
+          <Text type="code" style={getHashColors(productDataHash)}>
+            {shortStr(productDataHash)}
           </Text>
 
           <Text type="code" style={getHashColors(previousBlockHash)}>

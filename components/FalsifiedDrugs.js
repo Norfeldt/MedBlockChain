@@ -30,7 +30,7 @@ export default class FalsifiedDrugs extends PureComponent {
                         if (genuineDrugs.length == 0) {
                           Alert.alert(
                             'IMPOSSIBLE',
-                            'You need to manufacture and CHECK IN some drugs first'
+                            'All products has been checked out. Manufacture and CHECK IN a product before trying again'
                           )
                         } else {
                           checkOUT(genuineDrugs[0], true)
@@ -40,10 +40,10 @@ export default class FalsifiedDrugs extends PureComponent {
                     {
                       text: 'NEITHER CHECKED IN OR OUT',
                       onPress: () => {
-                        const drugData = getFalsifiedDrug(
+                        const productData = getFalsifiedDrug(
                           'Criminal Drug Dealer'
                         )
-                        checkOUT(drugData)
+                        checkOUT(productData)
                       },
                     },
                   ]
@@ -58,13 +58,14 @@ export default class FalsifiedDrugs extends PureComponent {
                 }}
               >
                 <Text type="p" style={{ paddingBottom: 5, color: 'grey' }}>
-                  Falsified Drugs
+                  Falsified Medicine
                 </Text>
                 <FontIcon
                   name="drugDealer"
                   size={width * 0.25}
                   color={'grey'}
                   style={{
+                    paddingHorizontal: width * 0.1,
                     ...Platform.select({
                       ios: {
                         shadowColor: '#000000',

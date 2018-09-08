@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { LayoutAnimation, View, Text } from 'react-native'
+import { LayoutAnimation, View } from 'react-native'
 import Card from './basic/Card'
 import BlockButton from './BlockCardFractions/BlockButton'
 import BlockConnector from './BlockCardFractions/BlockConnector'
@@ -11,6 +11,8 @@ import MiddlePart from './BlockCardFractions/MiddlePart'
 import TimestampInfo from './BlockCardFractions/TimestampInfo'
 import Colors from '../constants/Colors'
 import Warning from './BlockCardFractions/Warning'
+import Text from '../components/basic/Text'
+import FontIcon from './basic/FontIcon'
 
 export default class BlockCard extends PureComponent {
   constructor(props) {
@@ -29,11 +31,12 @@ export default class BlockCard extends PureComponent {
 
   render() {
     const {
+      index,
       blockHash,
       timestamp,
-      drugDataHash,
+      productDataHash,
       previousBlockHash,
-      drugData,
+      productData,
       drugMetaData,
       hashAlgorithmName,
       multipleCheckOUT,
@@ -50,18 +53,18 @@ export default class BlockCard extends PureComponent {
             <ChainingInfo
               timestamp={this.props.previousBlockInfo.timestamp}
               previousBlockHash={this.props.previousBlockInfo.previousBlockHash}
-              drugDataHash={this.props.previousBlockInfo.drugDataHash}
+              productDataHash={this.props.previousBlockInfo.productDataHash}
               hash={this.props.previousBlockHash}
               hashAlgorithmName={this.props.hashAlgorithmName}
             />
           )
 
-        case 'DRUG DATA':
-          if (drugData) {
+        case 'PRODUCT DATA':
+          if (productData) {
             return (
               <CheckOUTInfo
-                drugData={drugData}
-                drugDataHash={drugDataHash}
+                productData={productData}
+                productDataHash={productDataHash}
                 hashAlgorithmName={hashAlgorithmName}
               />
             )
@@ -69,7 +72,7 @@ export default class BlockCard extends PureComponent {
             return (
               <CheckINInfo
                 drugMetaData={drugMetaData}
-                drugDataHash={drugDataHash}
+                productDataHash={productDataHash}
               />
             )
           }
@@ -79,7 +82,7 @@ export default class BlockCard extends PureComponent {
             <ChainingInfo
               timestamp={this.props.timestamp}
               previousBlockHash={this.props.previousBlockHash}
-              drugDataHash={this.props.drugDataHash}
+              productDataHash={this.props.productDataHash}
               hash={this.props.blockHash}
               hashAlgorithmName={this.props.hashAlgorithmName}
             />
@@ -99,13 +102,23 @@ export default class BlockCard extends PureComponent {
           style={{
             padding: 5,
             marginBottom: 0,
-            backgroundColor: falsified ? Colors.warningBackground : 'white',
+            backgroundColor: falsified
+              ? Colors.warningBackground
+              : Colors.scrollBG,
+            borderWidth: 2,
+            borderColor: Colors.themeColor,
           }}
         >
           <Warning
             multipleCheckOUT={multipleCheckOUT}
             neverCheckedIN={neverCheckedIN}
           />
+
+          {index == 0 && (
+            <Text type="h3" style={{ color: Colors.themeColor }}>
+              GENESIS BLOCK
+            </Text>
+          )}
           <View
             style={{
               flexDirection: 'row',
@@ -124,8 +137,9 @@ export default class BlockCard extends PureComponent {
               <BlockButton
                 onPress={this.onButtonPress}
                 style={{ marginBottom: 5 }}
-                title="DRUG DATA"
-                value={drugDataHash}
+                title="PRODUCT DATA"
+                value={productDataHash}
+                colorize={index != 0}
               />
 
               <BlockButton
@@ -133,6 +147,7 @@ export default class BlockCard extends PureComponent {
                 style={{ marginBottom: 5 }}
                 title="PREVIOUS HASH"
                 value={previousBlockHash}
+                colorize={false}
               />
             </View>
 
@@ -148,16 +163,36 @@ export default class BlockCard extends PureComponent {
                 onPress={this.onButtonPress}
                 title="BLOCK HASH"
                 value={blockHash}
+                colorize={false}
               />
 
-              <CheckStatus drugData={drugData} drugDataHash={drugDataHash} />
+              {index !== 0 && (
+                <CheckStatus
+                  productData={productData}
+                  productDataHash={productDataHash}
+                />
+              )}
+
+              {index == 0 && (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <FontIcon name="aid" size={70} color={Colors.themeColor} />
+                </View>
+              )}
             </View>
           </View>
 
           <BlockInfo />
         </Card>
 
-        <BlockConnector />
+        {index !== 0 && (
+          <BlockConnector lineWidth={2} lineColor={Colors.themeColor} />
+        )}
       </View>
     )
   }

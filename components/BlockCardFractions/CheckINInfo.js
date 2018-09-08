@@ -7,7 +7,7 @@ import ListData from '../ListData'
 
 export default class CheckINInfo extends PureComponent {
   render() {
-    const { drugMetaData, drugDataHash } = this.props
+    const { drugMetaData, productDataHash } = this.props
 
     return (
       <View
@@ -16,18 +16,18 @@ export default class CheckINInfo extends PureComponent {
           borderTopWidth: StyleSheet.hairlineWidth,
         }}
       >
-        <Text type="h4">DRUG DATA</Text>
+        <Text type="h4">PRODUCT DATA</Text>
         <Text
           type="code"
           style={{ color: Colors.warning }}
         >{`SECRET INFORMATION!`}</Text>
-        <Text type="code">{`The information is only existing together with the genuine drug and will be exposed when it is checked into this blockchain\n`}</Text>
+        <Text type="code">{`The information is only existing together with the genuine medicine product and will be exposed when a CHECK OUT of this specific medicine product is added to the blockchain\n`}</Text>
         <Text type="h4">META DATA</Text>
         <ListData data={drugMetaData} />
         <Text type="h4" style={{ paddingBottom: 0 }}>
-          CHECKED IN
+          CHECK IN
         </Text>
-        <HashBlock value={drugDataHash} />>
+        <HashBlock value={productDataHash} />>
       </View>
     )
   }

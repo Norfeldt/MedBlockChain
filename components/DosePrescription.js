@@ -46,8 +46,8 @@ export default class DosePrescription extends PureComponent {
                 }}
               >
                 {/* MIN DOSE */}
-                <Text style={{ flex: 15, fontSize: 12 }}>
-                  {minDose.toFixed(2)}
+                <Text style={{ flex: 7, fontSize: 12 }}>
+                  {minDose.toFixed(0)}
                 </Text>
 
                 {/* BAR */}
@@ -82,8 +82,8 @@ export default class DosePrescription extends PureComponent {
                 </View>
 
                 {/* MAX DOSE */}
-                <Text style={{ flex: 15, fontSize: 12 }}>
-                  {maxDose.toFixed(2)}
+                <Text style={{ flex: 7, fontSize: 12 }}>
+                  {maxDose.toFixed(0)}
                 </Text>
               </View>
             </View>
