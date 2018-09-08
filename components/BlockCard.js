@@ -12,6 +12,7 @@ import TimestampInfo from './BlockCardFractions/TimestampInfo'
 import Colors from '../constants/Colors'
 import Warning from './BlockCardFractions/Warning'
 import Text from '../components/basic/Text'
+import FontIcon from './basic/FontIcon'
 
 export default class BlockCard extends PureComponent {
   constructor(props) {
@@ -162,6 +163,18 @@ export default class BlockCard extends PureComponent {
                   productData={productData}
                   productDataHash={productDataHash}
                 />
+              )}
+
+              {index == 0 && (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                >
+                  <FontIcon name="aid" size={70} />
+                </View>
               )}
             </View>
           </View>
