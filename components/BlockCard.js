@@ -114,7 +114,11 @@ export default class BlockCard extends PureComponent {
             neverCheckedIN={neverCheckedIN}
           />
 
-          {index == 0 && <Text type="h3">GENESIS BLOCK</Text>}
+          {index == 0 && (
+            <Text type="h3" style={{ color: Colors.themeColor }}>
+              GENESIS BLOCK
+            </Text>
+          )}
           <View
             style={{
               flexDirection: 'row',
