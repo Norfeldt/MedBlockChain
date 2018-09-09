@@ -1,12 +1,6 @@
 import map from 'lodash/map'
 import React, { PureComponent } from 'react'
-import {
-  Alert,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Platform,
-} from 'react-native'
+import { Alert, Platform, TouchableOpacity, View } from 'react-native'
 import QRCode from 'react-native-qrcode'
 import { getHashOfproductData } from '../cloudComputing/Block'
 import Colors, { getHashColors } from '../constants/Colors'
@@ -41,7 +35,7 @@ class DrugQR extends PureComponent {
         >
           <QRCode
             value={value}
-            size={isSmallDevice ? width * 0.9 : width * 0.4}
+            size={isSmallDevice ? width * 0.7 : width * 0.4}
             bgColor={Colors.dark}
             fgColor={Colors.scrollBGLight}
           />
@@ -55,6 +49,7 @@ export default class ManufactureHistory extends PureComponent {
   render() {
     const {
       window: { width },
+      isSmallDevice,
     } = Layout
     return (
       <ContextConsumer>
@@ -71,7 +66,13 @@ export default class ManufactureHistory extends PureComponent {
                   Alert.alert('QR Information', JSON.stringify(drug))
                 }
               >
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: isSmallDevice ? 'column' : 'row',
+                    alignItems: 'center',
+                  }}
+                >
                   <FontIcon
                     name="drug"
                     size={width * 0.4}
