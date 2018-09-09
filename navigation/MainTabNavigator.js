@@ -92,11 +92,12 @@ BlockchainStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <ContextConsumer>
       {({ blockchain }) => {
+        // not counting the genesis block
         return (
           <TabBarIcon
             focused={focused}
             name="block_chain"
-            counter={blockchain.chain.length}
+            counter={blockchain.chain.length - 1}
           />
         )
       }}
