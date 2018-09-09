@@ -69,12 +69,12 @@ PatientStack.navigationOptions = {
   tabBarOptions,
   tabBarIcon: ({ focused }) => (
     <ContextConsumer>
-      {({ genuineDrugs }) => {
+      {({ patientDrugHistory }) => {
         return (
           <TabBarIcon
             focused={focused}
             name="patient"
-            counter={genuineDrugs.length}
+            counter={patientDrugHistory.length}
           />
         )
       }}
