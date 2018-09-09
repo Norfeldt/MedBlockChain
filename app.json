@@ -6,7 +6,11 @@
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],
+<<<<<<< HEAD
     "version": "01.00.02",
+=======
+    "version": "01.00.03",
+>>>>>>> version_BLOCKCHAIN_COUNTER
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
