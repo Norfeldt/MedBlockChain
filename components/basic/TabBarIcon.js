@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Platform } from 'react-native'
 import Text from './Text'
 import Colors from '../../constants/Colors'
 
@@ -29,7 +29,20 @@ export default class TabBarIcon extends React.Component {
               },
             ]}
           >
-            <Text style={{ color: Colors.panel, fontSize: 10, marginTop: 2 }}>
+            <Text
+              style={{
+                color: Colors.panel,
+                fontSize: 10,
+                ...Platform.select({
+                  ios: {
+                    marginTop: 2,
+                  },
+                  android: {
+                    marginTop: 0,
+                  },
+                }),
+              }}
+            >
               {counter}
             </Text>
           </View>
@@ -42,7 +55,7 @@ export default class TabBarIcon extends React.Component {
 const blockStyles = StyleSheet.create({
   badge: {
     position: 'absolute',
-    top: -5,
+    top: 0,
     right: 30,
     minWidth: 18,
     height: 18,
