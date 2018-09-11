@@ -24,45 +24,51 @@ export default class DoseAdjuster extends PureComponent {
             maxDose
 
           return (
-            <View
-              style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
-            >
-              <Text style={{ flex: 7, fontSize: 12, marginTop: 3 }}>
-                {minDose.toFixed(0)}
+            <View>
+              <Text style={{ flex: 1, marginTop: 10 }}>
+                {`Dose: ${value} mg`}
               </Text>
-              <Slider
-                style={{ flex: 70, height: 60, alignSelf: 'stretch' }}
-                thumbStyle={{
-                  width: 40,
-                  height: 40,
-                  backgroundColor: 'transparent',
-                  shadowColor: 'black',
-                  shadowOffset: { width: 0, height: 1 },
-                  shadowOpacity: 0.5,
-                  shadowRadius: 1,
-                }}
-                thumbImage={require('../assets/images/knob.png')}
-                trackStyle={{
-                  height: 10,
-                  borderRadius: 3,
-                  borderWidth: 1,
-                  borderColor: Colors.passive,
-                  backgroundColor: Colors.passiveBG,
-                }}
-                minimumTrackTintColor={
-                  value > minPreDose && value < maxPreDose
-                    ? Colors.possitive
-                    : Colors.warning
-                }
-                minimumValue={minDose}
-                maximumValue={maxDose}
-                value={value}
-                step={1}
-                onValueChange={debounce(value => setDose(value), 50)}
-              />
-              <Text style={{ flex: 7, fontSize: 12, marginTop: 3 }}>
-                {maxDose.toFixed(0)}
-              </Text>
+
+              <View
+                style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
+              >
+                <Text style={{ flex: 7, fontSize: 12, marginTop: 3 }}>
+                  {minDose.toFixed(0)}
+                </Text>
+                <Slider
+                  style={{ flex: 70, height: 60, alignSelf: 'stretch' }}
+                  thumbStyle={{
+                    width: 40,
+                    height: 40,
+                    backgroundColor: 'transparent',
+                    shadowColor: 'black',
+                    shadowOffset: { width: 0, height: 1 },
+                    shadowOpacity: 0.5,
+                    shadowRadius: 1,
+                  }}
+                  thumbImage={require('../assets/images/knob.png')}
+                  trackStyle={{
+                    height: 40,
+                    borderRadius: 10,
+                    borderWidth: 1,
+                    borderColor: Colors.passive,
+                    backgroundColor: Colors.passiveBG,
+                  }}
+                  minimumTrackTintColor={
+                    value > minPreDose && value < maxPreDose
+                      ? Colors.possitive
+                      : Colors.warning
+                  }
+                  minimumValue={minDose}
+                  maximumValue={maxDose}
+                  value={value}
+                  step={1}
+                  onValueChange={debounce(value => setDose(value), 25)}
+                />
+                <Text style={{ flex: 7, fontSize: 12, marginTop: 3 }}>
+                  {maxDose.toFixed(0)}
+                </Text>
+              </View>
             </View>
           )
         }}
