@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, LayoutAnimation } from 'react-native'
+import { View, LayoutAnimation, Platform } from 'react-native'
 import Colors from '../constants/Colors'
 import FontIcon from './basic/FontIcon'
 import Text from './basic/Text'
@@ -32,7 +32,20 @@ export default class DosePrescription extends PureComponent {
                   alignItems: 'center',
                 }}
               >
-                <FontIcon name="machine_learning" size={40} />
+                <FontIcon
+                  name="machine_learning"
+                  size={40}
+                  style={{
+                    ...Platform.select({
+                      ios: {
+                        paddingBottom: 0,
+                      },
+                      android: {
+                        paddingBottom: 10,
+                      },
+                    }),
+                  }}
+                />
                 <Text type="p" style={{ marginTop: 5 }}>
                   Recommended Prescription
                 </Text>
