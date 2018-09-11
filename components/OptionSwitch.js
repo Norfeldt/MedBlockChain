@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { Switch, View } from 'react-native'
+import { View, Image } from 'react-native'
+import { Switch } from 'react-native-switch'
 import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
 import FontIcon from './basic/FontIcon'
@@ -52,7 +53,20 @@ export default class App extends PureComponent {
                     this.setState({ value })
                   }}
                   value={this.state.value}
-                  onTintColor={Colors.themeColor}
+                  backgroundActive={Colors.themeColor}
+                  backgroundInactive={Colors.passiveBG}
+                  innerCircleStyle={{
+                    borderWidth: 1,
+                    borderColor: Colors.passive,
+                  }}
+                  circleSize={35}
+                  barHeight={35}
+                  renderInsideCircle={() => (
+                    <Image
+                      style={{ width: 34, height: 34, padding: 1 }}
+                      source={require('../assets/images/knob.png')}
+                    />
+                  )}
                 />
               )
             }}
