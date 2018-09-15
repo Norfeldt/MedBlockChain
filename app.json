@@ -1,12 +1,12 @@
 {
   "expo": {
     "name": "MedBlockChain",
-    "description": "Proof of concept for a medical blockchain in the battle against falsified medicine",
+    "description": "Proof Of Concept App Build For Department Of Pharmacy CPH University The App Demonstrate A Medical Blockchain In The Battle Against Falsified Medicine And How Patient Data Consent Can Lead To A More Optimal Prescription Dose (AKA Personalized Medicine)",
     "slug": "medblockchain",
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],
-    "version": "01.00.05",
+    "version": "01.00.06",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
