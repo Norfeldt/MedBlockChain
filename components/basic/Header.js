@@ -16,7 +16,6 @@ const Header = ({ style, title }) => {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    height: 60,
     justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: Colors.panel,
@@ -24,6 +23,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     ...Platform.select({
       ios: {
+        height: 55,
         shadowColor: '#000000',
         shadowOpacity: 0.2,
         shadowRadius: 1,
@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
         },
       },
       android: {
+        height: 40,
         elevation: 1,
         position: 'relative',
       },
