@@ -1,16 +1,23 @@
 //import liraries
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { View, Text, StyleSheet, Platform } from 'react-native'
+import { Constants } from 'expo'
 
 import Colors from '../../constants/Colors'
 
-// create a component
-const Header = ({ style, title }) => {
-  return (
-    <View style={[styles.container, style]}>
-      <Text style={styles.text}>{title.toUpperCase()}</Text>
-    </View>
-  )
+class Header extends PureComponent {
+  render() {
+    const { title, style, textStyle } = this.props
+
+    return (
+      <View style={[styles.container, style]}>
+        {Platform.OS === 'ios' && (
+          <View style={{ height: Constants.statusBarHeight }} />
+        )}
+        <Text style={[styles.text, textStyle]}>{title.toUpperCase()}</Text>
+      </View>
+    )
+  }
 }
 
 // define your styles
@@ -23,7 +30,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     ...Platform.select({
       ios: {
-        height: 55,
         shadowColor: '#000000',
         shadowOpacity: 0.2,
         shadowRadius: 1,
@@ -32,7 +38,6 @@ const styles = StyleSheet.create({
         },
       },
       android: {
-        height: 40,
         elevation: 1,
         position: 'relative',
       },
@@ -42,7 +47,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Aldrich',
     fontSize: 28,
     color: Colors.dark,
-    marginBottom: 2,
+    marginVertical: 2,
   },
 })
 
