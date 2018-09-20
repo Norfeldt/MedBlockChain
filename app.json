@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MedBlockChain",
-    "description": "Proof Of Concept App Build For Department Of Pharmacy CPH University. The App Demonstrate A Medical Blockchain In The Battle Against Falsified Medicine And How Patient Data Consent Can Lead To A More Optimal Prescription Dose (AKA Personalized Medicine)",
+    "description": "Proof Of Concept App Build For Department Of Pharmacy CPH University. This app demonstrate a medical blockchain in the battle against falsified medicine and how patient data consent can lead to a more optimal prescription dose (a.k.a. personalized medicine)",
     "githubUrl": "https://github.com/Norfeldt/MedBlockChain",
     "slug": "medblockchain",
     "privacy": "public",
