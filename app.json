@@ -21,10 +21,10 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.norfeldt.medblockchain",
-      "supportsTablet": true
-    },
-    "infoPlist": {
-      "NSCameraUsageDescription": "This app uses the camera to scan barcodes."
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to scan barcodes."
+      }
     },
     "android": {
       "package": "com.norfeldt.medblockchain"
