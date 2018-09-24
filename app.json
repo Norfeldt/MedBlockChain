@@ -7,7 +7,7 @@
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],
-    "version": "01.00.15",
+    "version": "01.00.16",
     "orientation": "portrait",
     "icon": "./assets/images/AppStore.png",
     "splash": {
