@@ -1,14 +1,20 @@
 import { BarCodeScanner, Permissions } from 'expo'
 import React from 'react'
-import { StyleSheet, View, ScrollView, Alert } from 'react-native'
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import Button from '../components/basic/Button'
 import Header from '../components/basic/Header'
 import SectionTitle from '../components/basic/SectionTitle'
-import DrugHistory from '../components/DrugHistory'
-import Colors from '../constants/Colors'
-import GenuineDrugs from '../components/GenuineDrugs'
-import FalsifiedDrugs from '../components/FalsifiedDrugs'
 import Text from '../components/basic/Text'
+import DrugHistory from '../components/DrugHistory'
+import FalsifiedDrugs from '../components/FalsifiedDrugs'
+import GenuineDrugs from '../components/GenuineDrugs'
+import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
 
 export default class HomeScreen extends React.Component {
@@ -28,8 +34,9 @@ export default class HomeScreen extends React.Component {
         return (
           <ContextConsumer>
             {({ checkOUT }) => (
-              <View style={{ flex: 1, marginBottom: 10 }}>
+              <View style={{ flex: 1 }}>
                 <BarCodeScanner
+                  style={{ flex: 1 }}
                   onBarCodeRead={({ type, data }) => {
                     this.setState({ scanning: false })
 
@@ -44,8 +51,27 @@ export default class HomeScreen extends React.Component {
                       },
                     ])
                   }}
-                  style={StyleSheet.absoluteFill}
                 />
+                <View
+                  style={{
+                    backgroundColor: Colors.passiveBG,
+                    justifyContent: 'center',
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={() => this.setState({ scanning: false })}
+                  >
+                    <Text
+                      style={{
+                        color: Colors.passive,
+                        textAlign: 'center',
+                        paddingVertical: 15,
+                      }}
+                    >
+                      Cancel
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             )}
           </ContextConsumer>
@@ -54,6 +80,13 @@ export default class HomeScreen extends React.Component {
         return (
           <ScrollView style={blockStyles.container}>
             <SectionTitle name="CHECK OUT" />
+
+            <ScrollView horizontal={true}>
+              <GenuineDrugs style={{ flexDirection: 'row' }} />
+              <View style={{ borderLeftWidth: 1 }} />
+              <FalsifiedDrugs />
+            </ScrollView>
+
             <Button
               title="SCAN PRODUCT"
               iconName="QR_Code"
@@ -66,14 +99,6 @@ export default class HomeScreen extends React.Component {
                 })
               }}
             />
-
-            <Text style={{ color: Colors.themeColor }}>OR PICK</Text>
-
-            <ScrollView horizontal={true}>
-              <GenuineDrugs style={{ flexDirection: 'row' }} />
-              <View style={{ borderLeftWidth: 1 }} />
-              <FalsifiedDrugs />
-            </ScrollView>
 
             <SectionTitle name="MEDICATION HISTORY" />
 
