@@ -9,11 +9,11 @@
     "platforms": ["ios", "android"],
     "version": "01.00.16",
     "orientation": "portrait",
-    "icon": "./assets/images/AppStore.png",
+    "icon": "./assets/images/icon.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#063796"
     },
     "updates": {
       "fallbackToCacheTimeout": 10000
