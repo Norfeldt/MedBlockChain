@@ -7,7 +7,7 @@
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "platforms": ["ios", "android"],
-    "version": "01.00.17",
+    "version": "01.00.18",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -28,7 +28,13 @@
     },
     "android": {
       "package": "com.norfeldt.medblockchain",
-      "versionCode": 2
+      "versionCode": 3,
+      "icon": "./assets/images/icon_android.png",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "androidStatusBar": {
       "barStyle": "dark-content",
