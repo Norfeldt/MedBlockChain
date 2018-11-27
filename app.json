@@ -28,7 +28,8 @@
     },
     "android": {
       "package": "com.norfeldt.medblockchain",
-      "versionCode": 2
+      "versionCode": 3,
+      "icon": "./assets/images/icon_android.png"
     },
     "androidStatusBar": {
       "barStyle": "dark-content",
