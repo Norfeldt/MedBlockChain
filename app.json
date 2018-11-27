@@ -29,7 +29,12 @@
     "android": {
       "package": "com.norfeldt.medblockchain",
       "versionCode": 3,
-      "icon": "./assets/images/icon_android.png"
+      "icon": "./assets/images/icon_android.png",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "androidStatusBar": {
       "barStyle": "dark-content",
