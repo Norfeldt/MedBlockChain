@@ -5,11 +5,12 @@ import HashBlock from '../components/basic/HashBlock'
 import Header from '../components/basic/Header'
 import SectionTitle from '../components/basic/SectionTitle'
 import DoseAdjuster from '../components/DoseAdjuster'
+import DosePrescription from '../components/DosePrescription'
 import ListData from '../components/ListData'
 import ManufactureHistory from '../components/ManufactureHistory'
+import SourceCodeLink from '../components/SourceCodeLink'
 import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
-import DosePrescription from '../components/DosePrescription'
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
@@ -47,7 +48,11 @@ export default class HomeScreen extends Component {
           </ContextConsumer>
 
           <SectionTitle name="BLOCKCHAINED" />
+
           <ManufactureHistory />
+
+          <SourceCodeLink />
+          <View style={{ height: 30 }} />
         </View>
       </ScrollView>
     )

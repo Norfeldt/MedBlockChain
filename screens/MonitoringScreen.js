@@ -1,10 +1,11 @@
 import React from 'react'
-import { ScrollView, StyleSheet, View, Platform } from 'react-native'
-import OptionSwitch from '../components/OptionSwitch'
-import SectionTitle from '../components/basic/SectionTitle'
+import { Platform, ScrollView, StyleSheet, View } from 'react-native'
 import Header from '../components/basic/Header'
+import SectionTitle from '../components/basic/SectionTitle'
 import DosePrescription from '../components/DosePrescription'
+import OptionSwitch from '../components/OptionSwitch'
 import Colors from '../constants/Colors'
+import SourceCodeLink from '../components/SourceCodeLink'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -61,6 +62,9 @@ export default class HomeScreen extends React.Component {
           <OptionSwitch name="instagram" font="FontAwesome" LPI={7} UPI={2} />
           <OptionSwitch name="snapchat" font="FontAwesome" LPI={0} UPI={0} />
           <View style={{ height: 20 }} />
+
+          <SourceCodeLink />
+          <View style={{ height: 30 }} />
         </ScrollView>
       </View>
     )

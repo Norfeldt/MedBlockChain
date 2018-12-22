@@ -2,8 +2,8 @@ import map from 'lodash/map'
 import React, { PureComponent } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import Header from '../components/basic/Header'
-import Text from '../components/basic/Text'
 import BlockCard from '../components/BlockCard'
+import SourceCodeLink from '../components/SourceCodeLink'
 import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
 
@@ -39,6 +39,7 @@ export default class BlockchainScreen extends PureComponent {
                   />
                 </View>
               )).reverse()}
+              <SourceCodeLink />
               <View style={{ height: 30 }} />
             </ScrollView>
           )
