@@ -16,6 +16,7 @@ import FalsifiedDrugs from '../components/FalsifiedDrugs'
 import GenuineDrugs from '../components/GenuineDrugs'
 import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
+import SourceCodeLink from '../components/SourceCodeLink'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -103,6 +104,9 @@ export default class HomeScreen extends React.Component {
             <SectionTitle name="MEDICATION HISTORY" />
 
             <DrugHistory />
+
+            <SourceCodeLink />
+            <View style={{ height: 30 }} />
           </ScrollView>
         )
       }
