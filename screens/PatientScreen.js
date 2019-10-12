@@ -1,5 +1,5 @@
-import { BarCodeScanner } from 'expo-barcode-scanner'
-import * as Permissions from 'expo-barcode-permissions'
+import * as BarCodeScanner from 'expo-barcode-scanner'
+import * as Permissions from 'expo-permissions'
 import React from 'react'
 import {
   Alert,
