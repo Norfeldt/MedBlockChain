@@ -11,17 +11,17 @@
     "@expo/samples": "2.1.1",
     "crypto-js": "^3.1.9-1",
     "date-fns": "^1.29.0",
-    "expo": "^33.0.0",
+    "expo": "^34.0.0",
     "invert-color": "^1.2.3",
     "lodash": "^4.17.10",
     "react": "16.8.3",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.2.tar.gz",
     "react-native-qrcode": "^0.2.6",
     "react-native-slider": "^0.11.0",
     "react-native-switch": "^1.5.0",
     "react-navigation": "2.3.1"
   },
   "devDependencies": {
-    "jest-expo": "^28.0.0"
+    "jest-expo": "^34.0.0"
   }
 }
