@@ -1,7 +1,7 @@
 //import liraries
 import React, { PureComponent } from 'react'
 import { View, Text, StyleSheet, Platform } from 'react-native'
-import { Constants } from 'expo'
+import Constants from 'expo-constants';
 
 import Colors from '../../constants/Colors'
 

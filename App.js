@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Platform, StatusBar, StyleSheet, View } from 'react-native'
-import { AppLoading, Asset, Font, Icon } from 'expo'
+import { AppLoading } from 'expo';
+import * as Icon from '@expo/vector-icons';
+import * as Font from 'expo-font';
+import { Asset } from 'expo-asset';
 import AppNavigator from './navigation/AppNavigator'
 import { ContextProvider } from './Context'
 export default class App extends React.Component {
