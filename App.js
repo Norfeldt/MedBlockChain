@@ -9,7 +9,7 @@ import { ContextProvider } from './Context'
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false)
 
-  if (isLoadingComplete && !props.skipLoadingScreen) {
+  if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
       <AppLoading
         startAsync={loadResourcesAsync}
