@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "start": "node_modules/expo-cli/bin/expo.js start -c",
+    "build:android": "node_modules/expo-cli/bin/expo.js build:android -t app-bundle",
+    "build:ios": "node_modules/expo-cli/bin/expo.js build:ios",
     "test": "node ./node_modules/jest/bin/jest.js --watchAll"
   },
   "jest": {
