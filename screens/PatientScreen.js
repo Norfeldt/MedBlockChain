@@ -1,4 +1,5 @@
-import { BarCodeScanner, Permissions } from 'expo'
+import * as BarCodeScanner from 'expo-barcode-scanner'
+import * as Permissions from 'expo-permissions'
 import React from 'react'
 import {
   Alert,
@@ -24,7 +25,7 @@ export default class HomeScreen extends React.Component {
   }
 
   state = {
-    scanning: false,
+    scanned: false,
   }
 
   render() {
@@ -38,20 +39,24 @@ export default class HomeScreen extends React.Component {
               <View style={{ flex: 1 }}>
                 <BarCodeScanner
                   style={{ flex: 1 }}
-                  onBarCodeRead={({ type, data }) => {
-                    this.setState({ scanning: false })
+                  onBarCodeScanned={
+                    this.state.scanned
+                      ? undefined
+                      : ({ type, data }) => {
+                          this.setState({ scanning: false })
 
-                    Alert.alert('PRODUCT DATA', data, [
-                      {
-                        text: 'Cancel',
-                        onPress: () => console.log('Cancel Pressed'),
-                      },
-                      {
-                        text: 'CHECK OUT',
-                        onPress: () => checkOUT({ ...JSON.parse(data) }),
-                      },
-                    ])
-                  }}
+                          Alert.alert('PRODUCT DATA', data, [
+                            {
+                              text: 'Cancel',
+                              onPress: () => console.log('Cancel Pressed'),
+                            },
+                            {
+                              text: 'CHECK OUT',
+                              onPress: () => checkOUT({ ...JSON.parse(data) }),
+                            },
+                          ])
+                        }
+                  }
                 />
                 <View
                   style={{
