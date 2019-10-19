@@ -23,7 +23,7 @@ export const palette = {
   passiveText: idleColor,
   dark: '#333333',
   passive: '#999999',
-  possitive: '#009966',
+  positive: '#009966',
   warning: '#990000',
   warningBackground: '#EAEB5E',
 }

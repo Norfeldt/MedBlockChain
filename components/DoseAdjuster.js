@@ -56,7 +56,7 @@ export default class DoseAdjuster extends PureComponent {
                   }}
                   minimumTrackTintColor={
                     value > minPreDose && value < maxPreDose
-                      ? Colors.possitive
+                      ? Colors.positive
                       : Colors.warning
                   }
                   minimumValue={minDose}
