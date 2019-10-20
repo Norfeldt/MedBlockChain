@@ -27,7 +27,7 @@ export default class CheckINInfo extends PureComponent {
         <Text type="h4" style={{ paddingBottom: 0 }}>
           CHECK IN
         </Text>
-        <HashBlock value={productDataHash} />>
+        <HashBlock value={productDataHash} />
       </View>
     )
   }
