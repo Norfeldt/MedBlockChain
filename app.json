@@ -10,7 +10,7 @@
       "ios",
       "android"
     ],
-    "version": "01.01.00",
+    "version": "01.01.01",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -33,7 +33,7 @@
     },
     "android": {
       "package": "com.norfeldt.medblockchain",
-      "versionCode": 5,
+      "versionCode": 6,
       "icon": "./assets/images/icon_android.png",
       "permissions": [
         "CAMERA",
