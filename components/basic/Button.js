@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     flex: 4,
-    fontFamily: 'Aldrich',
+    fontFamily: 'Aldrich_400Regular',
     fontSize: 24,
     color: '#fff',
     paddingTop: 5,

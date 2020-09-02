@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     }),
   },
   text: {
-    fontFamily: 'Aldrich',
+    fontFamily: 'Aldrich_400Regular',
     fontSize: 28,
     color: Colors.dark,
     marginVertical: 2,

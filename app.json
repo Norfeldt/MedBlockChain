@@ -5,7 +5,6 @@
     "githubUrl": "https://github.com/Norfeldt/MedBlockChain",
     "slug": "medblockchain",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
     "platforms": [
       "ios",
       "android"
@@ -22,7 +21,9 @@
       "fallbackToCacheTimeout": 10000
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/fonts/*.ttf",
+      "assets/icons/*.png",
+      "assets/images/knob*.png"
     ],
     "ios": {
       "bundleIdentifier": "com.norfeldt.medblockchain",

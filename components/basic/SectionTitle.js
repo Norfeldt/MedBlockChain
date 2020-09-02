@@ -38,7 +38,7 @@ const blockStyle = StyleSheet.create({
 
 const textStyle = StyleSheet.create({
   sectionTitle: {
-    fontFamily: 'Aldrich',
+    fontFamily: 'Aldrich_400Regular',
     fontSize: 24,
     textAlign: 'center',
     color: Colors.themeColor,

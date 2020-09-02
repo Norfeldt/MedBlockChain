@@ -37,13 +37,13 @@ const styles = StyleSheet.create({
   },
   leftText: {
     flex: 1,
-    fontFamily: 'Aldrich',
+    fontFamily: 'Aldrich_400Regular',
     color: Colors.tintColor,
     fontWeight: 'bold',
   },
   rightText: {
     flex: 1,
-    fontFamily: 'Aldrich',
+    fontFamily: 'Aldrich_400Regular',
     textAlign: 'right',
     color: Colors.dark,
   },

@@ -37,16 +37,6 @@ export default class DoseAdjuster extends PureComponent {
                 </Text>
                 <Slider
                   style={{ flex: 70, height: 60, alignSelf: 'stretch' }}
-                  thumbStyle={{
-                    width: 40,
-                    height: 40,
-                    backgroundColor: 'transparent',
-                    shadowColor: 'black',
-                    shadowOffset: { width: 0, height: 1 },
-                    shadowOpacity: 0.5,
-                    shadowRadius: 1,
-                  }}
-                  thumbImage={require('../assets/images/knob.png')}
                   trackStyle={{
                     height: 40,
                     borderRadius: 10,
@@ -63,7 +53,7 @@ export default class DoseAdjuster extends PureComponent {
                   maximumValue={maxDose}
                   value={value}
                   step={1}
-                  onValueChange={debounce(value => setDose(value), 25)}
+                  onValueChange={debounce((value) => setDose(value), 25)}
                 />
                 <Text style={{ flex: 7, fontSize: 12, marginTop: 3 }}>
                   {maxDose.toFixed(0)}

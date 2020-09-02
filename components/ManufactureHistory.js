@@ -1,7 +1,7 @@
 import map from 'lodash/map'
 import React, { PureComponent } from 'react'
 import { Alert, Platform, TouchableOpacity, View } from 'react-native'
-import QRCode from 'react-qr-code'
+import { QRCode } from 'react-native-custom-qr-codes-expo'
 import { getHashOfproductData } from '../cloudComputing/Block'
 import Colors, { getHashColors } from '../constants/Colors'
 import Layout from '../constants/Layout'
@@ -34,7 +34,7 @@ class DrugQR extends PureComponent {
           }}
         >
           <QRCode
-            value={value}
+            content={value}
             size={isSmallDevice ? width * 0.7 : width * 0.4}
           />
         </View>

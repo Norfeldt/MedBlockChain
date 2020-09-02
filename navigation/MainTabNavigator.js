@@ -15,7 +15,7 @@ import { ContextConsumer } from '../Context'
 const tabBarOptions = {
   activeTintColor: Colors.themeColor,
   labelStyle: {
-    fontFamily: 'Aldrich',
+    fontFamily: 'Aldrich_400Regular',
     fontSize: 10,
   },
   style: {

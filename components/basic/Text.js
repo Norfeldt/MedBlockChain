@@ -13,7 +13,7 @@ export default class Text extends PureComponent {
 }
 
 const p = {
-  fontFamily: 'Aldrich',
+  fontFamily: 'Aldrich_400Regular',
   fontSize: 16,
   textAlign: 'center',
 }
@@ -41,14 +41,14 @@ const textStyle = StyleSheet.create({
   },
   p,
   passiveHeader: {
-    fontFamily: 'NovaMono',
+    fontFamily: 'NovaMono_400Regular',
     fontSize: 16,
     textAlign: 'center',
     color: Colors.passive,
     paddingVertical: 5,
   },
   code: {
-    fontFamily: 'NovaMono',
+    fontFamily: 'NovaMono_400Regular',
     fontSize: 14,
     textAlign: 'center',
   },
