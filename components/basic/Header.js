@@ -1,13 +1,13 @@
 //import liraries
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View, Text, StyleSheet, Platform } from 'react-native'
 import Constants from 'expo-constants';
 
 import Colors from '../../constants/Colors'
 
-class Header extends PureComponent {
-  render() {
-    const { title, style, textStyle } = this.props
+function Header(props) {
+  //render() {
+    const { title, style, textStyle } = props
 
     return (
       <View style={[styles.container, style]}>
@@ -17,7 +17,7 @@ class Header extends PureComponent {
         <Text style={[styles.text, textStyle]}>{title.toUpperCase()}</Text>
       </View>
     )
-  }
+ // }
 }
 
 // define your styles

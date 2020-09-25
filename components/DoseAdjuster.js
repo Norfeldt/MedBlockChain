@@ -1,13 +1,12 @@
 import debounce from 'lodash/debounce'
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View } from 'react-native'
-import Slider from 'react-native-slider'
+import Slider from '@react-native-community/slider'
 import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
 import Text from './basic/Text'
 
-export default class DoseAdjuster extends PureComponent {
-  render() {
+export default function DoseAdjuster(props) {
     return (
       <ContextConsumer>
         {({ getDose, getDoseRange, setDose, prescriptionDose }) => {
@@ -64,5 +63,4 @@ export default class DoseAdjuster extends PureComponent {
         }}
       </ContextConsumer>
     )
-  }
 }

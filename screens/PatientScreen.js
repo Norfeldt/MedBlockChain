@@ -21,7 +21,7 @@ import SourceCodeLink from '../components/SourceCodeLink'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: <Header title="Patient" />,
+    header: () => (<Header title="Patient" />),
   }
 
   state = {

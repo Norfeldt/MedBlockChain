@@ -1,5 +1,5 @@
 import map from 'lodash/map'
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { Alert, Platform, TouchableOpacity, View } from 'react-native'
 import { getHashOfproductData } from '../cloudComputing/Block'
 import { getHashColors } from '../constants/Colors'
@@ -7,8 +7,7 @@ import Layout from '../constants/Layout'
 import { ContextConsumer } from '../Context'
 import FontIcon from './basic/FontIcon'
 
-export default class GenuineDrugs extends PureComponent {
-  render() {
+export default function GenuineDrugs(props) {
     const {
       window: { width },
     } = Layout
@@ -16,7 +15,7 @@ export default class GenuineDrugs extends PureComponent {
       <ContextConsumer>
         {({ genuineDrugs, checkOUT }) => {
           return (
-            <View style={this.props.style}>
+            <View style={props.style}>
               {map(genuineDrugs, (drug, index) => {
                 return (
                   <TouchableOpacity
@@ -79,5 +78,4 @@ export default class GenuineDrugs extends PureComponent {
         }}
       </ContextConsumer>
     )
-  }
 }

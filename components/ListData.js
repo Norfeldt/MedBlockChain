@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { View } from 'react-native'
 
 import reduce from 'lodash/reduce'
@@ -7,9 +7,9 @@ import capitalize from 'lodash/capitalize'
 
 import InfoRow from './basic/InfoRow'
 
-export default class ListData extends Component {
-  render() {
-    const { data } = this.props
+export default function ListData(props) {
+ // render() {
+    const { data } = props;
     return (
       <View>
         {reduce(
@@ -32,5 +32,5 @@ export default class ListData extends Component {
         )}
       </View>
     )
-  }
+//  }
 }

@@ -9,7 +9,7 @@ import SourceCodeLink from '../components/SourceCodeLink'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    header: <Header title="Monitoring" />,
+    header: () => ( <Header title="Monitoring" /> ),
   }
 
   render() {

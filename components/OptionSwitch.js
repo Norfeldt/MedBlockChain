@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { useState } from 'react'
 import { View, Image } from 'react-native'
 import { Switch } from 'react-native-switch'
 import Colors from '../constants/Colors'
@@ -6,13 +6,16 @@ import { ContextConsumer } from '../Context'
 import FontIcon from './basic/FontIcon'
 import Text from './basic/Text'
 
-export default class App extends PureComponent {
+export default function App(props) {
+  const [ value, setValue ] = useState(false);
+  /**
   state = {
     value: false,
   }
+  **/
 
-  render() {
-    const { name, desc, font, LPI, UPI } = this.props
+  //render() {
+    const { name, desc, font, LPI, UPI } = props
     const title = desc || name
 
     return (
@@ -50,9 +53,10 @@ export default class App extends PureComponent {
                   onValueChange={value => {
                     const impact = value ? +1 : -1
                     updatePrescriptionDose(LPI * impact, UPI * impact)
-                    this.setState({ value })
+                    setValue(value);
+                    //this.setState({ value })
                   }}
-                  value={this.state.value}
+                  value={value}
                   backgroundActive={Colors.themeColor}
                   backgroundInactive={Colors.passiveBG}
                   innerCircleStyle={{
@@ -74,5 +78,5 @@ export default class App extends PureComponent {
         </View>
       </View>
     )
-  }
+ // }
 }

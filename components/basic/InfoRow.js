@@ -1,31 +1,30 @@
 //import liraries
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import Conventions from '../../constants/Conventions'
 import Colors from '../../constants/Colors'
 
 // create a component
-class InfoRow extends PureComponent {
-  dateChecker = value => {
+function InfoRow(props) {
+  const dateChecker = value => {
     const dateformat = '^\\d{4}-\\d{2}-\\d{2}' // Match YYYY-MM-DD
     const matcher = new RegExp(dateformat)
     if (typeof value === 'string' && matcher.test(value)) {
       return Conventions.datetimeStr(value)
     }
-
     return value
   }
 
-  render() {
-    const { style, setting, value } = this.props
+  //render() {
+    const { style, setting, value } = props
 
     return (
       <View style={[styles.container, style]}>
         <Text style={styles.leftText}>{setting}</Text>
-        <Text style={styles.rightText}>{this.dateChecker(value)}</Text>
+        <Text style={styles.rightText}>{dateChecker(value)}</Text>
       </View>
     )
-  }
+ // }
 }
 
 // define your styles

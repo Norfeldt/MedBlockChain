@@ -9,7 +9,7 @@ import { ContextConsumer } from '../Context'
 
 export default class BlockchainScreen extends PureComponent {
   static navigationOptions = {
-    header: <Header title="Blockchain" />,
+    header: () => (<Header title="Blockchain" />),
   }
 
   render() {

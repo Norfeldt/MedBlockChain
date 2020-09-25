@@ -7,9 +7,9 @@ import { createIconSetFromFontello } from '@expo/vector-icons'
 import fontelloConfig from '../../assets/fonts/config.json'
 const Icon = createIconSetFromFontello(fontelloConfig, 'fonticons')
 
-export default class TabBarIcon extends React.Component {
-  render() {
-    const { name, focused, style, counter } = this.props
+export default function TabBarIcon(props) {
+ // render() {
+    const { name, focused, style, counter } = props
     return (
       <View>
         <Icon
@@ -49,7 +49,7 @@ export default class TabBarIcon extends React.Component {
         )}
       </View>
     )
-  }
+ // }
 }
 
 const blockStyles = StyleSheet.create({

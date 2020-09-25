@@ -14,7 +14,7 @@ import { ContextConsumer } from '../Context'
 
 export default class HomeScreen extends Component {
   static navigationOptions = {
-    header: <Header title="Manufacture" />,
+    header: () => (<Header title="Manufacture" />),
   }
 
   render() {

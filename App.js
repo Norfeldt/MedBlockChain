@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Platform, StatusBar, StyleSheet, View } from 'react-native'
 import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
@@ -16,21 +16,18 @@ export default function App(props) {
     fonticons: require('./assets/fonts/fonticons.ttf'),
   })
 
-  console.log()
-
   if (!fontsLoaded) {
-    console.log('got here')
     return <AppLoading />
+  } else {
+    return (
+      <ContextProvider>
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
+          <AppNavigator />
+        </View>
+      </ContextProvider>
+    )
   }
-
-  return (
-    <ContextProvider>
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
-        <AppNavigator />
-      </View>
-    </ContextProvider>
-  )
 }
 
 const styles = StyleSheet.create({
