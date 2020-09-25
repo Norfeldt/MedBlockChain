@@ -9,7 +9,7 @@ import Layout from '../../constants/Layout'
 export default function Card(props) {
  // render() {
     const { style } = props
-    return <View style={[styles.card, style]}>{this.props.children}</View>
+    return <View style={[styles.card, style]}>{props.children}</View>
  // }
 }
 
