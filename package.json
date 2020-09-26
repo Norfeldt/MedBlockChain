@@ -20,7 +20,7 @@
     "expo": "^38.0.0",
     "expo-asset": "~8.1.7",
     "expo-barcode-scanner": "~8.2.1",
-    "expo-cli": "^3.27.8",
+    "expo-cli": "^3.27.10",
     "expo-constants": "~9.1.1",
     "expo-font": "~8.2.1",
     "expo-permissions": "~9.0.1",
