@@ -4,12 +4,12 @@ import Text from '../basic/Text'
 import FontIcon from '../basic/FontIcon'
 import Colors from '../../constants/Colors'
 
-export default class Warning extends PureComponent {
-  renderWarning = warningText => (
+export default function Warning(props) {
+  const renderWarning = warningText => (
     <View
       style={[
         { flex: 1, justifyContent: 'center', paddingBottom: 10 },
-        this.props.style,
+        props.style,
       ]}
     >
       <View
@@ -41,14 +41,14 @@ export default class Warning extends PureComponent {
     </View>
   )
 
-  render() {
-    if (this.props.multipleCheckOUT) {
-      return this.renderWarning('MULTIPLE CHECK OUT')
+ // render() {
+    if (props.multipleCheckOUT) {
+      return renderWarning('MULTIPLE CHECK OUT')
     }
-    if (this.props.neverCheckedIN) {
-      return this.renderWarning('NOT CHECKED IN BY\nAUTHORIZED MANUFACTURE ')
+    if (props.neverCheckedIN) {
+      return renderWarning('NOT CHECKED IN BY\nAUTHORIZED MANUFACTURE ')
     }
 
     return null
-  }
+ // }
 }

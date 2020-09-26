@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import Text from '../basic/Text'
 import Colors from '../../constants/Colors'
 import { styleHashBlock } from '../basic/HashBlock'
 
-export default class TimestampInfo extends PureComponent {
-  render() {
-    const { timestamp } = this.props
+export default function TimestampInfo(props) {
+  //render() {
+    const { timestamp } = props
     return (
       <View
         style={{
@@ -27,5 +27,5 @@ export default class TimestampInfo extends PureComponent {
         </View>
       </View>
     )
-  }
+//  }
 }
