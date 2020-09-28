@@ -13,13 +13,6 @@ import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
 
 export default function HomeScreen(props) {
-/**
-  static navigationOptions = {
-    header: () => (<Header title="Manufacture" />),
-  }
-**/
-
-  //render() {
     return (
       <ScrollView style={{ flex: 1, backgroundColor: Colors.scrollBG }}>
         <View style={{ alignContent: 'center', paddingHorizontal: 10 }}>
@@ -58,7 +51,6 @@ export default function HomeScreen(props) {
         </View>
       </ScrollView>
     )
-//  }
 }
 
 HomeScreen['navigationOptions'] = screenprops => ({

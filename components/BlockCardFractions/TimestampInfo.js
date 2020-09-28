@@ -5,7 +5,6 @@ import Colors from '../../constants/Colors'
 import { styleHashBlock } from '../basic/HashBlock'
 
 export default function TimestampInfo(props) {
-  //render() {
     const { timestamp } = props
     return (
       <View
@@ -27,5 +26,4 @@ export default function TimestampInfo(props) {
         </View>
       </View>
     )
-//  }
 }

@@ -6,7 +6,6 @@ import Colors from '../constants/Colors'
 import Button from './basic/Button'
 
 function SourceCodeLink(props) {
-//  render() {
     const { title, style, textStyle } = props
 
     return (
@@ -31,7 +30,6 @@ function SourceCodeLink(props) {
         />
       </View>
     )
-//  }
 }
 
 // define your styles

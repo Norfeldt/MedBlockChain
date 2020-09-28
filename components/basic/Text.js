@@ -3,13 +3,11 @@ import { Text as RNText, StyleSheet } from 'react-native'
 import Colors from '../../constants/Colors'
 
 export default function Text(props) {
-//  render() {
     return (
       <RNText style={[p, textStyle[props.type], props.style]}>
         {props.children}
       </RNText>
     )
-//  }
 }
 
 const p = {

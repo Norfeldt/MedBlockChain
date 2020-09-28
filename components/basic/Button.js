@@ -15,7 +15,6 @@ import fontelloConfig from '../../assets/fonts/config.json'
 const Icon = createIconSetFromFontello(fontelloConfig, 'fonticons')
 
 export default function Button(props) {
-//  render() {
     const {
       style,
       title,
@@ -46,7 +45,6 @@ export default function Button(props) {
         />
       </TouchableOpacity>
     )
- // }
 }
 
 const styles = StyleSheet.create({

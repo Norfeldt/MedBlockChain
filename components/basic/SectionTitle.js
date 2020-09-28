@@ -4,7 +4,6 @@ import { View, Text, StyleSheet } from 'react-native'
 import Colors from '../../constants/Colors'
 
 export default function SectionTitle(props) {
-  //render() {
     const Line = () => (
       <View style={{ flex: 1, paddingHorizontal: 5 }}>
         <View
@@ -24,7 +23,6 @@ export default function SectionTitle(props) {
         <Line />
       </View>
     )
- // }
 }
 
 const blockStyle = StyleSheet.create({

@@ -6,7 +6,6 @@ import HashBlock from '../basic/HashBlock'
 import ListData from '../ListData'
 
 export default function CheckINInfo(props) {
- // render() {
     const { drugMetaData, productDataHash } = props
 
     return (
@@ -30,5 +29,4 @@ export default function CheckINInfo(props) {
         <HashBlock value={productDataHash} />
       </View>
     )
-//  }
 }

@@ -20,17 +20,6 @@ import { ContextConsumer } from '../Context'
 import SourceCodeLink from '../components/SourceCodeLink'
 
 export default function HomeScreen(props) {
-/**
-  static navigationOptions = {
-    header: () => (<Header title="Patient" />),
-  }
-
-  state = {
-    scanned: false,
-  }
-**/
- // render() {
-   // const { scanning } = this.state
    const scanned = false;
    const [ scanning, setScanned ] = useState(false);
 
@@ -119,7 +108,6 @@ export default function HomeScreen(props) {
     }
 
     return <RenderView />
-  //}
 }
 
 HomeScreen['navigationOptions'] = screenprops => ({

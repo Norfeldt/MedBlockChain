@@ -6,7 +6,6 @@ import Text from '../basic/Text'
 import ListData from '../ListData'
 
 export default function CheckOUTInfo(props) {
- // render() {
     const { productData, productDataHash } = props
     return (
       <View
@@ -23,5 +22,4 @@ export default function CheckOUTInfo(props) {
         <HashBlock value={productDataHash} />
       </View>
     )
-//  }
 }

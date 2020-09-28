@@ -6,7 +6,6 @@ import Constants from 'expo-constants';
 import Colors from '../../constants/Colors'
 
 function Header(props) {
-  //render() {
     const { title, style, textStyle } = props
 
     return (
@@ -17,7 +16,6 @@ function Header(props) {
         <Text style={[styles.text, textStyle]}>{title.toUpperCase()}</Text>
       </View>
     )
- // }
 }
 
 // define your styles

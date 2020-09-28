@@ -6,7 +6,6 @@ import Text from '../basic/Text'
 import BlockHashVisualized from './BlockHashVisualized'
 
 export default function ChainingInfo(props) {
- // render() {
     const {
       timestamp,
       previousBlockHash,
@@ -52,5 +51,4 @@ export default function ChainingInfo(props) {
         />
       </View>
     )
-//  }
 }

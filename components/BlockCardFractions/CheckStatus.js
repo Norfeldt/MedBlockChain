@@ -5,7 +5,6 @@ import Text from '../basic/Text'
 import { getHashColors } from '../../constants/Colors'
 
 export default function componentName(props) {
- // render() {
     const { productData, productDataHash } = props
     const iconSize = 60
     return (
@@ -47,7 +46,6 @@ export default function componentName(props) {
         </View>
       </View>
     )
- // }
 }
 
 const blockStyle = StyleSheet.create({

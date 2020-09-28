@@ -8,13 +8,6 @@ import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
 
 export default function BlockchainScreen(props) {
-/**
-  static navigationOptions = {
-    header: () => (<Header title="Blockchain" />),
-  }
-**/
-
-//  render() {
     return (
       <ContextConsumer>
         {({ blockchain }) => {
@@ -48,7 +41,6 @@ export default function BlockchainScreen(props) {
         }}
       </ContextConsumer>
     )
-//  }
 }
 
 BlockchainScreen['navigationOptions'] = screenprops => ({

@@ -5,7 +5,6 @@ import HashBlock from '../basic/HashBlock'
 import Text from '../basic/Text'
 
 export default function componentName(props) {
-//  render() {
     const {
       hashAlgorithmName,
       timestamp,
@@ -46,5 +45,4 @@ export default function componentName(props) {
         <HashBlock value={hash} />
       </View>
     )
- // }
 }

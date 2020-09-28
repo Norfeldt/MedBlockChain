@@ -15,7 +15,6 @@ function InfoRow(props) {
     return value
   }
 
-  //render() {
     const { style, setting, value } = props
 
     return (
@@ -24,7 +23,6 @@ function InfoRow(props) {
         <Text style={styles.rightText}>{dateChecker(value)}</Text>
       </View>
     )
- // }
 }
 
 // define your styles

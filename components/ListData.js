@@ -8,7 +8,6 @@ import capitalize from 'lodash/capitalize'
 import InfoRow from './basic/InfoRow'
 
 export default function ListData(props) {
- // render() {
     const { data } = props;
     return (
       <View>
@@ -32,5 +31,4 @@ export default function ListData(props) {
         )}
       </View>
     )
-//  }
 }

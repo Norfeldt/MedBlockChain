@@ -8,13 +8,6 @@ import Colors from '../constants/Colors'
 import SourceCodeLink from '../components/SourceCodeLink'
 
 export default function HomeScreen(props) {
-/**
-  static navigationOptions = {
-    header: () => ( <Header title="Monitoring" /> ),
-  }
-**/
-
- // render() {
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.prescription}>
@@ -70,7 +63,6 @@ export default function HomeScreen(props) {
         </ScrollView>
       </View>
     )
-//  }
 }
 
 HomeScreen['navigationOptions'] = screenprops => ({

@@ -7,10 +7,8 @@ import Layout from '../../constants/Layout'
 
 // create a component
 export default function Card(props) {
- // render() {
     const { style } = props
     return <View style={[styles.card, style]}>{props.children}</View>
- // }
 }
 
 // define your styles

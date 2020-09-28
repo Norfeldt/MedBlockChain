@@ -41,7 +41,6 @@ export default function Warning(props) {
     </View>
   )
 
- // render() {
     if (props.multipleCheckOUT) {
       return renderWarning('MULTIPLE CHECK OUT')
     }
@@ -50,5 +49,4 @@ export default function Warning(props) {
     }
 
     return null
- // }
 }

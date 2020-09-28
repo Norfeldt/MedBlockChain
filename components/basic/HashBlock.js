@@ -5,7 +5,6 @@ import Text from './Text'
 import { getHashColors } from '../../constants/Colors'
 
 export function HashBlock(props) {
-  //render() {
     const { backgroundColor, color } = getHashColors(props.value)
     return (
       <View
@@ -19,7 +18,6 @@ export function HashBlock(props) {
         )}`}</Text>
       </View>
     )
- // }
 }
 
 export default HashBlock

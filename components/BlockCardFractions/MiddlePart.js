@@ -4,7 +4,6 @@ import Text from '../basic/Text'
 import Colors from '../../constants/Colors'
 
 export default function MiddlePart(props) {
-  //render() {
     const { hashAlgorithmName } = props
     return (
       <View
@@ -30,5 +29,4 @@ export default function MiddlePart(props) {
         />
       </View>
     )
-//  }
 }

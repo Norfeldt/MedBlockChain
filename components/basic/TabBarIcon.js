@@ -8,7 +8,6 @@ import fontelloConfig from '../../assets/fonts/config.json'
 const Icon = createIconSetFromFontello(fontelloConfig, 'fonticons')
 
 export default function TabBarIcon(props) {
- // render() {
     const { name, focused, style, counter } = props
     return (
       <View>
@@ -49,7 +48,6 @@ export default function TabBarIcon(props) {
         )}
       </View>
     )
- // }
 }
 
 const blockStyles = StyleSheet.create({

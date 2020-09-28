@@ -3,7 +3,6 @@ import { View } from 'react-native'
 import Colors from '../../constants/Colors'
 
 export default function BlockConnector(props) {
- // render() {
     const lineWidth = 2
     return (
       <View
@@ -41,5 +40,4 @@ export default function BlockConnector(props) {
         <View style={{ flex: 20 }} />
       </View>
     )
- // }
 }

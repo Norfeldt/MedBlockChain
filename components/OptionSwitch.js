@@ -8,15 +8,8 @@ import Text from './basic/Text'
 
 export default function App(props) {
   const [ value, setValue ] = useState(false);
-  /**
-  state = {
-    value: false,
-  }
-  **/
-
-  //render() {
-    const { name, desc, font, LPI, UPI } = props
-    const title = desc || name
+  const { name, desc, font, LPI, UPI } = props
+  const title = desc || name
 
     return (
       <View
@@ -78,5 +71,4 @@ export default function App(props) {
         </View>
       </View>
     )
- // }
 }
