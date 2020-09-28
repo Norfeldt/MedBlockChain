@@ -5,11 +5,8 @@
     "githubUrl": "https://github.com/Norfeldt/MedBlockChain",
     "slug": "medblockchain",
     "privacy": "public",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "version": "01.01.01",
+    "platforms": ["ios", "android"],
+    "version": "01.02.00",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -34,7 +31,7 @@
     },
     "android": {
       "package": "com.norfeldt.medblockchain",
-      "versionCode": 6,
+      "versionCode": 7,
       "icon": "./assets/images/icon_android.png",
       "permissions": [
         "CAMERA",
