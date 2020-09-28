@@ -47,7 +47,6 @@ export default function App(props) {
                     const impact = value ? +1 : -1
                     updatePrescriptionDose(LPI * impact, UPI * impact)
                     setValue(value);
-                    //this.setState({ value })
                   }}
                   value={value}
                   backgroundActive={Colors.themeColor}

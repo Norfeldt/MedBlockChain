@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Platform, StatusBar, StyleSheet, View } from 'react-native'
+import { Platform, StatusBar, StyleSheet, View, YellowBox } from 'react-native'
 import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
 import AppNavigator from './navigation/AppNavigator'
@@ -15,6 +15,10 @@ export default function App(props) {
     NovaMono_400Regular,
     fonticons: require('./assets/fonts/fonticons.ttf'),
   })
+
+  useEffect(() => {
+    YellowBox.ignoreWarnings(['Animated: `useNativeDriver`']);
+  }, []);
 
   if (!fontsLoaded) {
     return <AppLoading />
