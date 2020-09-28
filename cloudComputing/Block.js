@@ -1,5 +1,6 @@
 import Conventions from '../constants/Conventions'
-const SHA256 = require('crypto-js/sha256')
+import SHA256 from 'crypto-js/sha256';
+//const SHA256 = require('crypto-js/sha256')
 
 getHashOfproductData = productData => {
   return SHA256(JSON.stringify(productData))

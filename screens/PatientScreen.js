@@ -1,6 +1,6 @@
-import * as BarCodeScanner from 'expo-barcode-scanner'
+import { BarCodeScanner } from 'expo-barcode-scanner'
 import * as Permissions from 'expo-permissions'
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Alert,
   ScrollView,
@@ -19,107 +19,91 @@ import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
 import SourceCodeLink from '../components/SourceCodeLink'
 
-export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: <Header title="Patient" />,
-  }
+export default function HomeScreen(props) {
+  const [scanning, setScanning] = useState(false)
 
-  state = {
-    scanned: false,
-  }
+  const RenderView = (props) => {
+    if (scanning) {
+      return (
+        <ContextConsumer>
+          {({ checkOUT }) => (
+            <View style={{ flex: 1 }}>
+              <BarCodeScanner
+                style={{ flex: 1 }}
+                onBarCodeScanned={({ data }) => {
+                  setScanning(false)
 
-  render() {
-    const { scanning } = this.state
-
-    RenderView = props => {
-      if (scanning) {
-        return (
-          <ContextConsumer>
-            {({ checkOUT }) => (
-              <View style={{ flex: 1 }}>
-                <BarCodeScanner
-                  style={{ flex: 1 }}
-                  onBarCodeScanned={
-                    this.state.scanned
-                      ? undefined
-                      : ({ type, data }) => {
-                          this.setState({ scanning: false })
-
-                          Alert.alert('PRODUCT DATA', data, [
-                            {
-                              text: 'Cancel',
-                              onPress: () => console.log('Cancel Pressed'),
-                            },
-                            {
-                              text: 'CHECK OUT',
-                              onPress: () => checkOUT({ ...JSON.parse(data) }),
-                            },
-                          ])
-                        }
-                  }
-                />
-                <View
-                  style={{
-                    backgroundColor: Colors.passiveBG,
-                    justifyContent: 'center',
-                  }}
-                >
-                  <TouchableOpacity
-                    onPress={() => this.setState({ scanning: false })}
+                  Alert.alert('PRODUCT DATA', data, [
+                    {
+                      text: 'Cancel',
+                      onPress: () => console.log('Cancel Pressed'),
+                    },
+                    {
+                      text: 'CHECK OUT',
+                      onPress: () => checkOUT({ ...JSON.parse(data) }),
+                    },
+                  ])
+                }}
+              />
+              <View
+                style={{
+                  backgroundColor: Colors.passiveBG,
+                  justifyContent: 'center',
+                }}
+              >
+                <TouchableOpacity onPress={() => setScanning(false)}>
+                  <Text
+                    style={{
+                      color: Colors.passive,
+                      textAlign: 'center',
+                      paddingVertical: 15,
+                    }}
                   >
-                    <Text
-                      style={{
-                        color: Colors.passive,
-                        textAlign: 'center',
-                        paddingVertical: 15,
-                      }}
-                    >
-                      Cancel
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+                    Cancel
+                  </Text>
+                </TouchableOpacity>
               </View>
-            )}
-          </ContextConsumer>
-        )
-      } else {
-        return (
-          <ScrollView style={blockStyles.container}>
-            <SectionTitle name="CHECK OUT" />
+            </View>
+          )}
+        </ContextConsumer>
+      )
+    } else {
+      return (
+        <ScrollView style={blockStyles.container}>
+          <SectionTitle name="CHECK OUT" />
 
-            <ScrollView horizontal={true}>
-              <GenuineDrugs style={{ flexDirection: 'row' }} />
-              <View style={{ borderLeftWidth: 1 }} />
-              <FalsifiedDrugs />
-            </ScrollView>
-
-            <Button
-              title="SCAN PRODUCT"
-              iconName="QR_Code"
-              onPress={async () => {
-                const { status } = await Permissions.askAsync(
-                  Permissions.CAMERA
-                )
-                this.setState({
-                  scanning: status === 'granted',
-                })
-              }}
-            />
-
-            <SectionTitle name="MEDICATION HISTORY" />
-
-            <DrugHistory />
-
-            <SourceCodeLink />
-            <View style={{ height: 30 }} />
+          <ScrollView horizontal={true}>
+            <GenuineDrugs style={{ flexDirection: 'row' }} />
+            <View style={{ borderLeftWidth: 1 }} />
+            <FalsifiedDrugs />
           </ScrollView>
-        )
-      }
-    }
 
-    return <RenderView />
+          <Button
+            title="SCAN PRODUCT"
+            iconName="QR_Code"
+            onPress={async () => {
+              const { status } = await Permissions.askAsync(Permissions.CAMERA)
+              setScanning(status == 'granted')
+            }}
+          />
+
+          <SectionTitle name="MEDICATION HISTORY" />
+
+          <DrugHistory />
+
+          <SourceCodeLink />
+          <View style={{ height: 30 }} />
+        </ScrollView>
+      )
+    }
   }
+
+  return <RenderView />
 }
+
+HomeScreen['navigationOptions'] = (screenprops) => ({
+  header: () => <Header title="Patient" />,
+})
 
 const blockStyles = StyleSheet.create({
   container: {

@@ -1,20 +1,19 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import Colors, { getHashColors } from '../../constants/Colors'
 import HashBlock from '../basic/HashBlock'
 import Text from '../basic/Text'
 
-export default class componentName extends PureComponent {
-  render() {
+export default function componentName(props) {
     const {
       hashAlgorithmName,
       timestamp,
       productDataHash,
       previousBlockHash,
       hash,
-    } = this.props
+    } = props
 
-    shortStr = str =>
+    const shortStr = str =>
       `${str.slice(0, 3)}...${str.slice(str.length - 3, str.length)}`
 
     return (
@@ -46,5 +45,4 @@ export default class componentName extends PureComponent {
         <HashBlock value={hash} />
       </View>
     )
-  }
 }

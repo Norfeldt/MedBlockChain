@@ -1,12 +1,11 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View, TouchableOpacity, Alert, Platform } from 'react-native'
 import Layout from '../constants/Layout'
 import { ContextConsumer } from '../Context'
 import FontIcon from './basic/FontIcon'
 import Text from './basic/Text'
 
-export default class FalsifiedDrugs extends PureComponent {
-  render() {
+export default function FalsifiedDrugs(props){
     const {
       window: { width },
     } = Layout
@@ -89,5 +88,4 @@ export default class FalsifiedDrugs extends PureComponent {
         }}
       </ContextConsumer>
     )
-  }
 }

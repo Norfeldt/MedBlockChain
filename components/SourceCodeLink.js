@@ -1,13 +1,12 @@
 //import liraries
 import Constants from 'expo-constants';
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { Linking, Platform, StyleSheet, View } from 'react-native'
 import Colors from '../constants/Colors'
 import Button from './basic/Button'
 
-class SourceCodeLink extends PureComponent {
-  render() {
-    const { title, style, textStyle } = this.props
+function SourceCodeLink(props) {
+    const { title, style, textStyle } = props
 
     return (
       <View style={[styles.container, style]}>
@@ -31,7 +30,6 @@ class SourceCodeLink extends PureComponent {
         />
       </View>
     )
-  }
 }
 
 // define your styles

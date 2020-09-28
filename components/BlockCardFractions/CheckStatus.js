@@ -1,12 +1,11 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View, Platform, StyleSheet } from 'react-native'
 import FontIcon from '../basic/FontIcon'
 import Text from '../basic/Text'
 import { getHashColors } from '../../constants/Colors'
 
-export default class componentName extends PureComponent {
-  render() {
-    const { productData, productDataHash } = this.props
+export default function componentName(props) {
+    const { productData, productDataHash } = props
     const iconSize = 60
     return (
       <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -47,7 +46,6 @@ export default class componentName extends PureComponent {
         </View>
       </View>
     )
-  }
 }
 
 const blockStyle = StyleSheet.create({

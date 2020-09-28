@@ -1,13 +1,12 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View, LayoutAnimation, Platform } from 'react-native'
 import Colors from '../constants/Colors'
 import FontIcon from './basic/FontIcon'
 import Text from './basic/Text'
 import { ContextConsumer } from '../Context'
 
-export default class DosePrescription extends PureComponent {
-  render() {
-    const { style } = this.props
+export default function DosePrescription(props) {
+    const { style } = props
 
     return (
       <ContextConsumer>
@@ -104,5 +103,4 @@ export default class DosePrescription extends PureComponent {
         }}
       </ContextConsumer>
     )
-  }
 }

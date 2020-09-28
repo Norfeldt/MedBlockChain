@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { ScrollView, View } from 'react-native'
 import Button from '../components/basic/Button'
 import HashBlock from '../components/basic/HashBlock'
@@ -12,12 +12,7 @@ import SourceCodeLink from '../components/SourceCodeLink'
 import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
 
-export default class HomeScreen extends Component {
-  static navigationOptions = {
-    header: <Header title="Manufacture" />,
-  }
-
-  render() {
+export default function HomeScreen(props) {
     return (
       <ScrollView style={{ flex: 1, backgroundColor: Colors.scrollBG }}>
         <View style={{ alignContent: 'center', paddingHorizontal: 10 }}>
@@ -56,5 +51,8 @@ export default class HomeScreen extends Component {
         </View>
       </ScrollView>
     )
-  }
 }
+
+HomeScreen['navigationOptions'] = screenprops => ({
+  header: () => <Header title="Manufacture" />
+})

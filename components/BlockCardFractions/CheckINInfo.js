@@ -1,13 +1,12 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import Colors from '../../constants/Colors'
 import Text from '../basic/Text'
 import HashBlock from '../basic/HashBlock'
 import ListData from '../ListData'
 
-export default class CheckINInfo extends PureComponent {
-  render() {
-    const { drugMetaData, productDataHash } = this.props
+export default function CheckINInfo(props) {
+    const { drugMetaData, productDataHash } = props
 
     return (
       <View
@@ -30,5 +29,4 @@ export default class CheckINInfo extends PureComponent {
         <HashBlock value={productDataHash} />
       </View>
     )
-  }
 }

@@ -1,9 +1,8 @@
 import React from 'react'
 import { Platform } from 'react-native'
-import {
-  createBottomTabNavigator,
-  createStackNavigator,
-} from 'react-navigation'
+import { createAppContainer } from 'react-navigation'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { createStackNavigator } from 'react-navigation-stack'
 import TabBarIcon from '../components/basic/TabBarIcon'
 import Colors from '../constants/Colors'
 import BlockchainScreen from '../screens/BlockchainScreen'
@@ -15,7 +14,7 @@ import { ContextConsumer } from '../Context'
 const tabBarOptions = {
   activeTintColor: Colors.themeColor,
   labelStyle: {
-    fontFamily: 'Aldrich',
+    fontFamily: 'Aldrich_400Regular',
     fontSize: 10,
   },
   style: {
@@ -117,9 +116,11 @@ MonitoringStack.navigationOptions = {
   ),
 }
 
-export default createBottomTabNavigator({
-  ManufactureStack,
-  PatientStack,
-  MonitoringStack,
-  BlockchainStack,
-})
+export default createAppContainer(
+  createBottomTabNavigator({
+    ManufactureStack,
+    PatientStack,
+    MonitoringStack,
+    BlockchainStack,
+  })
+);

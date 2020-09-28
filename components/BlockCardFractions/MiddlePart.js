@@ -1,11 +1,10 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import Text from '../basic/Text'
 import Colors from '../../constants/Colors'
 
-export default class MiddlePart extends PureComponent {
-  render() {
-    const { hashAlgorithmName } = this.props
+export default function MiddlePart(props) {
+    const { hashAlgorithmName } = props
     return (
       <View
         style={{
@@ -30,5 +29,4 @@ export default class MiddlePart extends PureComponent {
         />
       </View>
     )
-  }
 }

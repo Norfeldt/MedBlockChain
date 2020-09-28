@@ -5,12 +5,8 @@
     "githubUrl": "https://github.com/Norfeldt/MedBlockChain",
     "slug": "medblockchain",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "version": "01.01.01",
+    "platforms": ["ios", "android"],
+    "version": "01.02.00",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -22,7 +18,9 @@
       "fallbackToCacheTimeout": 10000
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/fonts/*.ttf",
+      "assets/icons/*.png",
+      "assets/images/knob*.png"
     ],
     "ios": {
       "bundleIdentifier": "com.norfeldt.medblockchain",
@@ -33,7 +31,7 @@
     },
     "android": {
       "package": "com.norfeldt.medblockchain",
-      "versionCode": 6,
+      "versionCode": 7,
       "icon": "./assets/images/icon_android.png",
       "permissions": [
         "CAMERA",

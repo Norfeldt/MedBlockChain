@@ -3,8 +3,9 @@ import { getHashOfproductData } from './cloudComputing/Block'
 import Blockchain from './cloudComputing/Blockchain'
 import Conventions from './constants/Conventions'
 import remove from 'lodash/remove'
+import SHA256 from 'crypto-js/sha256';
 
-const SHA256 = require('crypto-js/sha256')
+//const SHA256 = require('crypto-js/sha256')
 
 // Using the Context API used in react 16.3 - https://www.youtube.com/watch?v=XLJN4JfniH4
 const { Provider, Consumer: ContextConsumer } = React.createContext()

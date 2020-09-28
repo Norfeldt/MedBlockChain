@@ -1,5 +1,5 @@
 import map from 'lodash/map'
-import React, { PureComponent } from 'react'
+import React, { useState } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import Header from '../components/basic/Header'
 import BlockCard from '../components/BlockCard'
@@ -7,12 +7,7 @@ import SourceCodeLink from '../components/SourceCodeLink'
 import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
 
-export default class BlockchainScreen extends PureComponent {
-  static navigationOptions = {
-    header: <Header title="Blockchain" />,
-  }
-
-  render() {
+export default function BlockchainScreen(props) {
     return (
       <ContextConsumer>
         {({ blockchain }) => {
@@ -46,8 +41,11 @@ export default class BlockchainScreen extends PureComponent {
         }}
       </ContextConsumer>
     )
-  }
 }
+
+BlockchainScreen['navigationOptions'] = screenprops => ({
+  header: () => <Header title="Blockchain" />
+});
 
 const blockStyle = StyleSheet.create({
   scrollView: {

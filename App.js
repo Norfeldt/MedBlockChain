@@ -1,22 +1,27 @@
-import React, { useState } from 'react'
-import { Platform, StatusBar, StyleSheet, View } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Platform, StatusBar, StyleSheet, View, YellowBox } from 'react-native'
 import { AppLoading } from 'expo'
 import { Asset } from 'expo-asset'
-import * as Font from 'expo-font'
 import AppNavigator from './navigation/AppNavigator'
 import { ContextProvider } from './Context'
 
-export default function App(props) {
-  const [isLoadingComplete, setLoadingComplete] = useState(false)
+import { useFonts } from 'expo-font'
+import { Aldrich_400Regular } from '@expo-google-fonts/aldrich'
+import { NovaMono_400Regular } from '@expo-google-fonts/nova-mono'
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
-    return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => setLoadingComplete(true)}
-      />
-    )
+export default function App(props) {
+  let [fontsLoaded] = useFonts({
+    Aldrich_400Regular,
+    NovaMono_400Regular,
+    fonticons: require('./assets/fonts/fonticons.ttf'),
+  })
+
+  useEffect(() => {
+    YellowBox.ignoreWarnings(['Animated: `useNativeDriver`']);
+  }, []);
+
+  if (!fontsLoaded) {
+    return <AppLoading />
   } else {
     return (
       <ContextProvider>
@@ -27,23 +32,6 @@ export default function App(props) {
       </ContextProvider>
     )
   }
-}
-
-async function loadResourcesAsync() {
-  await Promise.all([
-    Asset.loadAsync([require('./assets/images/knob.png')]),
-    Font.loadAsync({
-      'Aldrich': require('./assets/fonts/Aldrich-Regular.ttf'),
-      'NovaMono': require('./assets/fonts/NovaMono.ttf'),
-      'fonticons': require('./assets/fonts/fonticons.ttf'),
-    }),
-  ])
-}
-
-function handleLoadingError(error) {
-  // In this case, you might want to report the error to your error
-  // reporting service, for example Sentry
-  console.warn(error)
 }
 
 const styles = StyleSheet.create({

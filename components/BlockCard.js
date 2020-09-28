@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { useState } from 'react'
 import { LayoutAnimation, View } from 'react-native'
 import Card from './basic/Card'
 import BlockButton from './BlockCardFractions/BlockButton'
@@ -14,22 +14,32 @@ import Warning from './BlockCardFractions/Warning'
 import Text from '../components/basic/Text'
 import FontIcon from './basic/FontIcon'
 
-export default class BlockCard extends PureComponent {
+export default function BlockCard(props){
+/***
   constructor(props) {
     super(props)
     this.state = {
       showBlockInfo: null,
     }
   }
+**/
+  const [ showBlockInfo, setBlockInfo ] = useState(null);
 
-  onButtonPress = buttonTitle => {
+  const onButtonPress = buttonTitle => {
+  /**
     this.setState({
       showBlockInfo:
         this.state.showBlockInfo == buttonTitle ? null : buttonTitle,
     })
+  **/
+    if(showBlockInfo == buttonTitle){
+      setBlockInfo(null);
+    } else {
+      setBlockInfo(buttonTitle);
+    }
   }
 
-  render() {
+  //render() {
     const {
       index,
       blockHash,
@@ -41,21 +51,21 @@ export default class BlockCard extends PureComponent {
       hashAlgorithmName,
       multipleCheckOUT,
       neverCheckedIN,
-    } = this.props
+    } = props
 
-    BlockInfo = () => {
+    const BlockInfo = () => {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
 
-      const { showBlockInfo } = this.state
+//      const { showBlockInfo } = this.state
       switch (showBlockInfo) {
         case 'PREVIOUS HASH':
           return (
             <ChainingInfo
-              timestamp={this.props.previousBlockInfo.timestamp}
-              previousBlockHash={this.props.previousBlockInfo.previousBlockHash}
-              productDataHash={this.props.previousBlockInfo.productDataHash}
-              hash={this.props.previousBlockHash}
-              hashAlgorithmName={this.props.hashAlgorithmName}
+              timestamp={props.previousBlockInfo.timestamp}
+              previousBlockHash={props.previousBlockInfo.previousBlockHash}
+              productDataHash={props.previousBlockInfo.productDataHash}
+              hash={props.previousBlockHash}
+              hashAlgorithmName={props.hashAlgorithmName}
             />
           )
 
@@ -80,11 +90,11 @@ export default class BlockCard extends PureComponent {
         case 'BLOCK HASH':
           return (
             <ChainingInfo
-              timestamp={this.props.timestamp}
-              previousBlockHash={this.props.previousBlockHash}
-              productDataHash={this.props.productDataHash}
-              hash={this.props.blockHash}
-              hashAlgorithmName={this.props.hashAlgorithmName}
+              timestamp={props.timestamp}
+              previousBlockHash={props.previousBlockHash}
+              productDataHash={props.productDataHash}
+              hash={props.blockHash}
+              hashAlgorithmName={props.hashAlgorithmName}
             />
           )
 
@@ -127,7 +137,7 @@ export default class BlockCard extends PureComponent {
           >
             <View style={{ flex: 4, justifyContent: 'space-between' }}>
               <BlockButton
-                onPress={this.onButtonPress}
+                onPress={onButtonPress}
                 style={{ marginBottom: 5 }}
                 title="TIMESTAMP"
                 value={timestamp}
@@ -135,7 +145,7 @@ export default class BlockCard extends PureComponent {
               />
 
               <BlockButton
-                onPress={this.onButtonPress}
+                onPress={onButtonPress}
                 style={{ marginBottom: 5 }}
                 title="PRODUCT DATA"
                 value={productDataHash}
@@ -143,7 +153,7 @@ export default class BlockCard extends PureComponent {
               />
 
               <BlockButton
-                onPress={this.onButtonPress}
+                onPress={onButtonPress}
                 style={{ marginBottom: 5 }}
                 title="PREVIOUS HASH"
                 value={previousBlockHash}
@@ -160,7 +170,7 @@ export default class BlockCard extends PureComponent {
               }}
             >
               <BlockButton
-                onPress={this.onButtonPress}
+                onPress={onButtonPress}
                 title="BLOCK HASH"
                 value={blockHash}
                 colorize={false}
@@ -195,5 +205,5 @@ export default class BlockCard extends PureComponent {
         )}
       </View>
     )
-  }
+ // }
 }

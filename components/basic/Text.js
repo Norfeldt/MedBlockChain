@@ -1,19 +1,17 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { Text as RNText, StyleSheet } from 'react-native'
 import Colors from '../../constants/Colors'
 
-export default class Text extends PureComponent {
-  render() {
+export default function Text(props) {
     return (
-      <RNText style={[p, textStyle[this.props.type], this.props.style]}>
-        {this.props.children}
+      <RNText style={[p, textStyle[props.type], props.style]}>
+        {props.children}
       </RNText>
     )
-  }
 }
 
 const p = {
-  fontFamily: 'Aldrich',
+  fontFamily: 'Aldrich_400Regular',
   fontSize: 16,
   textAlign: 'center',
 }
@@ -41,14 +39,14 @@ const textStyle = StyleSheet.create({
   },
   p,
   passiveHeader: {
-    fontFamily: 'NovaMono',
+    fontFamily: 'NovaMono_400Regular',
     fontSize: 16,
     textAlign: 'center',
     color: Colors.passive,
     paddingVertical: 5,
   },
   code: {
-    fontFamily: 'NovaMono',
+    fontFamily: 'NovaMono_400Regular',
     fontSize: 14,
     textAlign: 'center',
   },
