@@ -14,8 +14,7 @@ import { createIconSetFromFontello } from '@expo/vector-icons'
 import fontelloConfig from '../../assets/fonts/config.json'
 const Icon = createIconSetFromFontello(fontelloConfig, 'fonticons')
 
-export default class Button extends PureComponent {
-  render() {
+export default function Button(props) {
     const {
       style,
       title,
@@ -23,7 +22,7 @@ export default class Button extends PureComponent {
       buttonColor,
       textColor,
       iconName,
-    } = this.props
+    } = props
     return (
       <TouchableOpacity
         style={[
@@ -46,7 +45,6 @@ export default class Button extends PureComponent {
         />
       </TouchableOpacity>
     )
-  }
 }
 
 const styles = StyleSheet.create({

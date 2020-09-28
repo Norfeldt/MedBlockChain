@@ -3,9 +3,8 @@ import { View, Text, StyleSheet } from 'react-native'
 
 import Colors from '../../constants/Colors'
 
-export default class SectionTitle extends PureComponent {
-  render() {
-    Line = () => (
+export default function SectionTitle(props) {
+    const Line = () => (
       <View style={{ flex: 1, paddingHorizontal: 5 }}>
         <View
           style={{
@@ -18,13 +17,12 @@ export default class SectionTitle extends PureComponent {
       </View>
     )
     return (
-      <View style={[blockStyle.section, this.props.style]}>
+      <View style={[blockStyle.section, props.style]}>
         <Line />
-        <Text style={textStyle.sectionTitle}>{this.props.name}</Text>
+        <Text style={textStyle.sectionTitle}>{props.name}</Text>
         <Line />
       </View>
     )
-  }
 }
 
 const blockStyle = StyleSheet.create({

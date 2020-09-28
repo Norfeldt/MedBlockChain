@@ -1,16 +1,14 @@
 //import liraries
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View, StyleSheet, Platform } from 'react-native'
 
 import Colors from '../../constants/Colors'
 import Layout from '../../constants/Layout'
 
 // create a component
-export default class Card extends PureComponent {
-  render() {
-    const { style } = this.props
-    return <View style={[styles.card, style]}>{this.props.children}</View>
-  }
+export default function Card(props) {
+    const { style } = props
+    return <View style={[styles.card, style]}>{props.children}</View>
 }
 
 // define your styles

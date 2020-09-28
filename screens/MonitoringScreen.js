@@ -7,12 +7,7 @@ import OptionSwitch from '../components/OptionSwitch'
 import Colors from '../constants/Colors'
 import SourceCodeLink from '../components/SourceCodeLink'
 
-export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: <Header title="Monitoring" />,
-  }
-
-  render() {
+export default function HomeScreen(props) {
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.prescription}>
@@ -68,8 +63,11 @@ export default class HomeScreen extends React.Component {
         </ScrollView>
       </View>
     )
-  }
 }
+
+HomeScreen['navigationOptions'] = screenprops => ({
+  header: () => <Header title="Monitoring" />
+});
 
 const styles = StyleSheet.create({
   scroll: {

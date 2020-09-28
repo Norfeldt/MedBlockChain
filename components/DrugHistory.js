@@ -1,6 +1,6 @@
 //import liraries
 import map from 'lodash/map'
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import { ContextConsumer } from '../Context'
 import Card from './basic/Card'
@@ -12,8 +12,7 @@ import Colors from '../constants/Colors'
 import Warning from './BlockCardFractions/Warning'
 
 // create a component
-export default class DrugHistory extends PureComponent {
-  render() {
+export default function DrugHistory(props) {
     return (
       <ContextConsumer>
         {({ patientDrugHistory, blockchain: { falsifiedMedicine } }) => {
@@ -54,5 +53,4 @@ export default class DrugHistory extends PureComponent {
         }}
       </ContextConsumer>
     )
-  }
 }

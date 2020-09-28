@@ -1,12 +1,11 @@
 import trim from 'lodash/trim'
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import Text from './Text'
 import { getHashColors } from '../../constants/Colors'
 
-export class HashBlock extends PureComponent {
-  render() {
-    const { backgroundColor, color } = getHashColors(this.props.value)
+export function HashBlock(props) {
+    const { backgroundColor, color } = getHashColors(props.value)
     return (
       <View
         style={{
@@ -14,12 +13,11 @@ export class HashBlock extends PureComponent {
           ...styleHashBlock,
         }}
       >
-        <Text type="code" style={[{ color }, this.props.textStyle]}>{`${trim(
-          this.props.value.replace(/(.{32})/g, '$1\n')
+        <Text type="code" style={[{ color }, props.textStyle]}>{`${trim(
+          props.value.replace(/(.{32})/g, '$1\n')
         )}`}</Text>
       </View>
     )
-  }
 }
 
 export default HashBlock

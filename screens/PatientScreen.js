@@ -1,6 +1,6 @@
-import * as BarCodeScanner from 'expo-barcode-scanner'
+import { BarCodeScanner } from 'expo-barcode-scanner'
 import * as Permissions from 'expo-permissions'
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Alert,
   ScrollView,
@@ -19,19 +19,11 @@ import Colors from '../constants/Colors'
 import { ContextConsumer } from '../Context'
 import SourceCodeLink from '../components/SourceCodeLink'
 
-export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: <Header title="Patient" />,
-  }
+export default function HomeScreen(props) {
+   const scanned = false;
+   const [ scanning, setScanned ] = useState(false);
 
-  state = {
-    scanned: false,
-  }
-
-  render() {
-    const { scanning } = this.state
-
-    RenderView = props => {
+    const RenderView = props => {
       if (scanning) {
         return (
           <ContextConsumer>
@@ -40,10 +32,10 @@ export default class HomeScreen extends React.Component {
                 <BarCodeScanner
                   style={{ flex: 1 }}
                   onBarCodeScanned={
-                    this.state.scanned
+                    scanned
                       ? undefined
                       : ({ type, data }) => {
-                          this.setState({ scanning: false })
+                      setScanned(false)
 
                           Alert.alert('PRODUCT DATA', data, [
                             {
@@ -65,7 +57,7 @@ export default class HomeScreen extends React.Component {
                   }}
                 >
                   <TouchableOpacity
-                    onPress={() => this.setState({ scanning: false })}
+                    onPress={() => setScanned(false)}
                   >
                     <Text
                       style={{
@@ -100,9 +92,7 @@ export default class HomeScreen extends React.Component {
                 const { status } = await Permissions.askAsync(
                   Permissions.CAMERA
                 )
-                this.setState({
-                  scanning: status === 'granted',
-                })
+                setScanned(status == 'granted')
               }}
             />
 
@@ -118,8 +108,11 @@ export default class HomeScreen extends React.Component {
     }
 
     return <RenderView />
-  }
 }
+
+HomeScreen['navigationOptions'] = screenprops => ({
+  header: () => <Header title="Patient" />
+});
 
 const blockStyles = StyleSheet.create({
   container: {

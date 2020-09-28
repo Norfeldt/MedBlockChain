@@ -1,5 +1,5 @@
 import map from 'lodash/map'
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { Alert, Platform, TouchableOpacity, View } from 'react-native'
 import { QRCode } from 'react-native-custom-qr-codes-expo'
 import { getHashOfproductData } from '../cloudComputing/Block'
@@ -9,9 +9,8 @@ import { ContextConsumer } from '../Context'
 import FontIcon from './basic/FontIcon'
 import HashBlock from './basic/HashBlock'
 
-class DrugQR extends PureComponent {
-  render() {
-    const { value, borderColor } = this.props
+function DrugQR(props) {
+    const { value, borderColor } = props
     const {
       window: { width },
       isSmallDevice,
@@ -40,11 +39,9 @@ class DrugQR extends PureComponent {
         </View>
       </View>
     )
-  }
 }
 
-export default class ManufactureHistory extends PureComponent {
-  render() {
+export default function ManufactureHistory(props){
     const {
       window: { width },
       isSmallDevice,
@@ -110,5 +107,4 @@ export default class ManufactureHistory extends PureComponent {
         }
       </ContextConsumer>
     )
-  }
 }

@@ -1,15 +1,14 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 import Colors from '../../constants/Colors'
 
-export default class BlockConnector extends PureComponent {
-  render() {
+export default function BlockConnector(props) {
     const lineWidth = 2
     return (
       <View
         style={{
           flexDirection: 'row',
-          height: this.props.height || 30,
+          height: props.height || 30,
         }}
       >
         <View style={{ flex: 20 }} />
@@ -18,22 +17,22 @@ export default class BlockConnector extends PureComponent {
           <View
             style={{
               flex: 1,
-              borderLeftWidth: this.props.lineWidth || lineWidth,
-              borderLeftColor: this.props.lineColor || Colors.passive,
+              borderLeftWidth: props.lineWidth || lineWidth,
+              borderLeftColor: props.lineColor || Colors.passive,
             }}
           />
           <View
             style={{
               flex: 0,
-              borderBottomWidth: this.props.lineWidth || lineWidth,
-              borderBottomColor: this.props.lineColor || Colors.passive,
+              borderBottomWidth: props.lineWidth || lineWidth,
+              borderBottomColor: props.lineColor || Colors.passive,
             }}
           />
           <View
             style={{
               flex: 1,
-              borderRightWidth: this.props.lineWidth || lineWidth,
-              borderRightColor: this.props.lineColor || Colors.passive,
+              borderRightWidth: props.lineWidth || lineWidth,
+              borderRightColor: props.lineColor || Colors.passive,
             }}
           />
         </View>
@@ -41,5 +40,4 @@ export default class BlockConnector extends PureComponent {
         <View style={{ flex: 20 }} />
       </View>
     )
-  }
 }
