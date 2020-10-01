@@ -17,11 +17,7 @@
     "updates": {
       "fallbackToCacheTimeout": 10000
     },
-    "assetBundlePatterns": [
-      "assets/fonts/*.ttf",
-      "assets/icons/*.png",
-      "assets/images/knob*.png"
-    ],
+    "assetBundlePatterns": ["assets/**/*"],
     "ios": {
       "bundleIdentifier": "com.norfeldt.medblockchain",
       "supportsTablet": true,
