@@ -32,7 +32,7 @@
     },
     "android": {
       "package": "com.norfeldt.medblockchain",
-      "versionCode": 9,
+      "versionCode": 11,
       "icon": "./assets/images/icon_android.png",
       "permissions": [
         "CAMERA",
