@@ -2,10 +2,11 @@
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
-    "start": "node_modules/expo-cli/bin/expo.js start -c",
-    "build:android": "echo \"$( jq '.expo.android.versionCode=.expo.android.versionCode+1' app.json )\" > app.json && node_modules/expo-cli/bin/expo.js build:android -t app-bundle",
-    "build:ios": "node_modules/expo-cli/bin/expo.js build:ios",
-    "test": "node ./node_modules/jest/bin/jest.js --watchAll"
+    "start": "expo start",
+    "build:android": "expo build:android -t app-bundle",
+    "build:ios": "expo build:ios",
+    "test": "node ./node_modules/jest/bin/jest.js --watchAll",
+    "prebuild:android": "echo \"$( jq '.expo.android.versionCode=.expo.android.versionCode+1' app.json )\" > app.json"
   },
   "jest": {
     "preset": "jest-expo"
