@@ -1,56 +1,52 @@
-import React, { useState, useEffect } from 'react'
-import { Platform, StatusBar, StyleSheet, View, LogBox } from 'react-native'
+import React, { useEffect } from 'react'
+import { StyleSheet, View, LogBox } from 'react-native'
 import { AppLoading } from 'expo'
-import { Asset } from 'expo-asset'
-import * as Font from 'expo-font'
+import { useFonts } from 'expo-font'
+import {
+  SafeAreaProvider,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context'
 
 import AppNavigator from './navigation/AppNavigator'
 import { ContextProvider } from './Context'
+import Colors from './constants/Colors'
 
 export default function App(props) {
-  const [isLoadingComplete, setLoadingComplete] = useState(false)
+  let [fontsLoaded] = useFonts({
+    Aldrich_400Regular: require('./assets/fonts/Aldrich-Regular.ttf'),
+    NovaMono_400Regular: require('./assets/fonts/NovaMono.ttf'),
+    fonticons: require('./assets/fonts/fonticons.ttf'),
+  })
 
   useEffect(() => {
     LogBox.ignoreLogs(['Animated: `useNativeDriver`'])
   }, [])
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
+  if (fontsLoaded) {
     return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setLoadingComplete)}
-      />
+      <SafeAreaProvider style={styles.container}>
+        <UnsafeTopArea />
+        <ContextProvider>
+          <AppNavigator />
+        </ContextProvider>
+      </SafeAreaProvider>
     )
   } else {
-    return (
-      <ContextProvider>
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
-          <AppNavigator />
-        </View>
-      </ContextProvider>
-    )
+    return <AppLoading />
   }
 }
 
-async function loadResourcesAsync() {
-  await Promise.all([
-    Asset.loadAsync([require('./assets/images/knob.png')]),
-    Font.loadAsync({
-      fonticons: require('./assets/fonts/fonticons.ttf'),
-      Aldrich_400Regular: require('./assets/fonts/Aldrich-Regular.ttf'),
-      NovaMono_400Regular: require('./assets/fonts/NovaMono.ttf'),
-    }),
-  ])
-}
+function UnsafeTopArea(props) {
+  const insets = useSafeAreaInsets()
 
-function handleLoadingError(error) {
-  console.warn(error)
-}
-
-function handleFinishLoading(setLoadingComplete) {
-  setLoadingComplete(true)
+  return (
+    <View
+      style={{
+        backgroundColor: Colors.passiveBG,
+        paddingTop: insets.top,
+      }}
+    />
+  )
 }
 
 const styles = StyleSheet.create({
