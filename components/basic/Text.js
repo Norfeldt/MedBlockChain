@@ -2,12 +2,8 @@ import React from 'react'
 import { Text as RNText, StyleSheet } from 'react-native'
 import Colors from '../../constants/Colors'
 
-export default function Text(props) {
-    return (
-      <RNText style={[p, textStyle[props.type], props.style]}>
-        {props.children}
-      </RNText>
-    )
+export default function Text({ type, style, children }) {
+  return <RNText style={[p, textStyle[type], style]}>{children}</RNText>
 }
 
 const p = {
