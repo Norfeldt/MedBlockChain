@@ -30,6 +30,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
     "react-native-custom-qr-codes-expo": "^2.2.0",
     "react-native-gesture-handler": "~1.7.0",
+    "react-native-qrcode-svg": "^6.0.6",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.4",
     "react-native-safe-area-view": "^1.1.1",

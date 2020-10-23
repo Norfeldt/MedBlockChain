@@ -1,7 +1,7 @@
 import map from 'lodash/map'
 import React, { useState } from 'react'
 import { Alert, Platform, TouchableOpacity, View } from 'react-native'
-import { QRCode } from 'react-native-custom-qr-codes-expo'
+import QRCode from 'react-native-qrcode-svg'
 
 import { getHashOfproductData } from '../cloudComputing/Block'
 import Colors, { getHashColors } from '../constants/Colors'
@@ -108,7 +108,7 @@ const DrugQR = ({ qrInfo, borderColor }) => {
             }}
           >
             <QRCode
-              content={qrInfo}
+              value={qrInfo}
               size={
                 isSmallDevice ? parseInt(width * 0.7) : parseInt(width * 0.4)
               }
