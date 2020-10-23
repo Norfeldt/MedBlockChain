@@ -16,7 +16,7 @@
     "@react-native-community/slider": "3.0.3",
     "crypto-js": "^3.3.0",
     "date-fns": "^1.29.0",
-    "expo": "^39.0.0",
+    "expo": "^39.0.3",
     "expo-asset": "~8.2.0",
     "expo-barcode-scanner": "~9.0.0",
     "expo-cli": "^3.27.10",
