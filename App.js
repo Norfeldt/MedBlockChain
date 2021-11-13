@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, View, LogBox } from 'react-native'
-import { AppLoading } from 'expo'
+import AppLoading from 'expo-app-loading'
 import { useFonts } from 'expo-font'
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context'
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import AppNavigator from './navigation/AppNavigator'
 import { ContextProvider } from './Context'
