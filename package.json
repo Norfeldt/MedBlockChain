@@ -19,7 +19,7 @@
     "expo": "^39.0.3",
     "expo-asset": "~8.2.0",
     "expo-barcode-scanner": "~9.0.0",
-    "expo-cli": "^3.27.10",
+    "expo-cli": "^4.13.0",
     "expo-constants": "~9.2.0",
     "expo-font": "~8.3.0",
     "expo-permissions": "~9.3.0",
