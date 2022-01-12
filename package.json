@@ -26,7 +26,7 @@
     "expo-permissions": "~13.0.3",
     "expo-splash-screen": "~0.13.5",
     "invert-color": "^2.0.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "react": "17.0.1",
     "react-native": "0.64.3",
     "react-native-custom-qr-codes-expo": "^2.2.0",
